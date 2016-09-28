@@ -58,6 +58,9 @@ class User < ActiveRecord::Base
   has_many :categorys, through: :categorys_users_relations 
   has_many :categorys_users_relations
   has_many :feed_messages, class_name: 'FeedMessage', foreign_key: :reciever_id
+  has_many :payments
+
+  belongs_to :default_payment, class_name: 'Payment'
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

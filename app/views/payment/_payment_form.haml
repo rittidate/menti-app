@@ -1,0 +1,76 @@
+.row
+  .form-fill
+    %h3 Card Details
+    %input{ id: 'js-payment-client-token', type: 'hidden', value: "#{@client_token}"}
+    .wrapper-inline-input
+      .label-inline
+        %label Name on Card
+      .input-inline
+        %input{ id: 'js-payment-name', type: 'text', maxlength: 50, onkeyup: '$.payment_listener.name()', tabindex: 1 }
+
+    .wrapper-inline-input
+      .label-inline
+        %label Card Number
+      .input-inline
+        %input{ id: 'js-payment-cardnumber', type: 'text', maxlength: 16, onkeyup: '$.payment_listener.cardnumber()', tabindex: 2  }
+
+    .wrapper-inline-input
+      .label-inline
+        %label Expiration
+      .input-inline
+        %input{ id: 'js-payment-expiration', type: 'text', maxlength: 5, placeholder: 'MM/YY', onkeyup: '$.payment_listener.expiration()', tabindex: 3  }
+
+    .wrapper-inline-input
+      .label-inline
+        %label{ id: 'js-payment-tag-security-code' } Security Code
+      .input-inline
+        %input{ id: 'js-payment-security-code', type: 'text', maxlength: 3, onkeyup: '$.payment_listener.securitycode()', tabindex: 4  }
+.row
+  .form-fill
+    %h3 Billing Details
+
+    .wrapper-inline-input
+      .label-inline
+        %label Company
+      .input-inline
+        %input{ id: 'js-payment-company', type: 'text', maxlength: 255, tabindex: 5  }
+
+    .wrapper-inline-input
+      .label-inline
+        %label Address
+      .input-inline
+        %input{ id: 'js-payment-address', type: 'text', maxlength: 255, tabindex: 5  }
+
+    .wrapper-inline-input
+      .label-inline
+        %label Apt/Unit/Suite
+      .input-inline
+        %input{ id: 'js-payment-apt', type: 'text', maxlength: 255, tabindex: 6  }
+
+    .wrapper-inline-input
+      .label-inline
+        %label City
+      .input-inline
+        %input{ id: 'js-payment-city', type: 'text', maxlength: 255, tabindex: 7  }
+
+    .wrapper-inline-input
+      .label-inline
+        %label State
+      .input-inline
+        %input{ id: 'js-payment-state', type: 'text', maxlength: 255, tabindex: 8  }
+
+    .wrapper-inline-input
+      .label-inline
+        %label Country
+      .input-inline
+        = select_tag 'js-payment-country', options_for_select(countries, "AU")
+
+    .wrapper-inline-input
+      .label-inline
+        %label Zip Code
+      .input-inline
+        %input{ id: 'js-payment-zip', type: 'text', onkeyup: '$.payment_listener.zip()', tabindex: 9  }
+
+    .wrapper-checkbox
+      %input{ type: 'checkbox', id: 'js-default-payment'}
+      %label{ for: 'js-default-payment' } Set as default option
