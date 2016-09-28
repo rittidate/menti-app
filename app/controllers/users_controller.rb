@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :payment]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :payment, :transaction]
 
   def index
     if user_signed_in?
@@ -58,6 +58,9 @@ class UsersController < ApplicationController
 
   def payment
     @payments = current_user.payments
+  end
+
+  def transaction
   end
 
 private

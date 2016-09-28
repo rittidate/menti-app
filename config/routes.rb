@@ -9,9 +9,12 @@ Rails.application.routes.draw do
   root 'home#index'
   get   '/terms',          to:  'home#terms'
 
-  match '/users/:id/payment' => 'users#payment', via: [:get, :patch], as: :users_payment
   
+
   resources :users
+
+  get '/users/:id/payment', to: 'users#payment', as: :users_payment
+  put '/users/:id/payment', to: 'users#transaction', as: :users_transaction
 
   get '/dashboard',       to: 'dashboard#index'
 

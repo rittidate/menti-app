@@ -1,0 +1,29 @@
+.row.setting-page
+  .col.s12
+    .row
+      .form-fill
+        %h3{ class: 'header'}
+          Payment
+        .row
+          = form_for(current_user, url: users_transaction_path(@user), html: { method: :put }) do |f|
+            %ul{ class: 'collection with-header'}
+              = link_to new_payment_path , class: 'collection-item' do
+                %i{ class: 'fa fa-plus-circle fa-2x'}
+                  Add Credit Card
+              - for payment in @payments
+                %li.collection-item.avatar
+                  = f.radio_button :default_payment_id, payment.id, class: 'with-gap'
+                  %label{ for: 'user_default_payment_id_' + payment.id.to_s, style: 'width: 100%' }
+                    = image_tag payment_logo(payment.card_type), class: "circle", style: "left: 34px !important;"
+                    %span.title{:style => "margin-left: 4rem;"}
+                      = " Card: #{payment.masked_number}"
+                    %p{:style => "margin-left: 4rem;"}
+                      = " Type: #{payment.card_type}"
+                    = link_to destroy_payment_path(payment), class: 'secondary-content', method: :delete, data: { confirm: 'Are you sure?' } do
+                      %i.fa.fa-times.fa-2x.right
+
+            .row.center
+              = link_to user_path(@user) , class: 'prev-page waves-effect waves-light btn' do
+                %i.fa.fa-angle-left
+                Back
+              = f.submit "Next", { class: 'waves-effect waves-light btn' }
