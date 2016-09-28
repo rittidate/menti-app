@@ -1,0 +1,77 @@
+#add-email.container
+  .row.icon-container
+    = image_tag("icon.png", :class=>"icon",  :alt => "menti icon")
+
+  %h2{ class: 'center heading'}
+    Sign Up
+  %h4{ class: 'center heading'}
+    Let me know you first...
+
+  .form-group
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      %h5.red-text
+        = devise_error_messages!
+      .field.input-field
+        = f.label :email
+        = f.text_field :email, autocomplete: "off", data: { validation: "email" }
+
+      .field.input-field
+        = f.label :username
+        = f.text_field :username, autocomplete: "off", data: { validation: "length alphanumeric", "validation-length": "3-15" }
+
+      .field.input-field
+        = f.label :password
+        = f.password_field :password, autocomplete: "off", data: { validation: "required" }
+
+      .field.input-field
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, autocomplete: "off", data: { validation: "required" }
+
+      .field.input-field
+        = f.label :birthdate
+        = f.text_field :birthdate, class: 'datepicker', data: { validation: "date", "validation-format": "mm/dd/yyyy" }
+
+      = f.label "Gender", class: 'white-text', style: 'font-size: 1.2rem'
+      %p
+        = f.radio_button :gender, :male,:checked=> true, id: 'male', class: 'with-gap'
+        = label :gender, 'Male', :for=>'male'
+        = f.radio_button :gender, :female, id: 'female', class: 'with-gap'
+        = label :gender, 'Female', :for=>'female'
+        
+
+      .field.input-field
+        = f.label :mobile_phone
+        = f.text_field :mobile_phone, :type=>"tel", autocomplete: "off", data: { validation: "required" }
+        
+      = f.label "What role will you play?", class: 'white-text', style: 'font-size: 1.2rem'
+      %p
+        = f.radio_button :user_type, :mentee,:checked=> true, id: 'mentee', class: 'with-gap'
+        = label :user_type, 'Mentee', :for=>'mentee'
+        = f.radio_button :user_type, :mentor, id: 'mentor', class: 'with-gap'
+        = label :user_type, 'Mentor', :for=>'mentor'
+        = f.radio_button :user_type, :both, id: 'both', class: 'with-gap'
+        = label :user_type, 'Both', :for=>'both'
+        
+      %p
+        .field.input-field.col.s5
+          = f.collection_select(:security_question_id, SecurityQuestion.all, :id, :name, {prompt: 'Security question' }, {:class=>'security_question_select'} )
+            
+      .field.input-field
+        = f.label :security_question_answer
+        = f.text_field :security_question_answer, autocomplete: "off", length: "20", data: { validation: "required" }
+
+      .field.input-field
+        = f.check_box :terms_of_service
+        = f.label :terms_of_service do
+          I agree to
+          = link_to 'Terms of Service', terms_path, target: '_blank'
+      
+
+      .actions.col.s10.offset-s1.center
+        %h5
+          = f.submit "Next", class: 'btn-large margin-btn green lighten-1'
+          //Here next button should navigate to next page(new2.html.haml) after validation and not submit!
+
+        = render "devise/shared/links"
+
+

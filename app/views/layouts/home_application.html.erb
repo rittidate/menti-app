@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= favicon_link_tag 'favicon.png' %>
+  <!--<%= favicon_link_tag 'favicon_1.png' %>-->
+  <title>Menti</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="login-page">
+<% if flash.any? %>
+  <script type="text/javascript">
+    $(function(){Materialize.toast("<%= notice %>", 5000);});
+  </script>
+<% end %>
+
+<%= yield  %>
+</body>
+
+</html>

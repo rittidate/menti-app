@@ -1,0 +1,137 @@
+
+/* Media queries for Mobile-First method */
+
+/*Desktop screens*/
+@media only screen and (min-width: 1200px) and (max-width: 993px){
+    .fb-button{
+        margin-top: 0 !important;
+    }
+}
+/*iphone only*/
+@media only screen and (min-width: 992px) and (max-width: 1201px){
+    .fb-button{
+        margin-top: 0.85rem !important;
+    }
+}
+
+/* Extra small devices (phones, up to 480px) */
+@media screen and (max-width: 767px) {
+    
+}
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+}
+/* tablets/desktops and up ----------- */
+@media (min-width: 992px) and (max-width: 1199px) {
+    
+}
+/* large desktops and up ----------- */
+@media screen and (min-width: 1200px) {
+}
+
+
+.fb-button{
+    background-color: #3A589E !important;
+}
+.margin-btn{
+    margin-top: 0.75rem !important;
+}
+.icon-container, .logo-container{
+  display: flex;
+  align-items: center;
+}
+.logo-container{
+    margin-bottom: 10% !important;
+}
+.icon {
+  width: 200px;
+  margin: 2% auto;
+}
+
+.logo{
+  height: 150px;
+  margin: 0 auto;
+}
+/* value color */
+.input-field {
+    color: #fff;
+    font-size: 2.2rem;
+    margin-top: 2rem;
+}
+/* label color */
+.input-field label {
+    color: #fff;
+    font-size: 1.5rem;
+}
+.input-field label.active {
+    color: #fff;
+    font-size: 1rem;
+}
+/*For all input types*/
+input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea{
+    font-size: 2.2rem;
+}
+
+/* label focus color */
+.input-field input[type=text]:focus + label {
+    color: #fff;
+}
+.heading{
+    color: #fff;
+}
+
+// Top-level selector
+.login-page{
+    background: $background;
+}
+main{
+    background: #fff;
+}
+
+//form-error
+.form-error{
+    font-size: 1rem;
+    color: red;
+    position: relative;
+    bottom: 30px;
+}
+
+.nav-wrapper{
+    .button-collapse{
+        width: 50px;
+    }
+    
+    ul.header-links{
+        li{
+            width: 70px;
+            a{
+                padding-left: 23px !important;
+                .header-fa{
+                    padding:0 !important;
+                }
+            }
+        }
+    }
+}
+*.icon-red {color: #FF4C4C}
+*.icon-grey {color: white}
+.badge {   
+    text-align:center;
+    vertical-align:middle;
+    position: relative;
+}
+.badge:after{
+    content:"";
+    position: absolute;
+    background: #FF6D6D;
+    height:0.55rem;
+    top: 1.25rem;
+    right:0.1rem;
+    width:0.55rem;
+    text-align: center;
+    line-height: 2rem;;
+    font-size: 1rem;
+    border-radius: 50%;
+    color:white;
+    border:1px solid #FF6D6D;
+}
