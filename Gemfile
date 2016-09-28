@@ -32,6 +32,7 @@ gem 'haml', '~> 4.0.7'
 
 #authen
 gem 'devise'
+gem 'devise_security_extension'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
