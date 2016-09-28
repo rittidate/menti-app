@@ -34,6 +34,11 @@ gem 'haml', '~> 4.0.7'
 gem 'devise'
 gem 'devise_security_extension'
 
+#api
+gem 'aws-sdk', '~> 1.6'
+gem 'paperclip', '~> 4.3'
+gem 'braintree', '~> 2.49.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
