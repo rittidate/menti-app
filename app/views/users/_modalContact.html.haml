@@ -1,0 +1,16 @@
+#contact-modal{class: 'modal bottom-sheet modal-fixed-footer'} 
+  .modat-content
+    %h4 Send contact request
+    = form_for(@user, url: users_payment_path(@user), html: { method: :get }) do |f|
+      .categories
+        %li.category-list
+          %h5 Select the category you want to send invitation for
+        - for course in @user.courses
+          %li.category-list
+            = radio_button_tag :course, course.id, {class: 'with-gap'}
+            = label :course, course.categories.name, :for=> 'course_' + course.id.to_s
+
+
+      .modal-footer
+        = f.submit "Send", { class: 'modal-action modal-close waves-effect waves-green btn-flat' }
+        %a{ href: "#!", class: 'modal-action modal-close close waves-effect waves-green btn-flat'} Cancel

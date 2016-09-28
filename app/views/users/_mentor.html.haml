@@ -1,0 +1,10 @@
+.mentors
+  %span.mentor-label My mentors:
+  %br/
+  .mentor-list
+    %ul.lists
+      - for f in @user.follows.mentors
+        = link_to user_path(f.follower), style: 'margin-bottom: 5px;' do
+          %li
+            = image_tag f.follower.avatar.url(:thumb), :class => "circle list-pics"
+            %span.mentor-name #{f.follower.first_name}

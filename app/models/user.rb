@@ -38,6 +38,9 @@
 #  avatar_file_size         :integer
 #  avatar_updated_at        :datetime
 #  education                :string
+#  about                    :string
+#  program                  :string
+#  terms                    :string
 #
 # Indexes
 #
@@ -54,9 +57,13 @@ class User < ActiveRecord::Base
 
   has_many :categorys, through: :categorys_users_relations 
   has_many :categorys_users_relations
+  has_many :feed_messages, class_name: 'FeedMessage', foreign_key: :reciever_id
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  extend FriendlyId
+  friendly_id :username
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 

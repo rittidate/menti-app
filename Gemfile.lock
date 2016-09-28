@@ -36,6 +36,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    animate.css-rails (3.2.0)
     annotate (2.7.1)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 12.0)
@@ -80,6 +81,8 @@ GEM
     execjs (2.7.0)
     font-awesome-sass (4.6.2)
       sass (>= 3.2)
+    friendly_id (5.1.0)
+      activerecord (>= 4.0.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     haml (4.0.7)
@@ -200,6 +203,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  animate.css-rails (~> 3.2.0)
   annotate
   aws-sdk (~> 1.6)
   braintree (~> 2.49.0)
@@ -209,6 +213,7 @@ DEPENDENCIES
   devise
   devise_security_extension
   font-awesome-sass (~> 4.6.2)
+  friendly_id (~> 5.1.0)
   haml (~> 4.0.7)
   jbuilder (~> 2.0)
   jquery-form-validator-rails
