@@ -1,4 +1,18 @@
-%h2 Hello World
-%p
-  The time is now: 
-  = Time.now
+.container.login
+  .row.icon-container
+    = image_tag("icon.png", :class=>"icon",  :alt => "menti icon")
+  .row.logo-container
+    = image_tag("logo.png", :class=>"logo",  :alt => "menti icon")
+  - if user_signed_in?
+    .row.center
+      .mdl-layout-spacer
+        = link_to 'LOGOUT', destroy_user_session_path, {method: :delete, class: 'btn waves-effect waves-light'} 
+  -else
+    .row.center
+      .mdl-layout-spacer
+        %h5
+          = link_to 'LOGIN', new_user_session_path, {class: 'btn-large waves-effect waves-light '}
+    .row.center
+      .mdl-layout-spacer
+        %h5
+          = link_to 'REGISTER (I\'m free!)' , new_user_registration_path, {class: 'btn-large waves-effect waves-light'}

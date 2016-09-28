@@ -1,0 +1,23 @@
+.range_badge{
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: #0092d7;
+  border-radius: 10px;
+  margin-left: 5px;
+}
+
+.desired_badge{
+  background-color: #67AD00;
+}
+
+.category_label{
+  font-size: 1.5em;
+}

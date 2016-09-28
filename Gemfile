@@ -20,6 +20,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-form-validator-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -29,6 +30,20 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # View and html
 gem 'haml', '~> 4.0.7'
+# Use SCSS for stylesheets
+gem 'materialize-sass'
+gem 'font-awesome-sass', '~> 4.6.2'
+
+#authen
+gem 'devise'
+gem 'devise_security_extension'
+
+#api
+gem 'aws-sdk', '~> 1.6'
+gem 'paperclip', '~> 4.3'
+gem 'braintree', '~> 2.49.0'
+
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

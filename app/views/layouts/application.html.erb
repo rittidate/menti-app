@@ -1,14 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MentiApp</title>
+  <%= favicon_link_tag 'favicon.png' %>
+  <title>Menti</title>
+  <script src = "https://js.braintreegateway.com/v2/braintree.js"></script>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Sacramento|Titillium+Web|Hind|Berkshire+Swash|Courgette|Lateef|Tillana|Sunshiney|Rubik" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+
 </head>
 <body>
+  <!--Header Navigation-->
+  <%= render 'common/header' %>
 
-<%= yield %>
+  <!--Header navigation end-->
+  <% if current_page?(dashboard_path) %>
+    <%= render 'common/carousel' %>
+  <% end %>
 
+  <!--Main Site Content-->
+  <main>
+    <div class="container home-container">
+        <% if flash.any? %>
+          <script type="text/javascript">
+            $(function(){Materialize.toast("<%= notice %>", 5000);});
+          </script>
+        <% end %>
+        <%= yield  %>
+    </div>
+    
+    
+  </main>
+  <!--Main site content end-->
+  
+  <!--Footer Content (Only shows on smaller devices less than Desktop-->
+  <footer class="hide-on-large-only page-footer">
+            <div class="container">
+              <div class="row">
+                <div class="center left col s12">
+                  <%= image_tag("icon.png", :class=>"center footer-icon",  :alt => "menti icon") %><%= image_tag("logo.png", :class=>"center footer-logo",  :alt => "menti icon") %>
+                </div>
+              </div>
+            </div>
+  </footer>
+  <!--End of Footer Content-->
+  
 </body>
 </html>

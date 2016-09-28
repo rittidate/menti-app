@@ -1,7 +1,7 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+SecurityQuestion.create! locale: :en, name: 'What was the name of the boy/girl you had your second kiss with?'
+SecurityQuestion.create! locale: :en, name: 'What was the name of your first pet?'
+SecurityQuestion.create! locale: :en, name: 'When you were young, what did you want to be when you grew up?'
+SecurityQuestion.create! locale: :en, name: 'Who was your childhood hero? '
+SecurityQuestion.create! locale: :en, name: 'What was your childhood nickname?'
+SecurityQuestion.create! locale: :en, name: 'What was the name of your elementary / primary school?'
+SecurityQuestion.create! locale: :en, name: 'What is your oldest cousin\'s first and last name?'

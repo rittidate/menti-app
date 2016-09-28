@@ -1,0 +1,71 @@
+.navbar-fixed
+  %nav.main-header
+    .nav-wrapper
+      = link_to dashboard_path do
+        .brand-logo
+          = image_tag 'icon.png', class: 'header-icon', alt: 'menti icon'
+          = image_tag 'logo.png', class: 'header-logo', alt: 'menti icon'
+      %a{ href: '#!', data: { activates: 'mobile-demo'}, class: 'right button-collapse' }
+        %i{ class: 'header-fa fa fa-bars', 'aria-hidden': 'true'}
+      %ul{ class: 'right hide-on-med-and-down header-links'}
+        - if user_signed_in?
+          %li
+            = link_to dashboard_path do
+              %i.fa.fa-home.header-fa
+          %li
+            = link_to user_path(current_user) do
+              %i{ class: 'fa fa-user header-fa', 'aria-hidden': 'true'}
+          %li
+            %a
+              %i{ class: 'fa fa-search header-fa', 'aria-hidden': 'true'}
+          %li
+            %a
+              %i{ class: 'fa fa-bell header-fa icon-grey', 'aria-hidden': 'true'} <!-- TODO add 'badge' class when new notification -->
+          %li
+            %a
+              %i{ class: 'fa fa-comment header-fa', 'aria-hidden': 'true'}
+          %li
+            %a
+              %i{ class: 'fa fa-book header-fa', 'aria-hidden': 'true'}
+          %li
+            = link_to settings_path do
+              %i.fa.fa-cog.header-fa
+          %li
+            = link_to destroy_user_session_path, :method => :delete do
+              %i.fa.fa-sign-out.header-fa
+        - else
+          %li
+            = link_to root_path do
+              %i.fa.fa-home.header-fa
+          %li
+            %a
+              %i{ class: 'fa fa-search header-fa', 'aria-hidden': 'true'}
+  
+      %ul{ class: 'side-nav', id: 'mobile-demo'}
+        - if user_signed_in?
+          %li
+            = link_to 'Home', dashboard_path, class: 'white-text side-links'
+          %li
+            = link_to 'My Profile', user_path(current_user), class: 'white-text side-links'
+          %li
+            %a{ href: '#!', class: 'white-text side-links' }
+              Search
+          %li
+            %a{ href: '#!', class: 'white-text side-links' }
+              Message
+          %li
+            %a{ href: '#!', class: 'white-text side-links' }
+              Notifications
+          %li
+            %a{ href: '#!', class: 'white-text side-links' }
+              Resources
+          %li
+            = link_to 'Setting', settings_path, class: 'white-text side-links'
+          %li
+            = link_to 'Sign Out', destroy_user_session_path, :method => :delete, class: 'white-text side-links'
+        - else
+          %li
+            = link_to 'Home', root_path, class: 'white-text side-links'
+          %li
+            %a{ href: '#!', class: 'white-text side-links' }
+              Search
