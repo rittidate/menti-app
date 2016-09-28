@@ -59,6 +59,7 @@ class User < ActiveRecord::Base
   has_many :categorys_users_relations
   has_many :feed_messages, class_name: 'FeedMessage', foreign_key: :reciever_id
   has_many :payments
+  has_many :follows
 
   belongs_to :default_payment, class_name: 'Payment'
 

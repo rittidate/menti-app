@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928171640) do
+ActiveRecord::Schema.define(version: 20160928182448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,26 @@ ActiveRecord::Schema.define(version: 20160928171640) do
     t.datetime "updated_at",               null: false
   end
 
+  create_table "courses", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "courses_id"
+    t.integer  "categories_id"
+    t.integer  "price"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "courses", ["categories_id"], name: "index_courses_on_categories_id", using: :btree
+  add_index "courses", ["courses_id"], name: "index_courses_on_courses_id", using: :btree
+  add_index "courses", ["user_id"], name: "index_courses_on_user_id", using: :btree
+
+  create_table "courses_user_relations", force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "feed_messages", force: :cascade do |t|
     t.integer  "reciever_id"
     t.integer  "sender_id"
@@ -43,6 +63,15 @@ ActiveRecord::Schema.define(version: 20160928171640) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "follower_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "follows", ["user_id"], name: "index_follows_on_user_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -76,6 +105,16 @@ ActiveRecord::Schema.define(version: 20160928171640) do
   end
 
   add_index "payments", ["user_id"], name: "index_payments_on_user_id", using: :btree
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "giver_id"
+    t.integer  "value",      default: 0, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
 
   create_table "security_questions", force: :cascade do |t|
     t.string "locale", null: false
@@ -126,4 +165,7 @@ ActiveRecord::Schema.define(version: 20160928171640) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "courses", "users"
+  add_foreign_key "follows", "users"
+  add_foreign_key "ratings", "users"
 end

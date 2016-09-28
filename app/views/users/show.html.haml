@@ -78,9 +78,9 @@
   = render 'category' if !@user.mentor?
 
   <!-- Mentor and both section -->
-  / = render 'mentor' if @user.follows.mentors.present?
+  = render 'mentor' if @user.follows.mentors.present?
 
-  / = render 'mentee' if @user.follows.mentees.present?
+  = render 'mentee' if @user.follows.mentees.present?
     
   %p{ style: 'height: 65px;'}
   <!-- End mentor and both section -->
