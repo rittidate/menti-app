@@ -6,6 +6,8 @@
           Payment
         .row
           = form_for(current_user, url: users_transaction_path(@user), html: { method: :put }) do |f|
+            .course-details
+              
             %ul{ class: 'collection with-header'}
               = link_to new_payment_path , class: 'collection-item' do
                 %i{ class: 'fa fa-plus-circle fa-2x'}
