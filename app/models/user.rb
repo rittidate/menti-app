@@ -1,3 +1,50 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                       :integer          not null, primary key
+#  email                    :string           default(""), not null
+#  encrypted_password       :string           default(""), not null
+#  reset_password_token     :string
+#  reset_password_sent_at   :datetime
+#  remember_created_at      :datetime
+#  sign_in_count            :integer          default(0), not null
+#  current_sign_in_at       :datetime
+#  last_sign_in_at          :datetime
+#  current_sign_in_ip       :inet
+#  last_sign_in_ip          :inet
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  username                 :string
+#  first_name               :string
+#  middle_name              :string
+#  last_name                :string
+#  address                  :string
+#  city                     :string
+#  state                    :string
+#  zipcode                  :string
+#  birthdate                :date
+#  country                  :string(2)
+#  prefered_language        :string(2)
+#  user_type                :integer
+#  mobile_phone             :string
+#  terms_of_service         :boolean
+#  default_payment_id       :integer
+#  gender                   :string
+#  security_question_id     :integer
+#  security_question_answer :string
+#  avatar_file_name         :string
+#  avatar_content_type      :string
+#  avatar_file_size         :integer
+#  avatar_updated_at        :datetime
+#  education                :string
+#
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
+
 class User < ActiveRecord::Base
   enum user_type: { mentee: 0, mentor: 1, both: 2 }
   enum gender: { male: 'male', female: 'female' }

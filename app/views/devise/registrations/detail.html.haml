@@ -1,0 +1,38 @@
+#add-email.container
+  .row.icon-container
+    = image_tag("icon.png", :class=>"icon",  :alt => "menti icon")
+
+  %h2{ class: 'center heading'}
+    Add Detail
+
+  .form-group
+    = form_for(current_user, url: users_detail_path, html: { method: :put }) do |f|
+      .field.input-field
+        = f.label :first_name
+        = f.text_field :first_name, autofocus: true
+        
+      .field.input-field
+        = f.label :middle_name
+        = f.text_field :middle_name
+        
+      .field.input-field
+        = f.label :last_name
+        = f.text_field :last_name
+        
+      .field.input-field
+        = f.select :education, options_for_select(educations), {prompt: "Select Education"}, { class: 'select-setting' }
+        = f.label :education
+
+      .field.input-field
+        = f.select :prefered_language, options_for_select(languages, f.object.prefered_language.present? ? f.object.prefered_language : "EN"), {prompt: "Select Prefered Language"}, { class: 'select-setting' }
+        = f.label :prefered_language
+
+      .field.input-field
+        = f.select :country, options_for_select(countries, f.object.country.present? ? f.object.country : "AU"), {prompt: "Select Country"}, { class: 'select-setting' }
+        = f.label :country
+        
+      = render 'category/category_list'
+
+      .actions.col.s10.offset-s1.center
+        %h5
+          = f.submit "Lets Start", class: 'btn-large margin-btn green lighten-1'
