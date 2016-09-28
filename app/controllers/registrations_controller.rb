@@ -25,7 +25,7 @@ class RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords resource
       set_minimum_password_length
-      respond_with resource
+      respond_with resource, location: new_user_registration_path(resource)
     end
   end
 
