@@ -1,0 +1,23 @@
+.collection.navigation-leftbar
+  = link_to_unless_current 'Personal Data <i class="right fa fa-pencil" aria-hidden="true"></i>'.html_safe, settings_path, class: 'collection-item' do
+    = link_to settings_path, class: 'collection-item active' do
+      Personal Data 
+      %i{ class: "right fa fa-pencil" }
+  = link_to_unless_current 'Change password <i class="right fa fa-key fa-rotate-90" aria-hidden="true"></i>'.html_safe, settings_password_path, class: 'collection-item' do  
+    = link_to settings_password_path, class: 'collection-item active' do
+      Change password 
+      %i{ class: "right fa fa-key fa-rotate-90" }
+  = link_to_unless_current 'Default Payment<i class="right fa fa-credit-card-alt" aria-hidden="true"></i>'.html_safe, settings_payment_path, class: 'collection-item' do
+    = link_to settings_payment_path, class: 'collection-item active' do
+      Default Payment
+      %i{ class: "right fa fa-credit-card-alt" }
+  = link_to_unless_current 'Category<i class="right fa fa-bar-chart" aria-hidden="true"></i>'.html_safe,  settings_category_path, class: 'collection-item' do
+    = link_to  settings_category_path, class: 'collection-item active' do
+      Category
+      %i{ class: "right fa fa-bar-chart" }
+
+  - if !current_user.mentee?
+    = link_to_unless_current 'Mentor Setting<i class="right fa fa-newspaper-o" aria-hidden="true"></i>'.html_safe,  settings_mentor_path, class: 'collection-item' do
+      = link_to  settings_mentor_path, class: 'collection-item active' do
+        Mentor Setting
+        %i{ class: "right fa fa-newspaper-o" }

@@ -1,0 +1,92 @@
+.row.setting-page
+  .col.s3.left-content
+    = render 'menu'
+  .col.s9.right-content
+    .row
+      .form-fill
+        = image_tag current_user.avatar.url(:thumb), :class => "right circle", :style => "height: 200px; width: 200px;"
+        %h3{ class: 'left header'}
+          My Profile
+        = form_for(current_user, url: settings_path, html: { method: :put , class: 'col s12' }) do |f|
+          .row
+            .input-field.col.s12
+              = f.text_field :first_name, autofocus: true
+              = f.label :first_name
+
+            .input-field.col.s12
+              = f.text_field :middle_name
+              = f.label :middle_name
+
+            .input-field.col.s12
+              = f.text_field :last_name
+              = f.label :last_name
+
+            .input-field.col.s12{:style => "margin-bottom: 40px"}
+              .col.s1
+                = f.label "Gender", style: 'font-size: 1.2rem'
+              .col.s11
+                = f.radio_button :gender, :male,:checked=> true, id: 'male', class: 'with-gap'
+                = label :gender, 'Male', :for=>'male'
+                = f.radio_button :gender, :female, id: 'female', class: 'with-gap'
+                = label :gender, 'Female', :for=>'female'
+
+            .input-field.col.s12
+              = f.label :birthdate
+              = f.text_field :birthdate, class: 'datepicker', value: (f.object.birthdate.strftime('%d/%m/%Y') if f.object.birthdate), autofocus: true
+
+            .input-field.col.s12
+              = f.select :education, options_for_select(educations, f.object.education), {prompt: "Select Education"}, { class: 'select-setting' }
+              = f.label :education
+
+            .input-field.col.s12
+              = f.text_field :address
+              = f.label :address
+
+            .input-field.col.s12
+              = f.label :city
+              = f.text_field :city
+
+            .input-field.col.s12
+              = f.label :state
+              = f.text_field :state
+
+            .input-field.col.s12
+              %label{ for: 'postcode'} Postcode
+              = f.text_field :zipcode
+
+            .input-field.col.s12
+              = f.select :country, options_for_select(countries, f.object.country), {prompt: "Select Country"}, { class: 'select-setting' }
+              = f.label :country
+
+            .input-field.col.s12
+              = f.label :mobile_phone
+              = f.text_field :mobile_phone, :type=>"tel", autocomplete: "off"
+
+            .input-field.col.s12
+              = f.select :prefered_language, options_for_select(languages, f.object.prefered_language), {prompt: "Select Prefered Language"}, { class: 'select-setting' }
+              = f.label :prefered_language
+
+            .input-field.col.s12{:style => "margin-bottom: 40px"}
+              .col.s1
+                = f.label "Role", style: 'font-size: 1.2rem'
+              .col.s11
+                = f.radio_button :user_type, :mentee,:checked=> true, id: 'mentee', class: 'with-gap'
+                = label :user_type, 'Mentee', :for=>'mentee'
+                = f.radio_button :user_type, :mentor, id: 'mentor', class: 'with-gap'
+                = label :user_type, 'Mentor', :for=>'mentor'
+                = f.radio_button :user_type, :both, id: 'both', class: 'with-gap'
+                = label :user_type, 'Both', :for=>'both'
+
+            .file-field.input-field.col.s12
+              .btn
+                %span Profile Image
+                = f.file_field :avatar
+              .file-path-wrapper
+                %input{ type: 'text', class: 'file-path validate'}
+                
+              
+
+          .row
+            = f.submit "Update", { class: 'waves-effect waves-light btn' }
+              
+
