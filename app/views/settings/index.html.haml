@@ -32,7 +32,7 @@
 
             .input-field.col.s12
               = f.label :birthdate
-              = f.text_field :birthdate, class: 'datepicker', value: (f.object.birthdate.strftime('%d/%m/%Y') if f.object.birthdate), autofocus: true
+              = f.text_field :birthdate, class: 'datepicker', value: (f.object.birthdate.strftime('%m/%d/%Y') if f.object.birthdate), autofocus: true
 
             .input-field.col.s12
               = f.select :education, options_for_select(educations, f.object.education), {prompt: "Select Education"}, { class: 'select-setting' }

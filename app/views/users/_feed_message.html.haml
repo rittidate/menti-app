@@ -1,0 +1,43 @@
+#js-feed-container.feed-container.animated.fadeInRight
+  .row
+    .row
+      .input-field.col.s12
+        = image_tag "images/thumb/avatar.png", class: 'hide', id: 'default-img'
+        = hidden_field_tag 'js-feed-reciever', @user.id
+        = hidden_field_tag 'js-feed-sender', current_user.id
+        = hidden_field_tag 'js-newest-message', 10
+        %textarea#feed-message-area.materialize-textarea.feed-message-area{:placeholder => "Share your ideas, concepts, motivations... anything..."}
+        %label{:for => "feed-message-area"}
+      %div{:style => "text-align: right;"}
+        %button.btn.waves-effect.waves-light.feed-message-button{:name => "action", :type => "submit", id: "js-feed-message-button"}
+          Share
+  .feeds
+    - if !@user.feed_messages.present?
+      %h5.js-no-content.center
+        No content
+      %ol.chat
+    - else
+      %ol.chat
+        - for msg in @user.feed_messages.order("created_at DESC")
+          - if msg.sender == @user
+            %li.self.animated.slideInDown
+              .avatar
+                = image_tag msg.sender.avatar.url(:thumb)
+              .msg
+                %p #{msg.message}
+                %time 
+                  - if msg.created_at.today?
+                    = msg.created_at.strftime("%I:%M %p") 
+                  - else
+                    = msg.created_at.strftime("%a/%m - %I:%M %p")
+          - else
+            %li.other.animated.slideInDown
+              .avatar
+                = image_tag msg.sender.avatar.url(:thumb)
+              .msg
+                %p #{msg.message}
+                %time
+                  - if msg.created_at.today?
+                    = msg.created_at.strftime("%I:%M %p") 
+                  - else
+                    = msg.created_at.strftime("%a/%m - %I:%M %p")

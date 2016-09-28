@@ -33,6 +33,8 @@ gem 'haml', '~> 4.0.7'
 # Use SCSS for stylesheets
 gem 'materialize-sass'
 gem 'font-awesome-sass', '~> 4.6.2'
+#For animations
+gem 'animate.css-rails', '~> 3.2.0'
 
 #authen
 gem 'devise'
@@ -46,6 +48,7 @@ gem 'braintree', '~> 2.49.0'
 #other
 gem 'annotate'
 gem 'countries_and_languages', :require => 'countries_and_languages/rails'
+gem 'friendly_id', '~> 5.1.0'
 
 
 group :development, :test do

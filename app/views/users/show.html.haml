@@ -1,0 +1,95 @@
+%ul#slide-out.side-nav.fixed
+  %div{:style => "display: block;"}= image_tag @user.avatar.url(:thumb), :class => "circle mypic"
+  %li
+    %h4.center.navFont Welcome #{@user.first_name}!
+  %li
+    %h6.center.navFont How are you tracking so far...
+  <!-- Only for mentor and both -->
+  %li
+  .rating.center
+    %span ☆
+    %span ☆
+    %span ☆
+    %span ☆
+    %span ☆
+  %hr/
+  - if @user != current_user
+    .col.s12
+      - if current_user.follows.where(follower: @user).first.present?
+        %button.waves-effect.waves-light.btn.unfollow.profBtns{ id: 'js-follow-button' } Unfollow
+      - else
+        %button.waves-effect.waves-light.btn.follow.profBtns{ id: 'js-follow-button' } Follow
+      %button.waves-effect.waves-light.btn.profBtns.contact.modal-contact-trigger{"data-target" => "contact-modal"} Contact
+  - if !@user.mentee?
+    %li
+      .areas{:style => "display: inline-block; width: 99%; text-align: center; background-color: #E6E7E8"}
+        %span.left{:style => "font-size: 1.4rem; margin-top: 0.5rem; margin-left: 2rem; color: #36524E"}
+          Areas:
+        %i.fa.fa-medkit.tooltip{"aria-hidden" => "true", "style" => "font-size: 2rem; color: #87CFC4; padding: 0.5rem"}
+          %span.tooltiptext
+            Health
+        %i.fa.fa-money.tooltip{"aria-hidden" => "true", "style" => "font-size: 2rem; color: #87CFC4; padding: 0.5rem"}
+          %span.tooltiptext
+            Finance
+      
+  - if !@user.mentee?
+    %li.mentor
+      %span.mentor-label
+        About:
+        %br/
+      %p.mentor-content
+        - if @user.about.present?
+          = @user.about
+        - else
+          %span.default-content
+            Please update this detail in settings
+        
+    %li.mentor
+      %span.mentor-label
+        Program:
+        %br/
+      %p.mentor-content
+        - if @user.program.present?
+          = @user.program
+        - else
+          %span.default-content
+            Please update this detail in settings
+        
+    %li.mentor
+      %span.mentor-label
+        terms:
+        %br/
+      %p.mentor-content
+        - if @user.terms.present?
+          = @user.terms
+        - else
+          %span.default-content
+            Please update this detail in settings
+    %li.mentor
+      %span.mentor-label
+        prices:
+        %br/
+      %p.mentor-content
+        %span.default-content
+          Please update this detail in settings
+
+  <!-- End mentor and both section -->
+    
+  = render 'category' if !@user.mentor?
+
+  <!-- Mentor and both section -->
+  = render 'mentor' if @user.follows.mentors.present?
+
+  = render 'mentee' if @user.follows.mentees.present?
+    
+  %p{ style: 'height: 65px;'}
+  <!-- End mentor and both section -->
+
+%a.button-collapse-other.left.hide-on-large-only{"data-activates" => "slide-out", :href => "#", :style => "font-size: 4rem; color: #36524E !important;"}
+  %div{:style => "display: block;"}= image_tag @user.avatar.url(:thumb), :class => "circle mypicslide"
+
+= render 'feed_message'
+
+= render 'modal' if @user == current_user
+
+= render 'modalContact' if @user != current_user

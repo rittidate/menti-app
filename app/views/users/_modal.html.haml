@@ -1,0 +1,29 @@
+#modal-track.modal
+  .modal-content
+    .row
+      .col.s4.progress-bar-content
+      .col.s8.progress-content
+        %span{ id: 'close'}x
+        .row
+          .col.s12.center
+            %h4.progress-body-header
+        .row.progress-range-content
+          %input{ type: 'hidden', id: 'parent_category'}
+          %input{ type: 'hidden', id: 'current_category'}
+          .col.s6.center
+            %label 
+              Current Level
+              %span{ class: "range_badge current_badge" } 
+                0
+          .col.s6.center
+            %label 
+              Desired Level
+              %span{ class: "range_badge desired_badge" } 
+                0
+        .row.progress-range-content
+          .col.s6
+            .progress-range
+              = range_field_tag("current_level", 0, { class: 'current_level_range', style: 'border: none;', min: 0, max: 100 })
+          .col.s6
+            .progress-range
+              = range_field_tag("desired_level", 0, { class: 'desired_level_range', style: 'border: none;', min: 0, max: 100 })

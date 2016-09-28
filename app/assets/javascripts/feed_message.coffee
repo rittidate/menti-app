@@ -30,4 +30,6 @@ $(document).on 'turbolinks:load', ->
     else
       avatar =  $('<div />', {'class': 'avatar'}).append($('<img/>', {'src': msg.avatar}))
     text = $('<div />', {'class': 'msg'}).append($('<p/>', {text: msg.message})).append($('<time/>', {text: msg.time}))
-    $('<li />', { 'class': msg.user}).append(avatar).append(text)
+    $('<li />', { 'class': msg.user}).append(avatar).append(text)# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://coffeescript.org/

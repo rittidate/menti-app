@@ -1,38 +1,38 @@
 %h2 News Feed
 .feeds.animated.fadeInUp
-  / - if !current_user.feed_messages.present?
-  /   %h5.js-no-content.center
-  /     = "-- No content --"
-  / - else
-  /   %ol.chat
-  /     - for msg in current_user.feed_messages.order("created_at DESC").first(20)
-  /       - if msg.sender == current_user
-  /         .self
-  /           %li.self
-  /             .avatar
-  /               = image_tag msg.sender.avatar.url(:thumb)
-  /             .msg
-  /               %p #{msg.message}
-  /               %time 
-  /                 - if msg.created_at.today?
-  /                   = msg.created_at.strftime("%I:%M %p") 
-  /                 - else
-  /                   = msg.created_at.strftime("%a/%m - %I:%M %p")
-  /           %a.waves-effect.waves-teal.btn-flat{:style => "margin-right: 6%;"}
-  /             Share
-  /             %i.fa.fa-heart{"aria-hidden" => "true"}
-  /       - else
-  /         .other
-  /           %li.other
-  /             .avatar
-  /               = image_tag msg.sender.avatar.url(:thumb)
-  /             .msg
-  /               %p #{msg.message}
-  /               %time
-  /             - if msg.created_at.today?
-  /               = msg.created_at.strftime("%I:%M %p")
-  /             - else
-  /               = msg.created_at.strftime("%a/%m - %I:%M %p")
-  /           %a.waves-effect.waves-teal.btn-flat{:style => "margin-left: 4%;"}
-  /             Share
-  /             %i.fa.fa-heart{"aria-hidden" => "true"}
+  - if !current_user.feed_messages.present?
+    %h5.js-no-content.center
+      = "-- No content --"
+  - else
+    %ol.chat
+      - for msg in current_user.feed_messages.order("created_at DESC").first(20)
+        - if msg.sender == current_user
+          .self
+            %li.self
+              .avatar
+                = image_tag msg.sender.avatar.url(:thumb)
+              .msg
+                %p #{msg.message}
+                %time 
+                  - if msg.created_at.today?
+                    = msg.created_at.strftime("%I:%M %p") 
+                  - else
+                    = msg.created_at.strftime("%a/%m - %I:%M %p")
+            %a.waves-effect.waves-teal.btn-flat{:style => "margin-right: 6%;"}
+              Share
+              %i.fa.fa-heart{"aria-hidden" => "true"}
+        - else
+          .other
+            %li.other
+              .avatar
+                = image_tag msg.sender.avatar.url(:thumb)
+              .msg
+                %p #{msg.message}
+                %time
+              - if msg.created_at.today?
+                = msg.created_at.strftime("%I:%M %p")
+              - else
+                = msg.created_at.strftime("%a/%m - %I:%M %p")
+            %a.waves-effect.waves-teal.btn-flat{:style => "margin-left: 4%;"}
+              Share
+              %i.fa.fa-heart{"aria-hidden" => "true"}

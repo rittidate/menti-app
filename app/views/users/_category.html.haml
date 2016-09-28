@@ -1,0 +1,8 @@
+- for category in @category
+  - if category.category_user_exist?(@user, category.id)
+    - cat = CategorysUsersRelation.joins(:category).where(categories: {parent_id: category.id}, user: @user)
+    %h6.center.sliders
+      #{category.name}
+    .range-field  
+      .progress.action{ ref: "#{category.id}" }
+        .determinate.determinate_base{ ref: "#{category.id}", style: "width: #{cat.average(:value).to_i}%" }

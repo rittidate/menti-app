@@ -15,4 +15,8 @@ class Category < ActiveRecord::Base
   def category_user_exist?(user, category_id)
     CategorysUsersRelation.joins(:category).where(categories: {parent_id: category_id}, user: user).present?
   end
+
+  def category_course(user, category_id)
+    Course.joins("INNER JOIN categories ON courses.categories_id = categories.id").where(categories_id: category_id, user: user)
+  end
 end
