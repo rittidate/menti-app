@@ -43,6 +43,9 @@ gem 'aws-sdk', '~> 1.6'
 gem 'paperclip', '~> 4.3'
 gem 'braintree', '~> 2.49.0'
 
+#other
+gem 'annotate'
+gem 'countries_and_languages', :require => 'countries_and_languages/rails'
 
 
 group :development, :test do

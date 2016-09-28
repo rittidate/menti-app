@@ -1,0 +1,28 @@
+#js-form-category.form-fill
+  - for category in @category
+    - @sub_category = Category.where(parent_id: category.id)
+    .row
+      .col.s12
+        = check_box_tag "category_#{category.id}", category.id, category.category_user_exist?(current_user, category.id), {class: 'category_checkbox', ref: category.id}
+
+        %label{ for: "category_#{category.id}" }
+          %span.category_label #{category.name}
+      .col.s12.sub_category{ ref: "#{category.id}" }
+        - for sub_category in @sub_category
+          - user_category_relation = CategorysUsersRelation.where(category: sub_category, user: current_user)
+          .col.s3
+            %br
+            = check_box_tag "sub_category_#{sub_category.id}", sub_category.id, user_category_relation.present?, {class: 'sub_category_checkbox filled-in', ref: sub_category.id}
+            %label{ for: "sub_category_#{sub_category.id}" } #{sub_category.name}
+          .col.s9
+            %label 
+              Current Level
+              %span{ class: "range_badge current_badge", ref: "#{sub_category.id}" } 
+                = user_category_relation.present? ? user_category_relation.first.value : 0
+            = range_field_tag("current_value_#{sub_category.id}", user_category_relation.present? ? user_category_relation.first.value : 0, { class: 'current_level_range', ref: "#{sub_category.id}", style: 'border: none;', min: 0, max: 100 })
+
+            %label 
+              Desired Level
+              %span{ class: "range_badge desired_badge", ref: "#{sub_category.id}" } 
+                = user_category_relation.present? ? user_category_relation.first.desire_value : 0
+            = range_field_tag("current_desired_#{sub_category.id}", user_category_relation.present? ? user_category_relation.first.desire_value : 0, { class: 'desired_level_range', ref: "#{sub_category.id}", style: 'border: none;', min: 0, max: 100 })

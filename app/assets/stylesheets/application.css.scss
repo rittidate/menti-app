@@ -1,3 +1,4 @@
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -11,19 +12,15 @@
  * file per style scope.
  *
  */
-// Load local variable
 @import "variables";
-
-@import "materialize/components/color";
-@import "materialize";
 @import "global";
 @import "dashboard";
 @import "my-profile";
+@import "materialize/components/color";
+@import "materialize";
 @import "payment";
 @import "mentor_setting";
 @import "contact_modal";
-
-
 
 // Load component style
 @import "login";

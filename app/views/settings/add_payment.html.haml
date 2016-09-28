@@ -1,0 +1,14 @@
+.row.setting-page
+  .col.s3.left-content
+    = render 'menu'
+  .col.s9.right-content
+    .row
+      .form-fill
+        %form{ id: 'js-payment-form', class: 'payment-form' }
+          = render 'payment/payment_form'
+          
+      .row.center
+        = link_to settings_payment_path , class: 'prev-page waves-effect waves-light btn' do
+          %i.fa.fa-angle-left
+          Back
+        %a{ class: 'waves-effect waves-light btn', id: 'js-payment-submit' } Submit
