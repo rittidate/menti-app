@@ -111,7 +111,9 @@ private
     @categories = Category.where(parent_id: nil)
   end
   def user_params
-    params.require(:user).permit(:first_name, :middle_name, :last_name, :gender, :education, :birthdate, :avatar, :address, :city, :state, :zipcode, :mobile_phone, :country, :prefered_language, :user_type)
+    hash_params = params.require(:user).permit(:first_name, :middle_name, :last_name, :gender, :education, :birthdate, :avatar, :address, :city, :state, :zipcode, :mobile_phone, :country, :prefered_language, :user_type)
+    hash_params[:birthdate] = Date.strptime(hash_params[:birthdate],"%m/%d/%Y") unless hash_params[:birthdate].nil? 
+    return hash_params
   end
 
   def coures_params
