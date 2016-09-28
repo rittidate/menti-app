@@ -60,6 +60,8 @@ class User < ActiveRecord::Base
   has_many :feed_messages, class_name: 'FeedMessage', foreign_key: :reciever_id
   has_many :payments
   has_many :follows
+  has_many :ratings
+  has_many :courses
 
   belongs_to :default_payment, class_name: 'Payment'
 

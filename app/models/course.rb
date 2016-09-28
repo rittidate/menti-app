@@ -4,7 +4,6 @@
 #
 #  id            :integer          not null, primary key
 #  user_id       :integer
-#  courses_id    :integer
 #  categories_id :integer
 #  price         :integer
 #  created_at    :datetime         not null
@@ -13,7 +12,6 @@
 # Indexes
 #
 #  index_courses_on_categories_id  (categories_id)
-#  index_courses_on_courses_id     (courses_id)
 #  index_courses_on_user_id        (user_id)
 #
 # Foreign Keys
@@ -22,4 +20,6 @@
 #
 
 class Course < ActiveRecord::Base
+  belongs_to :user
+  belongs_to :categories, class_name: 'Category'
 end
