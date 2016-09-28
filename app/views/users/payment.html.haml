@@ -2,12 +2,17 @@
   .col.s12
     .row
       .form-fill
-        %h3{ class: 'header'}
-          Payment
-        .row
-          = form_for(current_user, url: users_transaction_path(@user), html: { method: :put }) do |f|
+        = form_for(current_user, url: users_transaction_path(@user), html: { method: :put }) do |f|
+          %h3{ class: 'header'} Course
+          %div{:style => "display: block;"}
+            = image_tag @user.avatar.url(:thumb), :class => "circle mypic"
+            %p #{@user.first_name} #{@user.last_name}
+          .row
             .course-details
-              
+              %h5 Course: #{@course.categories.name}
+              %p Price: $ #{@course.price} per fortnight
+          %h3{ class: 'header'} Payment
+          .row
             %ul{ class: 'collection with-header'}
               = link_to new_payment_path , class: 'collection-item' do
                 %i{ class: 'fa fa-plus-circle fa-2x'}
