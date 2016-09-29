@@ -13,4 +13,6 @@
     %h5= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name), {class: 'col s6 offset-s1 btn-large waves-effect waves-light' }
 
 - if devise_mapping.omniauthable?
-  %h5= link_to "Sign in with Facebook", user_facebook_omniauth_callback_path , {class: 'col s8 offset-s2 btn-large waves-effect waves-light fb-button margin-btn'}
+  - resource_class.omniauth_providers.each do |provider|
+    %h5= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), {class: 'col s8 offset-s2 btn-large waves-effect waves-light fb-button margin-btn'}
+      
