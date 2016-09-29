@@ -64,7 +64,8 @@ class BraintreeApi
     )
     if result.success?
       # send email to user
-      Transaction.create(ref: result.transaction.id, transaction_type: :braintree, transaction_date: DateTime.now, user_id: payment.user.id, course_id: course.id, card_type: payment.card_type, masked_number: payment.masked_number, amount: course.price, status: 'holded')
+      transaction = Transaction.create(ref: result.transaction.id, transaction_type: :braintree, transaction_date: DateTime.now, user_id: payment.user.id, course_id: course.id, card_type: payment.card_type, masked_number: payment.masked_number, amount: course.price, status: 'holded')
+      Notification.create(user_id: course.user_id, sender_id: payment.user.id, notification_type: :payment, status: 'holded', transaction_id: transaction.id)
     else
       raise CreditCardVerifyException
     end

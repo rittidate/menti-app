@@ -1,0 +1,11 @@
+.row
+  .col.s12
+    .row
+      %h3{ class: 'header'} Notification
+
+      -if @notices.present?
+        - for notice in @notices
+          = notice.sender.first_name
+
+      - else
+        %p No notification

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160929153423) do
+ActiveRecord::Schema.define(version: 20160929192429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,18 @@ ActiveRecord::Schema.define(version: 20160929153423) do
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "transaction_id"
+    t.string   "status"
+    t.string   "notification_type"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "sender_id"
+  end
+
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "payments", force: :cascade do |t|
     t.integer  "user_id"
@@ -195,6 +207,7 @@ ActiveRecord::Schema.define(version: 20160929153423) do
   add_foreign_key "courses", "users"
   add_foreign_key "follows", "users"
   add_foreign_key "identities", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "ratings", "users"
   add_foreign_key "transactions", "users"
 end

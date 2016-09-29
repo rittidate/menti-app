@@ -51,4 +51,6 @@ Rails.application.routes.draw do
 
   put '/follow',    to: 'follow#create'
   put '/follow/delete',    to: 'follow#delete'
+
+  resources :notifications
 end
