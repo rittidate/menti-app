@@ -57,17 +57,16 @@ class User < ActiveRecord::Base
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
 
-  has_many :payments
   has_many :categorys, through: :categorys_users_relations 
   has_many :categorys_users_relations
   has_many :feed_messages, class_name: 'FeedMessage', foreign_key: :reciever_id
   has_many :follows
   has_many :ratings
   has_many :courses
+  has_many :payments
+  has_many :transactions
 
   belongs_to :default_payment, class_name: 'Payment'
-
-
 
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable

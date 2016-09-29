@@ -56,4 +56,17 @@ class BraintreeApi
       country_code_alpha2: bill_address['country']
     )
   end
+
+  def hold_amount(course, payment)
+    result = Braintree::Transaction.sale(
+      payment_method_token: payment.token,
+      amount: course.price
+    )
+    if result.success?
+      # send email to user
+      Transaction.create(ref: result.transaction.id, transaction_type: :braintree, transaction_date: DateTime.now, user_id: payment.user.id, course_id: course.id, card_type: payment.card_type, masked_number: payment.masked_number, amount: course.price, status: 'holded')
+    else
+      raise CreditCardVerifyException
+    end
+  end
 end

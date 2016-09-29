@@ -69,6 +69,11 @@ class UsersController < ApplicationController
   end
 
   def transaction
+    puts params
+  end
+
+  def wait
+
   end
 
 private
