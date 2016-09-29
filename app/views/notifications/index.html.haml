@@ -6,6 +6,9 @@
       -if @notices.present?
         - for notice in @notices
           = notice.sender.first_name
+          - if notice.notification_type == 'payment' and notice.status == 'holded'
+            %button{ class: 'btn payment_accept', ref: notice.transaction_id, noticification: notice.id } Accept
+            %button{ class: 'btn payment_decline', ref: notice.transaction_id, noticification: notice.id } Decline
 
       - else
         %p No notification

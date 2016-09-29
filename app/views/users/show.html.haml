@@ -19,7 +19,13 @@
         %button.waves-effect.waves-light.btn.unfollow.profBtns{ id: 'js-follow-button' } Unfollow
       - else
         %button.waves-effect.waves-light.btn.follow.profBtns{ id: 'js-follow-button' } Follow
-      %button.waves-effect.waves-light.btn.profBtns.contact.modal-contact-trigger{"data-target" => "contact-modal"} Contact
+
+      - if current_user.transactions.where(course_owner: @user, status: 'holded').where('created_at >= ?', 1.week.ago).present?
+        = link_to 'Contact', user_path(@user) , class: 'waves-effect waves-light btn profBtns contact modal-contact-trigger' 
+      - elsif current_user.transactions.where(course_owner: @user, status: 'submitted_for_settlement').where('created_at >= ?', 1.week.ago).present?
+        = link_to 'Contact',  message_path(@user) , class: 'waves-effect waves-light btn profBtns contact modal-contact-trigger' 
+      - else
+        %button.waves-effect.waves-light.btn.profBtns.contact.modal-contact-trigger{"data-target" => "contact-modal"} Contact
   - if !@user.mentee?
     %li
       .areas{:style => "display: inline-block; width: 99%; text-align: center; background-color: #E6E7E8"}

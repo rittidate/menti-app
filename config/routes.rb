@@ -53,4 +53,9 @@ Rails.application.routes.draw do
   put '/follow/delete',    to: 'follow#delete'
 
   resources :notifications
+
+  put '/payment/accept', to: 'payment#accept'
+  put '/payment/decline', to: 'payment#decline'
+
+  resources :message
 end

@@ -137,7 +137,14 @@ class User < ActiveRecord::Base
   def hold_transaction(course_id, payment_id)
     course = Course.find(course_id)
     payment = Payment.find(payment_id)
-
     BraintreeApi.new.hold_amount(course, payment)
+  end
+
+  def collect_transaction(transaction, noticification)
+    BraintreeApi.new.collect_amount(transaction, noticification)
+  end
+
+  def release_transaction(transaction, noticification)
+    BraintreeApi.new.release_amount(transaction, noticification)
   end
 end

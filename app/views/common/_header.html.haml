@@ -22,8 +22,8 @@
             = link_to notifications_path do
               %i.fa.fa-bell.header-fa.icon-grey
           %li
-            %a
-              %i{ class: 'fa fa-comment header-fa', 'aria-hidden': 'true'}
+            = link_to message_index_path do
+              %i.fa.fa-comment.header-fa
           %li
             %a
               %i{ class: 'fa fa-book header-fa', 'aria-hidden': 'true'}
@@ -51,10 +51,9 @@
             %a{ href: '#!', class: 'white-text side-links' }
               Search
           %li
-            %a{ href: '#!', class: 'white-text side-links' }
-              Message
-          %li
             = link_to 'Notifications', notifications_path, class: 'white-text side-links'
+          %li
+            = link_to 'Message', message_index_path, class: 'white-text side-links'
           %li
             %a{ href: '#!', class: 'white-text side-links' }
               Resources

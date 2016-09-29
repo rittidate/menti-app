@@ -15,6 +15,7 @@
 #  transaction_date :datetime
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  course_owner_id  :integer
 #
 # Indexes
 #
@@ -30,5 +31,6 @@ class Transaction < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :course
+  belongs_to :course_owner, :class_name => "User"
 
 end
