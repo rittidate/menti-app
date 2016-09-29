@@ -132,4 +132,11 @@ class User < ActiveRecord::Base
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
+
+  def hold_transaction(course_id, payment_id)
+    course = Course.find(course_id)
+    payment = Payment.find(payment_id)
+
+    BraintreeApi.new.hold_amount(course, payment)
+  end
 end

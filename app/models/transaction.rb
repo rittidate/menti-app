@@ -26,7 +26,7 @@
 #
 
 class Transaction < ActiveRecord::Base
-  enum transaction_type: { deposit: 0, withdrawal: 1, braintree: 2, pool_activity: 3 }
+  enum transaction_type: { braintree: 1 }
 
   belongs_to :user
   belongs_to :course

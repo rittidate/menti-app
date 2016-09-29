@@ -69,6 +69,7 @@ class UsersController < ApplicationController
   end
 
   def transaction
+    current_user.hold_transaction(params[:course], params[:payment])
     redirect_to users_wait_path
   end
 
