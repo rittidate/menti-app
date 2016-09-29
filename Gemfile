@@ -39,6 +39,8 @@ gem 'animate.css-rails', '~> 3.2.0'
 #authen
 gem 'devise'
 gem 'devise_security_extension'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 #api
 gem 'aws-sdk', '~> 1.6'
