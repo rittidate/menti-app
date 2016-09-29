@@ -41,6 +41,8 @@
 #  about                    :string
 #  program                  :string
 #  terms                    :string
+#  provider                 :string
+#  uid                      :string
 #
 # Indexes
 #
@@ -66,7 +68,8 @@ class User < ActiveRecord::Base
   belongs_to :default_payment, class_name: 'Payment'
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, :omniauth_providers => [:facebook]
 
   extend FriendlyId
   friendly_id :username
@@ -87,5 +90,14 @@ class User < ActiveRecord::Base
 
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
+  end
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.name = auth.info.name   # assuming the user model has a name
+      user.image = auth.info.image # assuming the user model has an image
+    end
   end
 end
