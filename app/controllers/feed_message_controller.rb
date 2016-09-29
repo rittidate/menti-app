@@ -1,4 +1,6 @@
 class FeedMessageController < ApplicationController
+  before_action :authenticate_user!, except: [:new, :create]
+  
   def create
     msg = FeedMessage.create(message_params) do |f|
       f.sender = current_user

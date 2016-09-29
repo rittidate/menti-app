@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :payment]
+  before_action :authenticate_user!, except: :index
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :payment, :transaction]
 
   def index
     if user_signed_in?
@@ -57,7 +58,15 @@ class UsersController < ApplicationController
   end
 
   def payment
-    @payments = current_user.payments
+    if params.has_key?(:id) and params.has_key?(:course)
+      @payments = current_user.payments
+      @course = Course.find(params[:course])
+    else
+      redirect_to user_path(current_user)
+    end
+  end
+
+  def transaction
   end
 
 private

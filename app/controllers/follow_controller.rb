@@ -1,4 +1,6 @@
 class FollowController < ApplicationController
+  before_action :authenticate_user!
+  
   def create
     current_user.follows.where(follower_id: params['follow_user']).first_or_create!
     render json: { success: true, status: 200 }

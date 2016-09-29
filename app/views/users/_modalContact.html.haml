@@ -8,7 +8,7 @@
         - for course in @user.courses
           %li.category-list
             = radio_button_tag :course, course.id, {class: 'with-gap'}
-            = label :course, course.categories.name, :for=> 'course_' + course.id.to_s
+            = label :course, course.categories.name + " ($ #{course.price} per fortnight)", :for=> 'course_' + course.id.to_s
 
 
       .modal-footer

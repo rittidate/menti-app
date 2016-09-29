@@ -1,0 +1,18 @@
+- if controller_name != 'sessions'
+  %h5= link_to "Log in", new_session_path(resource_name), {class: 'col s5 offset-s1 btn-large waves-effect waves-light margin-btn'}
+
+// - if devise_mapping.registerable? && controller_name != 'registrations'
+//   = link_to "Sign up", new_registration_path(resource_name), {class: 'col s4 offset-s2 btn waves-effect waves-light'}
+
+- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+  %h5= link_to "Forgot password?", new_password_path(resource_name), {class: 'col s8 offset-s2 btn-large waves-effect waves-light margin-btn'}
+
+  - if devise_mapping.confirmable? && controller_name != 'confirmations'
+    %h5= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), {class: 'col s4 offset-s1 btn-large waves-effect waves-light'}
+  - if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks'
+    %h5= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name), {class: 'col s6 offset-s1 btn-large waves-effect waves-light' }
+
+/ - if devise_mapping.omniauthable?
+/   - resource_class.omniauth_providers.each do |provider|
+/     %h5= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), {class: 'col s8 offset-s2 btn-large waves-effect waves-light fb-button margin-btn'}
+/ 
