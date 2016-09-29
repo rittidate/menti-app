@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   get '/users/:id/payment', to: 'users#payment', as: :users_payment
   put '/users/:id/payment', to: 'users#transaction', as: :users_transaction
+  get '/users/:id/wait', to: 'users#wait', as: :users_wait
 
   get '/dashboard',       to: 'dashboard#index'
 

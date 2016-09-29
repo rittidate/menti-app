@@ -3,7 +3,6 @@
     .row
       .form-fill
         = form_for(current_user, url: users_transaction_path(@user), html: { method: :put }) do |f|
-<<<<<<< Updated upstream
           .course-container
             %h3{ class: 'header'} Course
             %hr/
@@ -18,6 +17,7 @@
                 %h5 Course: 
                 %h6 Category : #{@course.categories.name}
                 %h6 Price: $#{@course.price} per fortnight
+                = hidden_field_tag :course_id, @course.id
             .row
               .option-container
                 %ul.center
@@ -30,19 +30,6 @@
           .payment-container      
             %h3{ class: 'header'} Payment
             %hr/
-=======
-          %h3{ class: 'header'} Course
-          %div{:style => "display: block;"}
-            = image_tag @user.avatar.url(:thumb), :class => "circle mypic"
-            %p #{@user.first_name} #{@user.last_name}
-          .row
-            .course-details
-              %h5 Course: #{@course.categories.name}
-              %p Price: $ #{@course.price} per fortnight
-              = hidden_field_tag :course_id, @course.id
-          %h3{ class: 'header'} Payment
-          .row
->>>>>>> Stashed changes
             %ul{ class: 'collection with-header'}
               = link_to new_payment_path , class: 'collection-item' do
                 %i{ class: 'fa fa-plus-circle fa-2x'}

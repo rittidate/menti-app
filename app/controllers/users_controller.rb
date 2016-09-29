@@ -69,7 +69,7 @@ class UsersController < ApplicationController
   end
 
   def transaction
-    puts params
+    redirect_to users_wait_path
   end
 
   def wait
