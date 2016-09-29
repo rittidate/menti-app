@@ -3,16 +3,32 @@
     .row
       .form-fill
         = form_for(current_user, url: users_transaction_path(@user), html: { method: :put }) do |f|
-          %h3{ class: 'header'} Course
-          %div{:style => "display: block;"}
-            = image_tag @user.avatar.url(:thumb), :class => "circle mypic"
-            %p #{@user.first_name} #{@user.last_name}
-          .row
-            .course-details
-              %h5 Course: #{@course.categories.name}
-              %p Price: $ #{@course.price} per fortnight
-          %h3{ class: 'header'} Payment
-          .row
+          .course-container
+            %h3{ class: 'header'} Course
+            %hr/
+            = image_tag @user.avatar.url(:thumb), :class => "payment-pic left"
+            %h5 #{@user.first_name} #{@user.last_name}
+            .row
+              .term-details
+                %h5 Terms:
+                %h6{ style: 'margin-left: 10rem'} All the long long long long long terms here!
+            .row
+              .course-details
+                %h5 Course: 
+                %h6 Category : #{@course.categories.name}
+                %h6 Price: $#{@course.price} per fortnight
+            .row
+              .option-container
+                %ul.center
+                  %li
+                    %input#option{:name => "options", :type => "radio", :checked => "checked" }/
+                    %label{:for => "option"} Accept
+                  %li
+                    %input#option2{:name => "options", :type => "radio"}/
+                    %label{:for => "option2"} Decline
+          .payment-container      
+            %h3{ class: 'header'} Payment
+            %hr/
             %ul{ class: 'collection with-header'}
               = link_to new_payment_path , class: 'collection-item' do
                 %i{ class: 'fa fa-plus-circle fa-2x'}
@@ -29,8 +45,8 @@
                     = link_to destroy_payment_path(payment), class: 'secondary-content', method: :delete, data: { confirm: 'Are you sure?' } do
                       %i.fa.fa-times.fa-2x.right
 
-            .row.center
-              = link_to user_path(@user) , class: 'prev-page waves-effect waves-light btn' do
-                %i.fa.fa-angle-left
-                Back
-              = f.submit "Next", { class: 'waves-effect waves-light btn' }
+          .row.center
+            = link_to user_path(@user) , class: 'prev-page waves-effect waves-light btn' do
+              %i.fa.fa-angle-left
+              Back
+            = f.submit "Next", { class: 'waves-effect waves-light btn' }
