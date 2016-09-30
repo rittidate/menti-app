@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get '/users/:id/wait', to: 'users#wait', as: :users_wait
 
   get '/dashboard',       to: 'dashboard#index'
+  post '/rating',          to: 'users#rating'
 
   get '/settings',            to: 'settings#index'
   put '/settings',            to: 'settings#update'

@@ -345,14 +345,15 @@ emoji.funny{background-image: url(http://i.imgur.com/qKia58V.png);}
 .rating {
     padding-top: 1rem;
     padding-bottom: 1rem;
-  unicode-bidi: bidi-override;
-  direction: rtl;
+    unicode-bidi: bidi-override;
+    direction: rtl;
 }
 .rating > span {
   display: inline-block;
   position: relative;
   width: 1.5em;
   font-size: 1.5rem;
+  cursor: pointer;
 }
 .rating > span:hover:before,
 .rating > span:hover ~ span:before {

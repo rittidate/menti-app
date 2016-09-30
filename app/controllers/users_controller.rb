@@ -77,6 +77,13 @@ class UsersController < ApplicationController
 
   end
 
+  def rating
+    rating = Rating.where(user_id: params[:user], giver: current_user, courses_user_relation_id: params[:courses_user_relations]).first_or_create!
+    rating.value = params[:value]
+    rating.save!
+    render json: { success: true, value: rating.value, status: 200 }
+  end
+
 private
   def set_user
     @user = User.friendly.find(params[:id])

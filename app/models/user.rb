@@ -66,6 +66,7 @@ class User < ActiveRecord::Base
   has_many :payments
   has_many :transactions
   has_many :notifications
+  has_many :courses_user_relations
 
   belongs_to :default_payment, class_name: 'Payment'
 
