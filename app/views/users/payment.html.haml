@@ -11,7 +11,12 @@
             .row
               .term-details
                 %h5 Terms:
-                %h6{ style: 'margin-left: 10rem'} All the long long long long long terms here!
+                %h6{ style: 'margin-left: 10rem'}
+                  - if @user.terms.present?
+                    = @user.terms
+                  - else
+                    %span.default-content
+                      Please update Terms in settings
             .row
               .course-details
                 %h5 Course: 

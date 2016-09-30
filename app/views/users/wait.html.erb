@@ -1,0 +1,16 @@
+<div class="wait-container col s12 overlay-container">
+    <div class="overlay"></div>
+    <div class="center main-wait" style="">
+        <!--<%= image_tag 'wait.jpg', :style => "width: 100%" %>-->
+        <i class="fa fa-envelope animated infinite rollOut" style="font-size: -webkit-xxx-large; color: #01DFFF;" aria-hidden="true"></i>
+        <h3>
+            Request sent to the mentor!
+        </h3>
+        <h4>
+           You will soon receive the response from the mentor. 
+        </h4>
+        <%= link_to user_path(current_user) , class: 'waves-effect waves-purple btn-large back-button' do %>
+          <i class="fa fa-angle-left" aria-hidden="true"></i> Back
+        <% end %>
+    </div>
+</div>

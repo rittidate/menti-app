@@ -26,14 +26,15 @@
         color: #AFAFAF;
     }
 }
-.collection{
+
+.payment-container{
+    margin-bottom: 2vh;
+    .collection{
     border: none;
     a{
         background-color: #F9F9F9 !important;
     }
 }
-.payment-container{
-    margin-bottom: 2vh;
 }
 .payment-pic{
     width: 100px;
@@ -41,13 +42,14 @@
     margin-left: 1.3rem;
     margin-right: 1.3rem;
     border-radius: 4px;
-    
 }
 .course-details{
     margin-left: 10rem;
 }
-li{
-    display: inline;
+.option-container{
+    li{
+        display: inline;
+    }
 }
 .prev-page{
     margin-right: 1rem;
