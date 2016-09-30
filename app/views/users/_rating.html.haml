@@ -1,5 +1,5 @@
+= hidden_field_tag :rating_value, @user.ratings.where('updated_at >= ?', 6.month.ago).average(:value).to_i
 - if @course_user_relation.present?
-  = hidden_field_tag :rating_value, 3
   %li
     .rating.center
       %span{ class: 'rating-star rating-give', num: 5 } ☆
@@ -8,7 +8,6 @@
       %span{ class: 'rating-star rating-give', num: 2 } ☆
       %span{ class: 'rating-star rating-give', num: 1 } ☆
 - else
-  = hidden_field_tag :rating_value
   %li
     .rating.center
       %span{ class: 'rating-star', num: 5 } ☆

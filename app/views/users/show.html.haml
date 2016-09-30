@@ -6,7 +6,7 @@
     %h6.center.navFont How are you tracking so far...
   - courses = Course.where(user: @user)
   - @course_user_relation = current_user.courses_user_relations.where(user: current_user, course: courses).where('created_at >= ?', 2.week.ago)
-  = hidden_field_tag :courses_user_relations, @course_user_relation.first.id
+  = hidden_field_tag :courses_user_relations, @course_user_relation.first.id if @course_user_relation.present?
   = render 'rating' if !@user.mentee?
   
   %hr/
