@@ -31,6 +31,12 @@ $(document).on 'turbolinks:load', ->
         $('.rating-star[num=3]').addClass('active')
         $('.rating-star[num=4]').addClass('active')
         $('.rating-star[num=5]').addClass('active')
+      else
+        $('.rating-star[num=1]').removeClass('active')
+        $('.rating-star[num=2]').removeClass('active')
+        $('.rating-star[num=3]').removeClass('active')
+        $('.rating-star[num=4]').removeClass('active')
+        $('.rating-star[num=5]').removeClass('active')
 
   $.rating_star($('#rating_value').val())
 
