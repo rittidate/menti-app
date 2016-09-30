@@ -59,7 +59,8 @@ $(document).on 'turbolinks:load', ->
     num = $(this).attr('num')
     $.rating_star(num)
   , () -> 
-    $.rating_star $('#rating_value').val()
+    num = $('#rating_value').val()
+    $.rating_star(num)
 
   $('.rating-give').on 'click', () ->
     num = $(this).attr('num')
