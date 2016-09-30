@@ -1,4 +1,13 @@
-= hidden_field_tag :rating_value, @user.ratings.where('updated_at >= ?', 6.month.ago).average(:value).to_i
+- rating = @user.ratings.where('updated_at >= ?', 6.month.ago)
+- if rating.present?
+  - avg = rating.average(:value).to_i
+- else
+  - rating = @user.ratings
+  - if rating.present?
+    - avg = rating.average(:value).to_i
+  - else
+    - avg = 0
+= hidden_field_tag :rating_value, avg
 - if @course_user_relation.present?
   %li
     .rating.center
