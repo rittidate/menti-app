@@ -38,22 +38,31 @@ $(document).on 'turbolinks:load', ->
         $('.rating-star[num=4]').removeClass('active')
         $('.rating-star[num=5]').removeClass('active')
 
+  $.payment_acceptance = () ->
+    if $('#option').prop('checked') and $('.payment-course:checked') != undefined
+      $('#submit-course').removeClass('disabled')
+    else
+      $('#submit-course').addClass('disabled')
+
+  $.payment_acceptance()
+
   $.rating_star($('#rating_value').val())
 
   $('#submit-course').addClass('disabled')
-                    .on 'click', () ->
-                      if $(this).hasClass('disabled')
-                        $("form").submit (e) ->
-                            e.preventDefault();
-                      else
-                        $("form").submit()
+                  .on 'click', () ->
+                    if $(this).hasClass('disabled')
+                      $("form").submit (e) ->
+                          e.preventDefault();
+                    else
+                      $("form").submit()
                         
-
   $('#option').on 'click', () ->
     $('#submit-course').removeClass('disabled')
+    $.payment_acceptance()
 
   $('#option2').on 'click', () ->
     $('#submit-course').addClass('disabled')
+    $.payment_acceptance()
 
   $('.rating-star').hover () ->
     num = $(this).attr('num')
@@ -78,5 +87,7 @@ $(document).on 'turbolinks:load', ->
     ).always( (d) ->
       $('#rating_value').val(d.value)
     )
+
+
 
 

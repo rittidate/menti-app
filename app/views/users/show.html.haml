@@ -18,7 +18,7 @@
         %button.waves-effect.waves-light.btn.follow.profBtns{ id: 'js-follow-button' } Follow
 
       - if current_user.transactions.where(course_owner: @user, status: 'holded').where('created_at >= ?', 1.week.ago).present?
-        = link_to 'Contact', user_path(@user) , class: 'waves-effect waves-light btn profBtns contact modal-contact-trigger' 
+        = link_to 'Contact', users_wait_path(@user) , class: 'waves-effect waves-light btn profBtns contact modal-contact-trigger' 
       - elsif @course_user_relation.present?
         = link_to 'Contact',  message_path(@user) , class: 'waves-effect waves-light btn profBtns contact modal-contact-trigger' 
       - else

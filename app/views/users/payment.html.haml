@@ -41,7 +41,7 @@
                   Add Credit Card
               - for payment in @payments
                 %li.collection-item.avatar
-                  = radio_button_tag :payment, payment.id, class: 'with-gap'
+                  = radio_button_tag :payment, payment.id, payment.id == current_user.default_payment_id,class: 'with-gap payment-course'
                   %label{ for: 'payment_' + payment.id.to_s, style: 'width: 100%' }
                     = image_tag payment_logo(payment.card_type), class: "circle", style: "left: 34px !important;"
                     %span.title{:style => "margin-left: 4rem;"}
