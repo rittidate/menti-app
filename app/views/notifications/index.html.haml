@@ -1,14 +1,53 @@
 .row
   .col.s12
     .row
-      %h3{ class: 'header'} Notification
+      
 
       -if @notices.present?
         - for notice in @notices
-          = notice.sender.first_name
-          - if notice.notification_type == 'payment' and notice.status == 'holded'
-            %button{ class: 'btn payment_accept', ref: notice.transaction_id, noticification: notice.id } Accept
-            %button{ class: 'btn payment_decline', ref: notice.transaction_id, noticification: notice.id } Decline
+          .col.s12.animated.zoomIn
+            .card.horizontal.card-confirm
+              .card-image.notification-img
+                = image_tag notice.sender.avatar.url(:thumb), :class => "circle"
+              .card-stacked
+                .card-content
+                  %i.fa.fa-trash-o.right.trash
+                  - if notice.notification_type == 'payment' and notice.status == 'holded'
+                    %i.fa.fa-pencil-square-o.tooltip.icons.right
+                      %span.tooltiptext
+                        Confirmation Pending
+                  - else
+                    %i.fa.fa-pencil-square-o.tooltip.icons{ style: 'color: #F7F7F7'}
+                      %span.tooltiptext
+                        Confirmed
+                  %h5= notice.sender.first_name
+                  %p The body of the message sent by mentor.
+                  %p The body of the message sent by mentor.
+                  %p The body of the message sent by mentor.
+                  %p The body of the message sent by mentor.
+                .card-action
+                  - if notice.notification_type == 'payment' and notice.status == 'holded'
+                    %button{ class: 'btn-flat payment_accept', ref: notice.transaction_id, noticification: notice.id } Accept
+                    %button{ class: 'btn-flat payment_decline', ref: notice.transaction_id, noticification: notice.id } Decline
+                  - else
+                    %button{ class: 'btn-flat payment_accept', disabled: 'disabled', ref: notice.transaction_id, noticification: notice.id } Accepted
+                    
+          .col.s12.animated.zoomIn
+            .card.horizontal.card-message
+              .card-image.notification-img
+                = image_tag notice.sender.avatar.url(:thumb), :class => "circle"
+              .card-stacked
+                .card-content
+                  %i.fa.fa-trash-o.right.trash
+                  %i.fa.fa-share-square.tooltip.icons
+                    %span.tooltiptext
+                      Confirmation sent
+                  %h5= notice.sender.first_name
+                  %p The body of the message sent to mentor.
+                  %p The body of the message sent to mentor.
+                  %p The body of the message sent to mentor.
+                  %p The body of the message sent to mentor.
 
       - else
-        %p No notification
+        %h5.js-no-content.center
+          No Notifications
