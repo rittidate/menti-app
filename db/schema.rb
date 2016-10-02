@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928183429) do
+ActiveRecord::Schema.define(version: 20161002103901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,29 @@ ActiveRecord::Schema.define(version: 20160928183429) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+  create_table "identities", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "transaction_id"
+    t.string   "status"
+    t.string   "notification_type"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "sender_id"
+    t.boolean  "seen",              default: false
+  end
+
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
+
   create_table "payments", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "card_type"
@@ -107,9 +130,10 @@ ActiveRecord::Schema.define(version: 20160928183429) do
   create_table "ratings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "giver_id"
-    t.integer  "value",      default: 0, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "value",                    default: 0, null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "courses_user_relation_id"
   end
 
   add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
@@ -118,6 +142,24 @@ ActiveRecord::Schema.define(version: 20160928183429) do
     t.string "locale", null: false
     t.string "name",   null: false
   end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "transaction_type", default: 0
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.integer  "amount"
+    t.string   "card_type"
+    t.string   "masked_number"
+    t.string   "status"
+    t.string   "ref"
+    t.string   "notes"
+    t.datetime "transaction_date"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "course_owner_id"
+  end
+
+  add_index "transactions", ["user_id"], name: "index_transactions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                              default: "", null: false
@@ -158,6 +200,8 @@ ActiveRecord::Schema.define(version: 20160928183429) do
     t.string   "about"
     t.string   "program"
     t.string   "terms"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -165,5 +209,8 @@ ActiveRecord::Schema.define(version: 20160928183429) do
 
   add_foreign_key "courses", "users"
   add_foreign_key "follows", "users"
+  add_foreign_key "identities", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "ratings", "users"
+  add_foreign_key "transactions", "users"
 end

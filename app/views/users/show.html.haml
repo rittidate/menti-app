@@ -4,14 +4,11 @@
     %h4.center.navFont Welcome #{@user.first_name}!
   %li
     %h6.center.navFont How are you tracking so far...
-  <!-- Only for mentor and both -->
-  %li
-  .rating.center
-    %span ☆
-    %span ☆
-    %span ☆
-    %span ☆
-    %span ☆
+  - courses = Course.where(user: @user)
+  - @course_user_relation = current_user.courses_user_relations.where(user: current_user, course: courses).where('created_at >= ?', 2.week.ago)
+  = hidden_field_tag :courses_user_relations, @course_user_relation.first.id if @course_user_relation.present?
+  = render 'rating' if !@user.mentee?
+  
   %hr/
   - if @user != current_user
     .col.s12
@@ -19,7 +16,14 @@
         %button.waves-effect.waves-light.btn.unfollow.profBtns{ id: 'js-follow-button' } Unfollow
       - else
         %button.waves-effect.waves-light.btn.follow.profBtns{ id: 'js-follow-button' } Follow
-      %button.waves-effect.waves-light.btn.profBtns.contact.modal-contact-trigger{"data-target" => "contact-modal"} Contact
+
+      - if current_user.transactions.where(course_owner: @user, status: 'holded').where('created_at >= ?', 1.week.ago).present?
+        = link_to 'Contact', users_wait_path(@user) , class: 'waves-effect waves-light btn profBtns contact modal-contact-trigger' 
+      - elsif @course_user_relation.present?
+        = link_to 'Contact',  message_path(@user) , class: 'waves-effect waves-light btn profBtns contact modal-contact-trigger' 
+      - else
+        %button.waves-effect.waves-light.btn.profBtns.contact.modal-contact-trigger{"data-target" => "contact-modal"} Contact
+
   - if !@user.mentee?
     %li
       .areas{:style => "display: inline-block; width: 99%; text-align: center; background-color: #E6E7E8"}
@@ -32,46 +36,7 @@
           %span.tooltiptext
             Finance
       
-  - if !@user.mentee?
-    %li.mentor
-      %span.mentor-label
-        About:
-        %br/
-      %p.mentor-content
-        - if @user.about.present?
-          = @user.about
-        - else
-          %span.default-content
-            Please update this detail in settings
-        
-    %li.mentor
-      %span.mentor-label
-        Program:
-        %br/
-      %p.mentor-content
-        - if @user.program.present?
-          = @user.program
-        - else
-          %span.default-content
-            Please update this detail in settings
-        
-    %li.mentor
-      %span.mentor-label
-        terms:
-        %br/
-      %p.mentor-content
-        - if @user.terms.present?
-          = @user.terms
-        - else
-          %span.default-content
-            Please update this detail in settings
-    %li.mentor
-      %span.mentor-label
-        prices:
-        %br/
-      %p.mentor-content
-        %span.default-content
-          Please update this detail in settings
+  = render 'terms' if !@user.mentee?
 
   <!-- End mentor and both section -->
     

@@ -40,10 +40,12 @@ class UsersController < ApplicationController
     if request.patch? && params[:user] #&& params[:user][:email]
       if @user.update(user_params)
         sign_in(@user, :bypass => true)
-        redirect_to @user, notice: 'Your profile was successfully updated.'
+        redirect_to users_detail_path(@user), notice: 'Your profile was successfully updated.'
       else
         @show_errors = true
       end
+    else
+      redirect_to users_path(@user)
     end
   end
 
@@ -67,6 +69,19 @@ class UsersController < ApplicationController
   end
 
   def transaction
+    current_user.hold_transaction(params[:course], params[:payment])
+    redirect_to users_wait_path
+  end
+
+  def wait
+
+  end
+
+  def rating
+    rating = Rating.where(user_id: params[:user], giver: current_user, courses_user_relation_id: params[:courses_user_relations]).first_or_create!
+    rating.value = params[:value]
+    rating.save!
+    render json: { success: true, value: rating.value, status: 200 }
   end
 
 private

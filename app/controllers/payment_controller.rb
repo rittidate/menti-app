@@ -46,6 +46,20 @@ class PaymentController < ApplicationController
     end
   end
 
+  def accept
+    transaction = Transaction.find(params[:transaction])
+    noticification = Notification.find(params[:noticification])
+    transaction.user.collect_transaction(transaction, noticification)
+    render json: { success: true, data: transaction, status: 200 }
+  end
+
+  def decline
+    transaction = Transaction.find(params[:transaction])
+    noticification = Notification.find(params[:noticification])
+    transaction.user.release_transaction(transaction, noticification)
+    render json: { success: true, data: transaction, status: 200 }
+  end
+
   private
     def payment_params
       params.require(:user).permit(:default_payment_id)

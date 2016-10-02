@@ -1,0 +1,74 @@
+.notification-container{
+    margin-top: 5vh;
+}
+.avatar{
+    .circle{
+        top: 1.3rem;
+    }
+    h4{
+        margin: 1.4rem 0 0.912rem 0;
+    }
+}
+.notification-img{
+    width: 20%;
+}
+.notification-img-2{
+    width: 15%;
+}
+.trash{
+    font-size: 2rem !important;
+    cursor: pointer;
+}
+.card-confirm{
+    border-left: 5px solid #D87F2B;
+    .icons{
+        color: #D87F2B;
+        font-size: 2rem;
+        position: absolute;
+        right: 4rem;
+    }
+    .card-action{
+        background-color: #F7F7F7;
+    }
+    .tooltiptext{
+        padding: 1rem;
+        background-color: #D87F2B;
+        color: white;
+        font-size: 1rem;
+    }
+    .tooltip .tooltiptext::after {
+            content: " ";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #D87F2B transparent transparent transparent;
+        }
+}
+.card-message{
+    border-left: 5px solid #089DC8;
+    .icons{
+        color: #089DC8;
+        font-size: 2rem;
+        position: absolute;
+        right: 4rem;
+    }
+    .tooltiptext{
+        padding: 1rem;
+        background-color: #089DC8;
+        color: white;
+        font-size: 1rem;
+    }
+    .tooltip .tooltiptext::after {
+            content: " ";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #089DC8 transparent transparent transparent;
+        }
+}

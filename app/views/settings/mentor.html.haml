@@ -29,7 +29,7 @@
                     %label{ for: "category_#{category.id}" }
                       %span.category_label #{category.name}
                   .col.s4.mentor_category_price_div{ ref: "#{category.id}"}
-                    %input{ type: 'number', id: 'category_price_#{category.id}', name: 'user[category][][price]', ref: "#{category.id}", class: 'mentor_category_price', value: "#{category.category_course(current_user, category.id).first.price if category.category_course(current_user, category.id).present?}" }
+                    %input{ type: 'number', id: 'category_price_#{category.id}',min: '0', name: 'user[category][][price]', ref: "#{category.id}", class: 'mentor_category_price', value: "#{category.category_course(current_user, category.id).first.price if category.category_course(current_user, category.id).present?}" }
                     %span{ class: 'prefix aud right'} 
                       AUD/Fortnight
                     %label{ for: "category_price_#{category.id}" }
@@ -42,7 +42,7 @@
                         %label{ for: "category_#{sub_category.id}" }
                           %span.category_label #{sub_category.name}
                       .col.s4.mentor_category_price_div{ ref: "#{sub_category.id}"}
-                        %input{ type: 'number', id: 'category_price_#{sub_category.id}', name: 'user[category][][price]', ref: "#{sub_category.id}", class: 'mentor_category_price', value: "#{category.category_course(current_user, sub_category.id).first.price if category.category_course(current_user, sub_category.id).present?}" }
+                        %input{ type: 'number', id: 'category_price_#{sub_category.id}',min: '0', name: 'user[category][][price]', ref: "#{sub_category.id}", class: 'mentor_category_price', value: "#{category.category_course(current_user, sub_category.id).first.price if category.category_course(current_user, sub_category.id).present?}" }
                         %span{ class: 'prefix aud right'} 
                           AUD/Fortnight
                         %label{ for: "category_price_#{sub_category.id}" }

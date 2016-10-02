@@ -1,0 +1,26 @@
+- rating = @user.ratings.where('updated_at >= ?', 6.month.ago)
+- if rating.present?
+  - avg = rating.average(:value).to_i
+- else
+  - rating = @user.ratings
+  - if rating.present?
+    - avg = rating.average(:value).to_i
+  - else
+    - avg = 0
+= hidden_field_tag :rating_value, avg
+- if @course_user_relation.present?
+  %li
+    .rating.center
+      %span{ class: 'rating-star rating-give', num: 5 } ☆
+      %span{ class: 'rating-star rating-give', num: 4 } ☆
+      %span{ class: 'rating-star rating-give', num: 3 } ☆
+      %span{ class: 'rating-star rating-give', num: 2 } ☆
+      %span{ class: 'rating-star rating-give', num: 1 } ☆
+- else
+  %li
+    .rating.center
+      %span{ class: 'rating-star', num: 5 } ☆
+      %span{ class: 'rating-star', num: 4 } ☆
+      %span{ class: 'rating-star', num: 3 } ☆
+      %span{ class: 'rating-star', num: 2 } ☆
+      %span{ class: 'rating-star', num: 1 } ☆

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, :controllers => { registrations: "registrations", sessions: "sessions" }
+  devise_for :users, :controllers => { registrations: "registrations", sessions: "sessions", :omniauth_callbacks => "omniauth_callbacks" }
   
   devise_scope :user do
     get '/users/detail',  to: 'registrations#detail'
@@ -9,14 +9,16 @@ Rails.application.routes.draw do
   root 'home#index'
   get   '/terms',          to:  'home#terms'
 
-  
+  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
 
   resources :users
 
   get '/users/:id/payment', to: 'users#payment', as: :users_payment
   put '/users/:id/payment', to: 'users#transaction', as: :users_transaction
+  get '/users/:id/wait', to: 'users#wait', as: :users_wait
 
   get '/dashboard',       to: 'dashboard#index'
+  post '/rating',          to: 'users#rating'
 
   get '/settings',            to: 'settings#index'
   put '/settings',            to: 'settings#update'
@@ -50,4 +52,11 @@ Rails.application.routes.draw do
 
   put '/follow',    to: 'follow#create'
   put '/follow/delete',    to: 'follow#delete'
+
+  resources :notifications
+
+  put '/payment/accept', to: 'payment#accept'
+  put '/payment/decline', to: 'payment#decline'
+
+  resources :message
 end

@@ -22,4 +22,5 @@
 class Course < ActiveRecord::Base
   belongs_to :user
   belongs_to :categories, class_name: 'Category'
+
 end

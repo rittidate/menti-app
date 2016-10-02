@@ -1,0 +1,39 @@
+%li.mentor
+  %span.mentor-label
+    About:
+    %br/
+  %p.mentor-content
+    - if @user.about.present?
+      = @user.about
+    - else
+      %span.default-content
+        Please update this detail in settings
+    
+%li.mentor
+  %span.mentor-label
+    Program:
+    %br/
+  %p.mentor-content
+    - if @user.program.present?
+      = @user.program
+    - else
+      %span.default-content
+        Please update this detail in settings
+    
+%li.mentor
+  %span.mentor-label
+    terms:
+    %br/
+  %p.mentor-content
+    - if @user.terms.present?
+      = @user.terms
+    - else
+      %span.default-content
+        Please update this detail in settings
+%li.mentor
+  %span.mentor-label
+    prices:
+    %br/
+  %p.mentor-content
+    %span.default-content
+      Please update this detail in settings
