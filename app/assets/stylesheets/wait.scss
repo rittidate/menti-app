@@ -27,16 +27,20 @@
 .back-button:hover {
     background-color: #00C7E4;
 }
-@media only screen and (min-width: 993px) and (min-height: 887px){
+/*@media only screen and (min-width: 993px) and (min-height: 887px){
     .main-wait{
         top: 10vh !important;
         left: 12vw !important;
     }
-}
+}*/
 .main-wait{
     padding: 1.5rem;
     z-index: 10;
     position: absolute;
+    top: 10vh;
+    right: 0;
+    left: 0;
+    bottom: 0;
     h3,h4{
         color: #01DFFF;
     }
@@ -47,23 +51,23 @@
     .overlay-container{
         height: 32vh;
     }
-    .main-wait{
+    /*.main-wait{
         top: 8vh;
         left: 3vw;
-    }
+    }*/
 }
 @media only screen and (min-height: 375px) and (min-width: 667px){
     .overlay-container{
         height: 58vh;
     }
-    .main-wait{
+    /*.main-wait{
         top: 8vh;
         left: 3vw;
-    }
+    }*/
 }
-@media only screen and (min-height: 768px) and (min-width: 102px){
-    .overlay-container{
+@media only screen and (min-height: 768px) and (min-width: 1024px){
+    /*.overlay-container{
         height: 52vh;
-    }
+    }*/
 }
 

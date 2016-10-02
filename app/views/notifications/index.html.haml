@@ -1,8 +1,6 @@
-.row
+.row.notification-container
   .col.s12
     .row
-      
-
       -if @notices.present?
         - for notice in @notices
           .col.s12.animated.zoomIn
@@ -49,5 +47,5 @@
                   %p The body of the message sent to mentor.
 
       - else
-        %h5.js-no-content.center
+        %h4.js-no-content.center
           No Notifications
