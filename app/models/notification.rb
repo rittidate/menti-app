@@ -10,6 +10,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  sender_id         :integer
+#  seen              :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -25,5 +26,10 @@ class Notification < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :sender, :class_name => "User"
+
+
+  def course
+    Transaction.find(self.transaction_id).course
+  end
 
 end

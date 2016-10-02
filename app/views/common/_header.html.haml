@@ -20,7 +20,10 @@
               %i{ class: 'fa fa-search header-fa', 'aria-hidden': 'true'}
           %li
             = link_to notifications_path do
-              %i.fa.fa-bell.header-fa.icon-grey
+              - if Notification.where(user: current_user, seen: false).present?
+                %i.fa.fa-bell.header-fa.icon-grey.badge
+              - else
+                %i.fa.fa-bell.header-fa.icon-grey
           %li
             = link_to message_index_path do
               %i.fa.fa-comment.header-fa
