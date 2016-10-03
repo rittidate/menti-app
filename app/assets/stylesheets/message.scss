@@ -337,3 +337,31 @@ textarea:focus {
         cursor: pointer;
     }
 }
+
+/*Normal header*/
+.message-header{
+    margin-top: 2rem;
+}
+.msg-list-img{
+    width: 3rem;
+    padding-top: 10px;
+}
+.msg-list-name{
+    position: absolute;
+    top: 1rem;
+    padding-left: 1rem;
+    font-size: 1.5rem;
+    font-family: 'Lancelot', cursive;
+}
+.collapsible-header, .collapsible-body{
+    position: relative;
+}
+.collapsible-body p{
+    padding-right: 4rem;
+}
+.msg-icon{
+    font-size: -webkit-xxx-large !important;
+    position: absolute;
+    top: 0.7rem;
+    right: 2rem;
+}
