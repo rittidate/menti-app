@@ -5,26 +5,36 @@
       %i.fa.fa-phone{ style: 'padding-right:3rem;', 'aria-hidden': true}
       %i.fa.fa-video-camera{ style: 'padding-right:3rem;', 'aria-hidden': true}
       = hidden_field_tag :coversation, @conversation.id
+      = image_tag "images/thumb/avatar.png", class: 'hide', id: 'default-img'
 %ol.chat-msg
-  %li.other-msg
-    .avatar-msg
-      %img{ src: "http://i.imgur.com/DY6gND0.png", draggable: "false"}
-    .msg-msg
-      %p Hello!
-      %p How are you?
-      %time 20:17
-  %li.self-msg
-    .avatar-msg
-      %img{ src: "ttp://i.imgur.com/HYcn9xO.png", draggable: "false"}
-    .msg-msg
-      %p Puff...
-      %p I am good bro!
-      %p 20:18
-      %time 20:17
+  - for msg in @conversation.conversation_replies
+    - if msg.user == current_user
+      %li.self-msg
+        .avatar-msg
+          = image_tag msg.user.avatar.url(:thumb), draggable: "false"
+        .msg-msg
+          %p #{msg.reply}
+          %time
+            - if msg.created_at.today?
+              = msg.created_at.strftime("%I:%M %p") 
+            - else
+              = msg.created_at.strftime("%a/%m - %I:%M %p")
+    - else
+      %li.other-msg
+        .avatar-msg
+          = image_tag msg.user.avatar.url(:thumb), draggable: "false"
+        .msg-msg
+          %p #{msg.reply}
+          %time
+            - if msg.created_at.today?
+              = msg.created_at.strftime("%I:%M %p") 
+            - else
+              = msg.created_at.strftime("%a/%m - %I:%M %p")
+
 .typezone
   %form
     %textarea#js-conversation-message{ type: 'text', placeholder: "Say something..."}
     .send
-      %i.material-icons.js-conversation-send-message send
+      %i.material-icons#js-conversation-send-message send
   .emojis
     %i.fa.fa-paperclip.fa-rotate-90{ style: 'font-size: xx-large;padding-top: 1.5rem; color: #6A6A6A;', 'aria-hidden': true}
