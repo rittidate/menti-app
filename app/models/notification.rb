@@ -22,7 +22,7 @@
 #
 
 class Notification < ActiveRecord::Base
-  enum notification_type: { payment: 'payment', message: 'message' }
+  enum notification_type: { payment: 'payment', course: 'course', message: 'message' }
 
   belongs_to :user
   belongs_to :sender, :class_name => "User"

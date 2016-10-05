@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: :index
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :payment, :transaction]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :payment, :transaction, :wait]
 
   def index
     if user_signed_in?
@@ -74,7 +74,6 @@ class UsersController < ApplicationController
   end
 
   def wait
-
   end
 
   def rating

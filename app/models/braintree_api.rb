@@ -79,7 +79,15 @@ class BraintreeApi
         # send email to user
         transaction.update(status: 'submitted_for_settlement', transaction_date: DateTime.now)
         noticification.update(status: 'submitted_for_settlement')
-        CoursesUserRelation.create(course_id: transaction.course_id, user: transaction.user)
+        CoursesUserRelation.create(course_id: transaction.course_id, user: transaction.user, owner: transaction.course.user)
+        Notification.create(user_id: transaction.user.id, sender_id: transaction.course.user.id, notification_type: :course, status: 'accepted', transaction_id: transaction.id)
+        
+        conversation_room = Conversation.where('(user_one_id = ? AND user_two_id = ?) OR (user_one_id = ? AND user_two_id = ?)', transaction.user.id, transaction.course.user.id, transaction.course.user.id, transaction.user.id)
+        if conversation_room.present?
+          conversation_room.first.update(status: :availible)
+        else
+          Conversation.create(user_one_id: transaction.user.id, user_two_id: transaction.course.user.id, status: :availible)
+        end
       else
         # Serious problem have to inform admin about this case
         raise CreditCardVerifyException
@@ -99,6 +107,8 @@ class BraintreeApi
           # send email to user
           transaction.update(status: 'voided', transaction_date: DateTime.now)
           noticification.update(status: 'voided')
+          Notification.create(user_id: transaction.user.id, sender_id: transaction.course.user.id, notification_type: :course, status: 'declined', transaction_id: transaction.id)
+
         end
       end
     else
