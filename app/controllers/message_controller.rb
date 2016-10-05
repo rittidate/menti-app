@@ -8,11 +8,10 @@ class MessageController < ApplicationController
   def show
     @user = User.friendly.find(params[:id])
     @conversation = Conversation.where('(user_one_id = ? and user_two_id = ?) OR (user_one_id = ? and user_two_id = ?)', @user.id, current_user.id, current_user.id, @user.id).first
-    @conversation.conversation_replies.update_all seen: true
+    
+    @conversation.conversation_replies.where.not(user: current_user).update_all seen: true
 
-    @notification = Notification.where(conversation_id: @conversation.id, seen: false)
-    puts @notification.ids
-    @notification.update_all seen: true
+    @notification = Notification.where(conversation_id: @conversation.id, user: current_user, seen: false).update_all seen: true
   end
 
   def create
@@ -28,7 +27,7 @@ class MessageController < ApplicationController
     message_notification
     replies = ConversationReply.where(conversation_id: params['conversation_id']).where('id > ?', params['lasted_reply']).where.not(user: current_user)
     replies.update_all seen: true
-    
+
     if replies.count > 0
       array = Array.new
       i = 0
@@ -49,11 +48,11 @@ class MessageController < ApplicationController
   end
 
   def unread_message?
-    ConversationReply.where(conversation_id: params['conversation_id'], user: current_user, seen: false).where('created_at > ?', 15.seconds.ago).present?
+    ConversationReply.where(conversation_id: params['conversation_id'], user: current_user, seen: false).where('created_at < ?', 15.seconds.ago).present?
   end
 
   def message_notification
-    unless unread_message?
+    if unread_message?
       @conversation = Conversation.find(params['conversation_id'])
       if @conversation.user_one == current_user
         receiver_user = @conversation.user_two

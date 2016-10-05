@@ -36,7 +36,8 @@
             %span.tooltiptext-header
               Message
             = link_to message_index_path do
-              - if Notification.where(user: current_user, seen: false).where(notification_type: :message).present?
+              - @conversations = Conversation.where('user_one_id = ? OR user_two_id = ?', current_user.id, current_user.id)
+              - if ConversationReply.where(conversation: @conversations, seen: false).where.not(user: current_user).present?
                 %i.fa.fa-comment.header-fa.badge
               - else
                 %i.fa.fa-comment.header-fa

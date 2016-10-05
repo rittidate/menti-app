@@ -9,6 +9,7 @@
 #  seen            :boolean
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  notify          :boolean          default(FALSE)
 #
 # Indexes
 #

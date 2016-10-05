@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005153943) do
+ActiveRecord::Schema.define(version: 20161005164952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,8 +37,9 @@ ActiveRecord::Schema.define(version: 20161005153943) do
     t.integer  "user_id"
     t.string   "reply"
     t.boolean  "seen"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "notify",          default: false
   end
 
   add_index "conversation_replies", ["conversation_id"], name: "index_conversation_replies_on_conversation_id", using: :btree
