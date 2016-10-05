@@ -8,6 +8,11 @@ class MessageController < ApplicationController
   def show
     @user = User.friendly.find(params[:id])
     @conversation = Conversation.where('(user_one_id = ? and user_two_id = ?) OR (user_one_id = ? and user_two_id = ?)', @user.id, current_user.id, current_user.id, @user.id).first
+    @conversation.conversation_replies.update_all seen: true
+
+    @notification = Notification.where(conversation_id: @conversation.id, seen: false)
+    puts @notification.ids
+    @notification.update_all seen: true
   end
 
   def create
@@ -20,7 +25,10 @@ class MessageController < ApplicationController
   end
 
   def update
+    message_notification
     replies = ConversationReply.where(conversation_id: params['conversation_id']).where('id > ?', params['lasted_reply']).where.not(user: current_user)
+    replies.update_all seen: true
+    
     if replies.count > 0
       array = Array.new
       i = 0
@@ -33,11 +41,26 @@ class MessageController < ApplicationController
     else
       render json: { success: false, status: 300, msg: 'No Record!!!' }
     end
-    
   end
 
   protected
   def conversation_message_params
     params.require(:conversation).permit(:conversation_id, :reply)
+  end
+
+  def unread_message?
+    ConversationReply.where(conversation_id: params['conversation_id'], user: current_user, seen: false).where('created_at > ?', 15.seconds.ago).present?
+  end
+
+  def message_notification
+    unless unread_message?
+      @conversation = Conversation.find(params['conversation_id'])
+      if @conversation.user_one == current_user
+        receiver_user = @conversation.user_two
+      else
+        receiver_user = @conversation.user_one
+      end
+      Notification.where(user_id: receiver_user, sender: current_user, notification_type: :message, seen: false, conversation_id: params['conversation_id']).first_or_create
+    end
   end
 end

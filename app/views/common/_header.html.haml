@@ -36,7 +36,10 @@
             %span.tooltiptext-header
               Message
             = link_to message_index_path do
-              %i.fa.fa-comment.header-fa
+              - if Notification.where(user: current_user, seen: false).where(notification_type: :message).present?
+                %i.fa.fa-comment.header-fa.badge
+              - else
+                %i.fa.fa-comment.header-fa
           %li.tooltip-header
             %span.tooltiptext-header
               Resources

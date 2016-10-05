@@ -5,7 +5,7 @@
       %i.fa.fa-phone{ style: 'padding-right:3rem;', 'aria-hidden': true}
       %i.fa.fa-video-camera{ style: 'padding-right:3rem;', 'aria-hidden': true}
       = hidden_field_tag :coversation, @conversation.id
-      = hidden_field_tag :lasted_reply, @conversation.conversation_replies.last.id
+      = hidden_field_tag :lasted_reply, @conversation.conversation_replies.last.id if @conversation.conversation_replies.present?
       = image_tag "images/thumb/avatar.png", class: 'hide', id: 'default-img'
 %ol.chat-msg
   - for msg in @conversation.conversation_replies.order("created_at DESC")
