@@ -16,6 +16,8 @@
             %b Course:
             - course_user =  CoursesUserRelation.where(user: current_user, owner: @user).first
             = course_user.course.categories.name
+          = link_to message_path(@user), class: 'black-text' do
+            %i{ class: 'material-icons msg-icon tooltipped', data: { position: 'bottom', delay: 50, tooltip: 'Send message' } } message
     - else
       - @user = conversation.user_one
       %li
@@ -31,4 +33,6 @@
             %b Course:
             - course_user = CoursesUserRelation.where(user: @user, owner: current_user).first
             = course_user.course.categories.name
+          = link_to message_path(@user), class: 'black-text' do
+            %i{ class: 'material-icons msg-icon tooltipped', data: { position: 'bottom', delay: 50, tooltip: 'Send message' } } message
       
