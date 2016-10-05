@@ -76,20 +76,18 @@
 
           - elsif notice.notification_type == 'message'          
             .col.s12.animated.zoomIn
-              .card.horizontal.card-message
-                .card-image.notification-img-2
-                  = image_tag notice.sender.avatar.url(:thumb), :class => "circle"
-                .card-stacked
-                  .card-content
-                    %i.fa.fa-trash-o.right.trash
-                    %i.fa.fa-share-square.tooltip.icons
-                      %span.tooltiptext
-                        Confirmation sent
-                    %h5= notice.sender.first_name
-                    %p The body of the message sent to mentor.
-                    %p The body of the message sent to mentor.
-                    %p The body of the message sent to mentor.
-                    %p The body of the message sent to mentor.
+              = link_to message_path(notice.sender), style: 'color: black;' do
+                .card.horizontal.card-message
+                  .card-image.notification-img-2
+                    = image_tag notice.sender.avatar.url(:thumb), :class => "circle"
+                  .card-stacked
+                    .card-content
+                      %i.fa.fa-trash-o.right.trash
+                      %i.fa.fa-share-square.tooltip.icons
+                        %span.tooltiptext
+                          Confirmation sent
+                      %h5= notice.sender.first_name
+                      %p #{notice.sender.first_name} sent new messages!!!!
 
       - else
         %h4.js-no-content.center
