@@ -9,8 +9,11 @@
         %textarea#feed-message-area.materialize-textarea.feed-message-area{:placeholder => "Share your ideas, concepts, motivations... anything..."}
         %label{:for => "feed-message-area"}
       %div{:style => "text-align: right;"}
+        %a.btn-floating.btn-large.waves-effect.waves-light.btn-flat
+          %i.material-icons.black-text attach_file
         %button.btn.waves-effect.waves-light.feed-message-button{:name => "action", :type => "submit", id: "js-feed-message-button"}
           Share
+        
   .feeds
     - if !@user.feed_messages.present?
       %h5.js-no-content.center
