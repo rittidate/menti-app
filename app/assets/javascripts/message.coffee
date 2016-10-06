@@ -22,6 +22,7 @@ $(document).on 'turbolinks:load', ->
 
   return if $('#js-conversation-send-message').length != 1
   $.update_conversation()
+  
   $('#js-conversation-send-message').on "click", ->
     text = $('#js-conversation-message').val()
     if text != ''
