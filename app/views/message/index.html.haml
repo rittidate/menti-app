@@ -1,38 +1,39 @@
-%h3.message-header Your contacts:
-%ul{ class: 'collapsible popout', data: {collapsible: 'accordion' } }
-  - for conversation in @conversations 
-    - if conversation.user_one == current_user
-      - @user = conversation.user_two
-      %li
-        .collapsible-header
-          = image_tag @user.avatar.url(:thumb), :class => "circle msg-list-img"
-          %span.msg-list-name
-            = @user.first_name
-        .collapsible-body
-          %p
-            %b About:
-            = @user.about
-            %br
-            %b Course:
-            - course_user =  CoursesUserRelation.where(user: current_user, owner: @user).first
-            = course_user.course.categories.name
-          = link_to message_path(@user), class: 'black-text' do
-            %i{ class: 'material-icons msg-icon tooltipped', data: { position: 'bottom', delay: 50, tooltip: 'Send message' } } message
-    - else
-      - @user = conversation.user_one
-      %li
-        .collapsible-header
-          = image_tag @user.avatar.url(:thumb), :class => "circle msg-list-img"
-          %span.msg-list-name
-            = @user.first_name
-        .collapsible-body
-          %p
-            %b About:
-            = @user.about
-            %br
-            %b Course:
-            - course_user = CoursesUserRelation.where(user: @user, owner: current_user).first
-            = course_user.course.categories.name
-          = link_to message_path(@user), class: 'black-text' do
-            %i{ class: 'material-icons msg-icon tooltipped', data: { position: 'bottom', delay: 50, tooltip: 'Send message' } } message
+.row.setting-page
+  .col.s3.left-content
+    %h3.center.contact-header Contacts
+    %ul{ class: 'collapsible contact-list', data: {collapsible: 'accordion' } }
+      - for conversation in @conversations 
+        - if conversation.user_one == current_user
+          - @user = conversation.user_two
+          %li
+            .collapsible-header.contacts
+              = image_tag @user.avatar.url(:thumb), :class => "circle msg-list-img"
+              %span.msg-list-name
+                = @user.first_name
+            .collapsible-body
+              %p
+                %span.msg-label Course:
+                - course_user =  CoursesUserRelation.where(user: current_user, owner: @user).first
+                = course_user.course.categories.name
+              = link_to message_path(@user), class: 'black-text' do
+                %i{ class: 'material-icons msg-icon tooltipped', data: { position: 'bottom', delay: 50, tooltip: 'Send message' } } message
+        - else
+          - @user = conversation.user_one
+          %li
+            .collapsible-header
+              = image_tag @user.avatar.url(:thumb), :class => "circle msg-list-img"
+              %span.msg-list-name
+                = @user.first_name
+            .collapsible-body
+              %p
+                %span.msg-label Course:
+                - course_user = CoursesUserRelation.where(user: @user, owner: current_user).first
+                = course_user.course.categories.name
+              = link_to message_path(@user), class: 'black-text' do
+                %i{ class: 'material-icons msg-icon tooltipped', data: { position: 'bottom', delay: 50, tooltip: 'Send message' } } message
+  .col.s9.right-content.no-content
+    .menu
+      .name.center
+        No chats selected
+        
       

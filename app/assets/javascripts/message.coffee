@@ -2,6 +2,7 @@ $(document).on 'turbolinks:load', ->
   $('.collapsible').collapsible({
     accordion : false
   })
+  $('.tooltipped').tooltip({});
 
   $.update_conversation = () ->
     $.ajax(

@@ -9,62 +9,42 @@
         %i{ class: 'header-fa fa fa-bars', 'aria-hidden': 'true'}
       %ul{ class: 'right hide-on-med-and-down header-links'}
         - if user_signed_in?
-          %li.tooltip-header
-            %span.tooltiptext-header
-              Home
+          %li.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Home' } }
             = link_to dashboard_path do
               %i.fa.fa-home.header-fa
-          %li.tooltip-header
-            %span.tooltiptext-header
-              Dashboard
+          %li.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Dashboard' } }
             = link_to user_path(current_user) do
               %i{ class: 'fa fa-user header-fa', 'aria-hidden': 'true'}
-          %li.tooltip-header
-            %span.tooltiptext-header
-              Search
+          %li.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Search' } }
             %a
               %i{ class: 'fa fa-search header-fa', 'aria-hidden': 'true'}
-          %li.tooltip-header
-            %span.tooltiptext-header
-              Notifications
+          %li.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Notifications' } }
             = link_to notifications_path do
               - if Notification.where(user: current_user, seen: false).present?
                 %i.fa.fa-bell.header-fa.icon-grey.badge
               - else
                 %i.fa.fa-bell.header-fa.icon-grey
-          %li.tooltip-header
-            %span.tooltiptext-header
-              Message
+          %li.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Message' } }
             = link_to message_index_path do
               - @conversations = Conversation.where('user_one_id = ? OR user_two_id = ?', current_user.id, current_user.id)
               - if ConversationReply.where(conversation: @conversations, seen: false).where.not(user: current_user).present?
                 %i.fa.fa-comment.header-fa.badge
               - else
                 %i.fa.fa-comment.header-fa
-          %li.tooltip-header
-            %span.tooltiptext-header
-              Resources
+          %li.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Resources' } }
             %a
               %i{ class: 'fa fa-book header-fa', 'aria-hidden': 'true'}
-          %li.tooltip-header
-            %span.tooltiptext-header
-              Settings
+          %li.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Settings' } }
             = link_to settings_path do
               %i.fa.fa-cog.header-fa
-          %li.tooltip-header
-            %span.tooltiptext-header
-              Sign out
+          %li.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Logout' } }
             = link_to destroy_user_session_path, :method => :delete do
               %i.fa.fa-sign-out.header-fa
         - else
-          %li.tooltip-header
-            %span.tooltiptext-header
-              Home
+          %li.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Home' } }
             = link_to root_path do
               %i.fa.fa-home.header-fa
-          %li.tooltip-header
-            %span.tooltiptext-header
-              Search
+          %li.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Search' } }
             %a
               %i{ class: 'fa fa-search header-fa', 'aria-hidden': 'true'}
   

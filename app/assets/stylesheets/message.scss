@@ -269,7 +269,7 @@ emoji{
     border: none;
     outline: none;
 }
-textarea, textarea:hover {
+textarea#js-conversation-message, textarea#js-conversation-message:hover {
     position: absolute;
     bottom: 0px;
     left: 8%;
@@ -293,7 +293,7 @@ textarea, textarea:hover {
     box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
     transition: all .4s cubic-bezier(0.565, -0.260, 0.255, 1.410);
 }
-textarea:focus {
+textarea#js-conversation-message:focus {
     height: 300px;
     box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
 }
@@ -348,9 +348,9 @@ textarea:focus {
 }
 .msg-list-name{
     position: absolute;
-    top: 1rem;
+    top: .5rem;
     padding-left: 1rem;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-family: 'Lancelot', cursive;
 }
 .collapsible-header, .collapsible-body{
@@ -360,8 +360,31 @@ textarea:focus {
     padding-right: 4rem;
 }
 .msg-icon{
-    font-size: -webkit-xxx-large !important;
+    font-size: 2rem !important;
     position: absolute;
-    top: 0.7rem;
+    top: 1.7rem;
     right: 2rem;
+}
+.msg-label{
+    font-size: large;
+    font-weight: 500;
+    margin-right: 0.3rem;
+}
+.no-content{
+    margin-top: 50px;
+}
+.contact-header{
+    border: 1px dashed #87CFC4;
+    box-shadow: 0 0 0 3px #fff, 0 0 0 5px #ddd, 0 0 0 10px #fff, 0 0 2px 10px #eee;
+    margin-top: 1rem;
+    padding: 1.2rem 0;
+    color: #6A6A6A;
+    font-family: 'Delius Unicase', cursive;
+    font-size: 25px;
+    font-weight: 300;
+    cursor: default;
+}
+.contacts{
+    background-color: #DDDDDD;
+    color: #6A6A6A;
 }
