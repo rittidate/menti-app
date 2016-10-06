@@ -2,7 +2,7 @@
   .col.s12
     .row
       -if @notices.present?
-        - for notice in @notices
+        - for notice in @notices.order("created_at DESC")
           - if notice.notification_type == 'payment'
             .col.s12.animated.zoomIn
               .card.horizontal.card-confirm
