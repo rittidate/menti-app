@@ -8,11 +8,12 @@ $(document).on 'turbolinks:load', ->
     $.ajax(
       method: "PUT"
       url: "/message/update"
+      async: false
       data: { 
               conversation_id: $('#coversation').val()
               lasted_reply: $('#lasted_reply').val()
             }
-    ).always( (data) ->
+    ).success( (data) ->
       if data.status == 200
         messages = data.msg
         for itemIndex in [0...messages.length]
@@ -22,7 +23,7 @@ $(document).on 'turbolinks:load', ->
 
   return if $('#js-conversation-send-message').length != 1
   $.update_conversation()
-  
+
   $('#js-conversation-send-message').on "click", ->
     text = $('#js-conversation-message').val()
     if text != ''
