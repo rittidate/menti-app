@@ -47,17 +47,29 @@ class PaymentController < ApplicationController
   end
 
   def accept
-    transaction = Transaction.find(params[:transaction])
-    noticification = Notification.find(params[:noticification])
-    transaction.user.collect_transaction(transaction, noticification)
-    render json: { success: true, data: transaction, status: 200 }
+    begin
+      transaction = Transaction.find(params[:transaction])
+      noticification = Notification.find(params[:noticification])
+      transaction.user.collect_transaction(transaction, noticification)
+      render json: { success: true, data: transaction, status: 200 }
+    rescue BraintreeApi::NilNonceException
+      render json: { error: { type: 'payment', message: "Sorry, Card Declined. Please check your card or use another card to process this transaction." } }
+    rescue BraintreeApi::CreditCardVerifyException
+      render json: { error: { type: 'payment', message: "Sorry, Card Declined. Please check your card or use another card to process this transaction." } }
+    end
   end
 
   def decline
-    transaction = Transaction.find(params[:transaction])
-    noticification = Notification.find(params[:noticification])
-    transaction.user.release_transaction(transaction, noticification)
-    render json: { success: true, data: transaction, status: 200 }
+    begin
+      transaction = Transaction.find(params[:transaction])
+      noticification = Notification.find(params[:noticification])
+      transaction.user.release_transaction(transaction, noticification)
+      render json: { success: true, data: transaction, status: 200 }
+    rescue BraintreeApi::NilNonceException
+      render json: { error: { type: 'payment', message: "Sorry, Card Declined. Please check your card or use another card to process this transaction." } }
+    rescue BraintreeApi::CreditCardVerifyException
+      render json: { error: { type: 'payment', message: "Sorry, Card Declined. Please check your card or use another card to process this transaction." } }
+    end
   end
 
   private

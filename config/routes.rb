@@ -59,4 +59,6 @@ Rails.application.routes.draw do
   put '/payment/decline', to: 'payment#decline'
 
   resources :message
+
+  put '/message/update', to: 'message#update'
 end

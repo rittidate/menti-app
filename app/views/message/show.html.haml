@@ -1,1 +1,75 @@
-= @user.first_name
+.row.setting-page
+  .col.s3.left-content
+    %h3.center.contact-header Contacts
+    %ul{ class: 'collapsible contact-list', data: {collapsible: 'accordion' } }
+      - for conversation in @conversations 
+        - if conversation.user_one == current_user
+          - @user = conversation.user_two
+          %li
+            .collapsible-header.contacts
+              = image_tag @user.avatar.url(:thumb), :class => "circle msg-list-img"
+              %span.msg-list-name
+                = @user.first_name
+            .collapsible-body
+              %p
+                %span.msg-label Course:
+                - course_user =  CoursesUserRelation.where(user: current_user, owner: @user).first
+                = course_user.course.categories.name
+              = link_to message_path(@user), class: 'black-text' do
+                %i{ class: 'material-icons msg-icon tooltipped', data: { position: 'bottom', delay: 50, tooltip: 'Send message' } } message
+        - else
+          - @user = conversation.user_one
+          %li
+            .collapsible-header.contacts
+              = image_tag @user.avatar.url(:thumb), :class => "circle msg-list-img"
+              %span.msg-list-name
+                = @user.first_name
+            .collapsible-body
+              %p
+                %span.msg-label Course:
+                - course_user = CoursesUserRelation.where(user: @user, owner: current_user).first
+                = course_user.course.categories.name
+              = link_to message_path(@user), class: 'black-text' do
+                %i{ class: 'material-icons msg-icon tooltipped', data: { position: 'bottom', delay: 50, tooltip: 'Send message' } } message
+  .col.s9.right-content.no-content
+    .menu
+      .name.center
+        = @user.first_name
+        .right.icons
+          %i.fa.fa-phone.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Call. Coming soon!' }, style: 'padding-right:3rem;', 'aria-hidden': true}
+          %i.fa.fa-video-camera.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Video call. Coming soon!' }, style: 'padding-right:3rem;', 'aria-hidden': true}
+          = hidden_field_tag :coversation, @conversation.id
+          = hidden_field_tag :lasted_reply, @conversation.conversation_replies.last.id if @conversation.conversation_replies.present?
+          = image_tag "images/thumb/avatar.png", class: 'hide', id: 'default-img'
+    %ol.chat-msg
+      - for msg in @conversation.conversation_replies.order("created_at DESC")
+        - if msg.user == current_user
+          %li.self-msg
+            .avatar-msg
+              = image_tag msg.user.avatar.url(:thumb), draggable: "false"
+            .msg-msg
+              %p #{msg.reply}
+              %time
+                - if msg.created_at.today?
+                  = msg.created_at.strftime("%I:%M %p") 
+                - else
+                  = msg.created_at.strftime("%a/%m - %I:%M %p")
+        - else
+          %li.other-msg
+            .avatar-msg
+              = image_tag msg.user.avatar.url(:thumb), draggable: "false"
+            .msg-msg
+              %p #{msg.reply}
+              %time
+                - if msg.created_at.today?
+                  = msg.created_at.strftime("%I:%M %p") 
+                - else
+                  = msg.created_at.strftime("%a/%m - %I:%M %p")
+    
+    .typezone
+      %form
+        %textarea#js-conversation-message{ type: 'text', placeholder: "Say something..."}
+        .send
+          %i.material-icons#js-conversation-send-message send
+      .emojis
+        %i.fa.fa-paperclip.fa-rotate-90{ style: 'font-size: xx-large;padding-top: 1.5rem; color: #6A6A6A;', 'aria-hidden': true}
