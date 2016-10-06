@@ -385,6 +385,13 @@ textarea#js-conversation-message:focus {
     cursor: default;
 }
 .contacts{
-    background-color: #DDDDDD;
     color: #6A6A6A;
+}
+.contacts.active{
+    background-color: #DDDDDD;
+    -webkit-transition: background 0.5s linear;
+    -moz-transition: background 0.5s linear;
+    -ms-transition: background 0.5s linear;
+    -o-transition: background 0.5s linear;
+    transition: background 0.5s linear;
 }

@@ -20,7 +20,7 @@
         - else
           - @user = conversation.user_one
           %li
-            .collapsible-header
+            .collapsible-header.contacts
               = image_tag @user.avatar.url(:thumb), :class => "circle msg-list-img"
               %span.msg-list-name
                 = @user.first_name
