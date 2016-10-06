@@ -19,6 +19,11 @@
                       %i.fa.fa-pencil-square-o.tooltip.icons{ style: 'color: #F7F7F7'}
                         %span.tooltiptext
                           Confirmed
+                    %time{ style: 'position: absolute;right: 8rem;color: #CAB7B7;'}
+                      - if notice.created_at.today?
+                        = notice.created_at.strftime("%I:%M %p") 
+                      - else
+                        = notice.created_at.strftime("%a/%m - %I:%M %p")
                     %h5= notice.sender.first_name
                     %p 
                       %b Terms: 
@@ -55,6 +60,11 @@
                       %i.fa.fa-pencil-square-o.tooltip.icons{ style: 'color: #F7F7F7'}
                         %span.tooltiptext
                           Confirmed
+                    %time{ style: 'position: absolute;right: 8rem;color: #CAB7B7;'}
+                      - if notice.created_at.today?
+                        = notice.created_at.strftime("%I:%M %p") 
+                      - else
+                        = notice.created_at.strftime("%a/%m - %I:%M %p")
                     %h5= notice.sender.first_name
                     %p 
                       %b Terms: 
