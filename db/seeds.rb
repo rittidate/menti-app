@@ -13,6 +13,7 @@ education = Category.create! name: 'Education'
 relation = Category.create! name: 'Relationships'
 career = Category.create! name: 'Career' 
 
+#seen
 
 Category.create! name: 'Financial Advice', parent_id: financial.id
 Category.create! name: 'Accounting', parent_id: financial.id
