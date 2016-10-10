@@ -2,7 +2,7 @@
     <!--Search bar -->
     <div id="wrap">
       <form action="" autocomplete="on">
-      <input id="search" name="search" type="text" placeholder="What are you looking for ?" >
+      <input id="search" name="search" type="text" placeholder="What are you looking for ?" class="col s12" >
       <input id="search_submit" type="submit" >
       </form>
     </div>
@@ -13,8 +13,8 @@
         <div class="search-row row">
             <a href="#" style="text-decoration: none; cursor: pointer; color: rgba(0, 0, 0, 0.87);">
             <div class="col s12 search-result left">
-                <div class="search-img col s1"><%= image_tag current_user.avatar.url(:thumb), :class => "circle" %></div>
-                <div class="search-name col s3">
+                <div class="search-img col l1"><%= image_tag current_user.avatar.url(:thumb), :class => "circle" %></div>
+                <div class="search-name col l3">
                     <div class="center"><h5 style="text-transform: uppercase;"><%= current_user.first_name %> <%= current_user.last_name %></h5></div>
                     <div class="">
                           <div class="rating center">
@@ -26,7 +26,7 @@
                           </div>
                     </div>
                 </div>
-                <div class="search-areas col s4">
+                <div class="search-areas col l4 show-on-large">
                     <table>
                         <tr class="bot-border">
                             <td colspan="4"><span style="text-transform: uppercase; padding-left: 1rem;">Areas</span> <%= image_tag 'images/icons/Finance.png', :class => "areas-icons" %><%= image_tag 'images/icons/Health.png', :class => "areas-icons" %></td>
@@ -45,7 +45,7 @@
                         </tr>
                     </table>
                 </div>
-                <div class="search-about col s3">
+                <div class="search-about col l3">
                     <h5 style="text-transform: uppercase;">About</h5>
                     <p><%= current_user.about %></p>
                     </div>
@@ -57,13 +57,13 @@
 </div>
 
 
-<div class="search-outer row">
+<!-- search results -->
+    <div class="search-outer row">
         <div class="search-row row">
             <a href="#" style="text-decoration: none; cursor: pointer; color: rgba(0, 0, 0, 0.87);">
-            <!-- search results -->
             <div class="col s12 search-result left">
-                <div class="search-img col s1"><%= image_tag current_user.avatar.url(:thumb), :class => "circle" %></div>
-                <div class="search-name col s3">
+                <div class="search-img col l1 m1"><%= image_tag current_user.avatar.url(:thumb), :class => "circle" %></div>
+                <div class="search-name col l3 m3">
                     <div class="center"><h5 style="text-transform: uppercase;"><%= current_user.first_name %> <%= current_user.last_name %></h5></div>
                     <div class="">
                           <div class="rating center">
@@ -75,7 +75,7 @@
                           </div>
                     </div>
                 </div>
-                <div class="search-areas col s4">
+                <div class="search-areas col l4 m4 show-on-large">
                     <table>
                         <tr class="bot-border">
                             <td colspan="4"><span style="text-transform: uppercase; padding-left: 1rem;">Areas</span> <%= image_tag 'images/icons/Finance.png', :class => "areas-icons" %><%= image_tag 'images/icons/Health.png', :class => "areas-icons" %></td>
@@ -94,7 +94,7 @@
                         </tr>
                     </table>
                 </div>
-                <div class="search-about col s3">
+                <div class="search-about col l3 m3">
                     <h5 style="text-transform: uppercase;">About</h5>
                     <p><%= current_user.about %></p>
                     </div>
