@@ -1,0 +1,54 @@
+<div class="search-container">
+    <!--Search bar -->
+    <div id="wrap">
+      <form action="" autocomplete="on">
+      <input id="search" name="search" type="text" placeholder="What are you looking for ?" >
+      <input id="search_submit" type="submit" >
+      </form>
+    </div>
+    <div class="search-row row">
+        <!-- if no content then display this. If user start typing hide it -->
+        <h4 class="js-no-content">Click search icon to start</h4>
+        <!-- search results -->
+        <div class="col s12 search-result left">
+            <div class="search-img col s1"><%= image_tag current_user.avatar.url(:thumb), :class => "circle" %></div>
+            <div class="search-name col s3">
+                <div class="center"><h5><%= current_user.first_name %></h5></div>
+                <div class="">
+                      <div class="rating center">
+                        <span class="rating-star rating-give" num="5">☆</span>
+                        <span class="rating-star rating-give" num="4">☆</span>
+                        <span class="rating-star rating-give" num="3">☆</span>
+                        <span class="rating-star rating-give" num="2">☆</span>
+                        <span class="rating-star rating-give" num="1">☆</span>
+                      </div>
+                </div>
+            </div>
+            <div class="search-areas col s4"><h5>hello</h5></div>
+            <div class="search-about col s2"><h5>About</h5></div>
+        </div>
+    </div>
+    
+    <div class="search-row row">
+        <!-- if no content then display this. If user start typing hide it -->
+        <h4 class="js-no-content">Click search icon to start</h4>
+        <!-- search results -->
+        <div class="col s12 search-result left">
+            <div class="search-img col s1"><%= image_tag current_user.avatar.url(:thumb), :class => "circle" %></div>
+            <div class="search-name col s3">
+                <div class="center"><h5><%= current_user.first_name %></h5></div>
+                <div class="">
+                      <div class="rating center">
+                        <span class="rating-star rating-give" num="5">☆</span>
+                        <span class="rating-star rating-give" num="4">☆</span>
+                        <span class="rating-star rating-give" num="3">☆</span>
+                        <span class="rating-star rating-give" num="2">☆</span>
+                        <span class="rating-star rating-give" num="1">☆</span>
+                      </div>
+                </div>
+            </div>
+            <div class="search-areas col s4"><h5>hello</h5></div>
+            <div class="search-about col s2"><h5>About</h5></div>
+        </div>
+    </div>
+</div>
