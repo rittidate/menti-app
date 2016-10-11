@@ -131,6 +131,14 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.search(search)
+    time = 6.month.ago
+    where("lower(first_name) LIKE ? OR lower(last_name) LIKE ?", "%#{search}%", "%#{search}%")
+    .joins("LEFT JOIN ratings ON users.id = ratings.user_id AND ratings.updated_at >= '#{time}'", )
+    .group("users.id")
+    .order("avg(ratings.value) ASC")
+  end
+
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end

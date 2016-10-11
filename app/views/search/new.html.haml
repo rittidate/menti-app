@@ -1,0 +1,138 @@
+.search-container
+  #wrap
+    = form_tag search_path, method: 'get' do
+      = text_field_tag :search, params[:search], placeholder: 'What are you looking for ?', class: 'col s12'
+      = submit_tag "Submit",  id: 'search_submit'
+
+  %h4{ class: 'center js-no-content' } Click search icon to start
+
+  - if @search.present?
+    - for user in @search
+      .search-outer.row
+        .search-row.row
+          %a{ href: '#', class: 'search-user-profile' }
+            .col.s12.search-result.left
+              .search-img.col.l1
+                = image_tag user.avatar.url(:thumb), :class => "circle"
+              .search-name.col.l3
+                .center
+                  %h5.search-user-profile-name
+                    = user.first_name
+                    = user.last_name
+                %div
+                  .search-rating.center
+                    %span{ class: "#{'active' if user.ratings.average(:value).to_i > 4}", num: 5} ☆
+                    %span{ class: "#{'active' if user.ratings.average(:value).to_i > 3}", num: 4} ☆
+                    %span{ class: "#{'active' if user.ratings.average(:value).to_i > 2}", num: 3} ☆
+                    %span{ class: "#{'active' if user.ratings.average(:value).to_i > 1}", num: 2} ☆
+                    %span{ class: "#{'active' if user.ratings.average(:value).to_i > 0}", num: 1} ☆
+
+              .search-areas.col.l4.show-on-large
+                %table
+                  %tr.bot-border
+                    %td{ colspan: 4 }
+                      %span{ style: 'ext-transform: uppercase; padding-left: 1rem;' } Areas
+                      = image_tag 'images/icons/Finance.png', :class => "areas-icons"
+                      = image_tag 'images/icons/Health.png', :class => "areas-icons"
+                  %tr.bot-border
+                    %td.center Mentis
+                    %td.center.l-border Compatibility
+                    %td.center.l-border Location
+                    %td.center.l-border Price
+                  %tr
+                    %td.center.l-border 
+                      %h5 95%
+                    %td.center.l-border
+                      %h5 AUS
+                    %td.center.l-border
+                      %h5 $$$
+              .search-about.col.l3
+                %h5{ style: 'text-transform: uppercase;' } About
+                %p
+                  = user.about
+
+    / .search-outer.row
+    /   .search-row.row
+    /     %a{ href: '#', class: 'search-user-profile' }
+    /       .col.s12.search-result.left
+    /         .search-img.col.l1
+    /           = image_tag current_user.avatar.url(:thumb), :class => "circle"
+    /         .search-name.col.l3
+    /           .center
+    /             %h5.search-user-profile-name
+    /               = current_user.first_name
+    /               = current_user.last_name
+    /           %div
+    /             .rating.center
+    /               %span{ class: 'rating-star rating-give', num: 5} ☆
+    /               %span{ class: 'rating-star rating-give', num: 4} ☆
+    /               %span{ class: 'rating-star rating-give', num: 3} ☆
+    /               %span{ class: 'rating-star rating-give', num: 2} ☆
+    /               %span{ class: 'rating-star rating-give', num: 1} ☆
+
+    /         .search-areas.col.l4.show-on-large
+    /           %table
+    /             %tr.bot-border
+    /               %td{ colspan: 4 }
+    /                 %span{ style: 'ext-transform: uppercase; padding-left: 1rem;' } Areas
+    /                 = image_tag 'images/icons/Finance.png', :class => "areas-icons"
+    /                 = image_tag 'images/icons/Health.png', :class => "areas-icons"
+    /             %tr.bot-border
+    /               %td.center Mentis
+    /               %td.center.l-border Compatibility
+    /               %td.center.l-border Location
+    /               %td.center.l-border Price
+    /             %tr
+    /               %td.center.l-border 
+    /                 %h5 95%
+    /               %td.center.l-border
+    /                 %h5 AUS
+    /               %td.center.l-border
+    /                 %h5 $$$
+    /         .search-about.col.l3
+    /           %h5{ style: 'text-transform: uppercase;' } About
+    /           %p
+    /             = current_user.about
+
+    / .search-outer.row
+    /   .search-row.row
+    /     %a{ href: '#', class: 'search-user-profile' }
+    /       .col.s12.search-result.left
+    /         .search-img.col.l1
+    /           = image_tag current_user.avatar.url(:thumb), :class => "circle"
+    /         .search-name.col.l3
+    /           .center
+    /             %h5.search-user-profile-name
+    /               = current_user.first_name
+    /               = current_user.last_name
+    /           %div
+    /             .rating.center
+    /               %span{ class: 'rating-star rating-give', num: 5} ☆
+    /               %span{ class: 'rating-star rating-give', num: 4} ☆
+    /               %span{ class: 'rating-star rating-give', num: 3} ☆
+    /               %span{ class: 'rating-star rating-give', num: 2} ☆
+    /               %span{ class: 'rating-star rating-give', num: 1} ☆
+
+    /         .search-areas.col.l4.show-on-large
+    /           %table
+    /             %tr.bot-border
+    /               %td{ colspan: 4 }
+    /                 %span{ style: 'ext-transform: uppercase; padding-left: 1rem;' } Areas
+    /                 = image_tag 'images/icons/Finance.png', :class => "areas-icons"
+    /                 = image_tag 'images/icons/Health.png', :class => "areas-icons"
+    /             %tr.bot-border
+    /               %td.center Mentis
+    /               %td.center.l-border Compatibility
+    /               %td.center.l-border Location
+    /               %td.center.l-border Price
+    /             %tr
+    /               %td.center.l-border 
+    /                 %h5 95%
+    /               %td.center.l-border
+    /                 %h5 AUS
+    /               %td.center.l-border
+    /                 %h5 $$$
+    /         .search-about.col.l3
+    /           %h5{ style: 'text-transform: uppercase;' } About
+    /           %p
+    /             = current_user.about
