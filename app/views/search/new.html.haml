@@ -10,7 +10,7 @@
     - for user in @search
       .search-outer.row
         .search-row.row
-          %a{ href: '#', class: 'search-user-profile' }
+          = link_to user_path(user), class: 'search-user-profile' do
             .col.s12.search-result.left
               .search-img.col.l1
                 = image_tag user.avatar.url(:thumb), :class => "circle"
