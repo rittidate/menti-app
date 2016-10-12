@@ -143,6 +143,27 @@ class User < ActiveRecord::Base
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
 
+  def booked_number
+    CoursesUserRelation.where(owner: self).where('created_at >= ?', 2.week.ago).count
+  end
+
+  def compatibility(user)
+    puts self.first_name
+    a = []
+    CategorysUsersRelation.where(user: user).each { |r| a << r.category_id } 
+    
+    a2 = []
+    Course.where(user: self).each { |d| a2 << d.categories_id }
+
+    com_count = 0
+
+    a.each do |v| 
+      com_count += 1 if a2.include?(v)
+    end
+
+    (com_count.to_f / a.length ) * 100
+  end
+
   def hold_transaction(course_id, payment_id)
     course = Course.find(course_id)
     payment = Payment.find(payment_id)
@@ -156,4 +177,5 @@ class User < ActiveRecord::Base
   def release_transaction(transaction, noticification)
     BraintreeApi.new.release_amount(transaction, noticification)
   end
+
 end

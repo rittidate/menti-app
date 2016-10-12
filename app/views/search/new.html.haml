@@ -42,9 +42,11 @@
                   %tr
                     %td.center.l-border
                       %h5
-                        = CoursesUserRelation.where(owner: user).where('created_at >= ?', 2.week.ago).count
+                        = user.booked_number
                     %td.center.l-border 
-                      %h5 95%
+                      %h5 
+                        = user.compatibility(current_user).to_i
+                        \%
                     %td.center.l-border
                       %h5 
                         = user.country
