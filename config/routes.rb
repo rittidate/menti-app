@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   put '/category/relation_one', to: 'category#relation_one'
 
   put '/feed_message',    to: 'feed_message#create'
+  put '/feed_message/update',    to: 'feed_message#update'
 
   put '/follow',    to: 'follow#create'
   put '/follow/delete',    to: 'follow#delete'
