@@ -24,7 +24,7 @@ $(document).on 'turbolinks:load', ->
         messages = data.msg
         for itemIndex in [0...messages.length]
           $('ol.chat').prepend($.chat_element(messages[itemIndex]))
-      window.setTimeout($.update_feed_message, 5000);
+      window.setTimeout($.update_feed_message, 36000);
     )
   
   return if $('#js-feed-container').length != 1
