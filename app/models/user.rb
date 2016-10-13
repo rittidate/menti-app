@@ -148,7 +148,6 @@ class User < ActiveRecord::Base
   end
 
   def compatibility(user)
-    puts self.first_name
     a = []
     CategorysUsersRelation.where(user: user).each { |r| a << r.category_id } 
     

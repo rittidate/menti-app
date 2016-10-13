@@ -15,7 +15,6 @@ class FeedMessageController < ApplicationController
 
   def update
     user_ids = feed_message_user
-    puts user_ids
     feed_messages = FeedMessage.where(sender_id: user_ids).where('id > ?', params[:lasted_feed]).order("created_at DESC")
 
     if feed_messages.count > 0
