@@ -1,0 +1,48 @@
+
+.resources-container{
+    background-color: #E6E7E8;
+    font-family: 'Bungee Hairline', cursive;
+    margin-top: 1rem;
+    font-weight: 600;
+    padding: 1rem 1rem 1rem 2rem;
+    .res-heading{
+        color: #89D2D5;
+        text-transform: uppercase;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+    .res-off-list{
+        color: #A5A8AB;
+        font-weight: 600;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    .res-off-ul{
+        padding-left: 4rem;
+    }
+    .res-user-ul{
+        padding-right: 5rem;
+        text-align: right;
+    }
+    .res-user-list{
+        color: #A5A8AB;
+        font-weight: 600;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    .res-padd{
+        padding-top: 4.3rem;
+    }
+    .img-cont{
+        position: relative;
+    }
+    .res-img{
+        width: 3rem;
+    }
+    .res-name{
+        font-family: 'Baumans', cursive;
+        position: absolute;
+        top: 0.8rem;
+        padding-left: 0.5rem;
+    }
+}
