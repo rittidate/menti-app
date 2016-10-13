@@ -32,8 +32,12 @@
                   %tr.bot-border
                     %td{ colspan: 4 }
                       %span{ style: 'ext-transform: uppercase; padding-left: 1rem;' } Areas
-                      = image_tag 'images/icons/Finance.png', :class => "areas-icons"
-                      = image_tag 'images/icons/Health.png', :class => "areas-icons"
+                      = image_tag 'images/icons/Finance.png', :class => "areas-icons" if user.mentor_area_exist?(Category.where(name: 'Financial').first.id)
+                      = image_tag 'images/icons/Health.png', :class => "areas-icons" if user.mentor_area_exist?(Category.where(name: 'Health and Fitness').first.id)
+                      = image_tag 'images/icons/Education.png', :class => "areas-icons" if user.mentor_area_exist?(Category.where(name: 'Education').first.id)
+                      = image_tag 'images/icons/Relationships.png', :class => "areas-icons" if user.mentor_area_exist?(Category.where(name: 'Relationships').first.id)
+                      = image_tag 'images/icons/Spirituality.png', :class => "areas-icons" if user.mentor_area_exist?(Category.where(name: 'Spiritual').first.id)
+                      = image_tag 'images/icons/Work.png', :class => "areas-icons" if user.mentor_area_exist?(Category.where(name: 'Career').first.id)
                   %tr.bot-border
                     %td.center Mentis
                     %td.center.l-border Compatibility

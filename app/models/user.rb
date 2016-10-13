@@ -177,4 +177,9 @@ class User < ActiveRecord::Base
     BraintreeApi.new.release_amount(transaction, noticification)
   end
 
+  def mentor_area_exist?(category)
+    categories = Category.where(parent_id: category)
+    Course.where(user: self, categories: categories).present?
+  end
+
 end

@@ -29,12 +29,12 @@
       .areas{:style => "display: inline-block; width: 99%; text-align: center; background-color: #E6E7E8"}
         %span.left{:style => "font-size: 1.4rem; margin-top: 0.5rem; margin-left: 2rem; color: #36524E"}
           Areas:
-        = image_tag 'images/icons/Finance.png', :class => "areas-icons"
-        = image_tag 'images/icons/Health.png', :class => "areas-icons"
-        = image_tag 'images/icons/Education.png', :class => "areas-icons"
-        = image_tag 'images/icons/Relationships.png', :class => "areas-icons"
-        = image_tag 'images/icons/Spirituality.png', :class => "areas-icons"
-        = image_tag 'images/icons/Work.png', :class => "areas-icons"
+        = image_tag 'images/icons/Finance.png', :class => "areas-icons" if @user.mentor_area_exist?(Category.where(name: 'Financial').first.id)
+        = image_tag 'images/icons/Health.png', :class => "areas-icons" if @user.mentor_area_exist?(Category.where(name: 'Health and Fitness').first.id)
+        = image_tag 'images/icons/Education.png', :class => "areas-icons" if @user.mentor_area_exist?(Category.where(name: 'Education').first.id)
+        = image_tag 'images/icons/Relationships.png', :class => "areas-icons" if @user.mentor_area_exist?(Category.where(name: 'Relationships').first.id)
+        = image_tag 'images/icons/Spirituality.png', :class => "areas-icons" if @user.mentor_area_exist?(Category.where(name: 'Spiritual').first.id)
+        = image_tag 'images/icons/Work.png', :class => "areas-icons" if @user.mentor_area_exist?(Category.where(name: 'Career').first.id)
       
   = render 'terms' if !@user.mentee?
 
