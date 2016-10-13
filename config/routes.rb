@@ -64,4 +64,5 @@ Rails.application.routes.draw do
   put '/message/update', to: 'message#update'
   
   get  '/search',        to: 'search#new', as: :search
+  get  '/resources',        to: 'resources#new', as: :resources
 end

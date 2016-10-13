@@ -32,7 +32,7 @@
               - else
                 %i.fa.fa-comment.header-fa
           %li.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Resources' } }
-            %a
+            = link_to resources_path do
               %i{ class: 'fa fa-book header-fa', 'aria-hidden': 'true'}
           %li.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Settings' } }
             = link_to settings_path do

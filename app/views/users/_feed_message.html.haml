@@ -30,6 +30,7 @@
               .avatar
                 = image_tag msg.sender.avatar.url(:thumb)
               .msg
+                %h5.msg-name #{msg.sender.first_name}
                 %p #{msg.message}
                 %time 
                   - if msg.created_at.today?
@@ -41,6 +42,7 @@
               .avatar
                 = image_tag msg.sender.avatar.url(:thumb)
               .msg
+                %h5.msg-name #{msg.sender.first_name}
                 %p #{msg.message}
                 %time
                   - if msg.created_at.today?
