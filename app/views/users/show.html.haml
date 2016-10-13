@@ -29,12 +29,12 @@
       .areas{:style => "display: inline-block; width: 99%; text-align: center; background-color: #E6E7E8"}
         %span.left{:style => "font-size: 1.4rem; margin-top: 0.5rem; margin-left: 2rem; color: #36524E"}
           Areas:
-        %i.fa.fa-medkit.tooltip{"aria-hidden" => "true", "style" => "font-size: 2rem; color: #87CFC4; padding: 0.5rem"}
-          %span.tooltiptext
-            Health
-        %i.fa.fa-money.tooltip{"aria-hidden" => "true", "style" => "font-size: 2rem; color: #87CFC4; padding: 0.5rem"}
-          %span.tooltiptext
-            Finance
+        = image_tag 'images/icons/Finance.png', :class => "areas-icons"
+        = image_tag 'images/icons/Health.png', :class => "areas-icons"
+        = image_tag 'images/icons/Education.png', :class => "areas-icons"
+        = image_tag 'images/icons/Relationships.png', :class => "areas-icons"
+        = image_tag 'images/icons/Spirituality.png', :class => "areas-icons"
+        = image_tag 'images/icons/Work.png', :class => "areas-icons"
       
   = render 'terms' if !@user.mentee?
 

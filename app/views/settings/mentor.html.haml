@@ -17,6 +17,15 @@
             .input-field.col.s12
               = f.text_area :terms, length: 100, class: 'materialize-textarea'
               = f.label :terms
+            .input-field.col.s12
+              %select.select-areas{:multiple => "multiple"}
+                %option{:value => "1"} Education
+                %option{:value => "2"} Finance
+                %option{:value => "3"} Health
+                %option{:value => "4"} Relationship
+                %option{:value => "5"} Spirituality
+                %option{:value => "6"} Work
+              %label Choose your areas
 
           .row
             %h4.left.header
