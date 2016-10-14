@@ -17,32 +17,31 @@
             .input-field.col.s12
               = f.text_area :terms, length: 100, class: 'materialize-textarea'
               = f.label :terms
+            .input-field.col.s12
+              %select.select-areas{:multiple => "multiple", id: 'mentor-category-area'}
+                - for category in @categories
+                  %option{:value => "#{category.id}", selected: current_user.mentor_area_exist?(category)} #{category.name}
+               
+              %label Choose your areas
 
           .row
             %h4.left.header
               Mentor Fields
             - for category in @categories
-              .col.s12
+              .col.s12{ class: 'mentor-categories-group', ref: category.id }
                 .div-check
                   .col.s5{ style: 'padding-bottom: 20px;'}
-                    = check_box_tag "category_#{category.id}", category.id, category.category_course(current_user, category.id).present?, {class: 'mentor_category_checkbox',ref: category.id, name: 'user[category][][id]'}
-                    %label{ for: "category_#{category.id}" }
-                      %span.category_label #{category.name}
-                  .col.s4.mentor_category_price_div{ ref: "#{category.id}"}
-                    %input{ type: 'number', id: 'category_price_#{category.id}',min: '0', name: 'user[category][][price]', ref: "#{category.id}", class: 'mentor_category_price', value: "#{category.category_course(current_user, category.id).first.price if category.category_course(current_user, category.id).present?}" }
-                    %span{ class: 'prefix aud right'} 
-                      AUD/Fortnight
-                    %label{ for: "category_price_#{category.id}" }
+                    %h5 #{category.name}
                 - @sub_category = Category.where(parent_id: category.id)
                 - for sub_category in @sub_category
                   .col.s12{ style: 'padding-left: 20px; padding-bottom: 20px;'}
                     .div-check
                       .col.s5
-                        = check_box_tag "category_#{sub_category.id}", sub_category.id, category.category_course(current_user, sub_category.id).present?, {class: 'mentor_category_checkbox', ref: sub_category.id , name: 'user[category][][id]'}
+                        = check_box_tag "category_#{sub_category.id}", sub_category.id, category.category_course(current_user, sub_category.id).present?, {class: 'mentor_category_checkbox', ref: sub_category.id , name: 'user[category][][id]', parent: "#{category.id}"}
                         %label{ for: "category_#{sub_category.id}" }
                           %span.category_label #{sub_category.name}
                       .col.s4.mentor_category_price_div{ ref: "#{sub_category.id}"}
-                        %input{ type: 'number', id: 'category_price_#{sub_category.id}',min: '0', name: 'user[category][][price]', ref: "#{sub_category.id}", class: 'mentor_category_price', value: "#{category.category_course(current_user, sub_category.id).first.price if category.category_course(current_user, sub_category.id).present?}" }
+                        %input{ type: 'number', id: "category_price_#{sub_category.id}",min: '0', name: 'user[category][][price]', ref: "#{sub_category.id}", class: 'mentor_category_price', value: "#{category.category_course(current_user, sub_category.id).first.price if category.category_course(current_user, sub_category.id).present?}" }
                         %span{ class: 'prefix aud right'} 
                           AUD/Fortnight
                         %label{ for: "category_price_#{sub_category.id}" }

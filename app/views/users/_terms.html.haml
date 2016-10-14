@@ -35,5 +35,11 @@
     prices:
     %br/
   %p.mentor-content
-    %span.default-content
-      Please update this detail in settings
+    - if @user.courses.present?
+      %h5.center
+        = '$' if @user.courses.maximum('price') >= 20 and @user.courses.maximum('price') <= 40
+        = '$$' if @user.courses.maximum('price') > 40 and @user.courses.maximum('price') <= 60
+        = '$$$' if @user.courses.maximum('price') > 60
+    - else
+      %span.default-content
+        Please update this detail in settings

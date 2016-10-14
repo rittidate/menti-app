@@ -12,6 +12,8 @@ class UsersController < ApplicationController
   # GET /users/:id.:format
   def show
     @category = Category.where(parent_id: nil)
+    user_ids = feed_message_user
+    @feed_message = FeedMessage.where(sender_id: user_ids).order("created_at DESC")
   end
 
   # GET /users/:id/edit
@@ -92,5 +94,14 @@ private
     accessible = [ :name, :email ] # extend with your own params
     accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
     params.require(:user).permit(accessible)
+  end
+
+  def feed_message_user
+    user_array = Array.new
+    for f in @user.follows
+      user_array << f.follower.id
+    end
+
+    user_array << @user.id
   end
 end

@@ -131,8 +131,40 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.search(search)
+    time = 6.month.ago
+    where("lower(first_name) LIKE ? OR lower(last_name) LIKE ?", "%#{search}%", "%#{search}%")
+    .joins("LEFT JOIN ratings ON users.id = ratings.user_id AND ratings.updated_at >= '#{time}'", )
+    .group("users.id")
+    .order("avg(ratings.value) ASC")
+  end
+
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
+  end
+
+  def booked_number
+    CoursesUserRelation.where(owner: self).where('created_at >= ?', 2.week.ago).count
+  end
+
+  def compatibility(user)
+    a = []
+    CategorysUsersRelation.where(user: user).each { |r| a << r.category_id } 
+    
+    a2 = []
+    Course.where(user: self).each { |d| a2 << d.categories_id }
+
+    com_count = 0
+
+    a.each do |v| 
+      com_count += 1 if a2.include?(v)
+    end
+    
+    unless a.length == 0
+      (com_count.to_f / a.length ) * 100
+    else
+      0
+    end
   end
 
   def hold_transaction(course_id, payment_id)
@@ -148,4 +180,10 @@ class User < ActiveRecord::Base
   def release_transaction(transaction, noticification)
     BraintreeApi.new.release_amount(transaction, noticification)
   end
+
+  def mentor_area_exist?(category)
+    categories = Category.where(parent_id: category)
+    Course.where(user: self, categories: categories).present?
+  end
+
 end

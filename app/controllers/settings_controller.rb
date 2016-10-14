@@ -51,16 +51,21 @@ class SettingsController < ApplicationController
     else
       @course = Course.new
     end
-    #else
-      #@course = Course.where(user: current_user)
-    #end
   end
 
   def mentor_detail
+    category_arr = Array.new
     params[:user][:category].each do |val|
       current_user.courses.where(categories_id: val[:id]).first_or_initialize.tap do |course|
         course.price = val[:price]
         course.save
+      end
+      category_arr << val[:id].to_i
+    end
+
+    for course in current_user.courses
+      unless category_arr.include?(course.categories_id)
+        Course.where(user: current_user, categories_id: course.categories_id).destroy_all
       end
     end
     respond_to do |format|
