@@ -9,16 +9,16 @@
   = hidden_field_tag :courses_user_relations, @course_user_relation.first.id if @course_user_relation.present?
   = render 'rating' if !@user.mentee?
   
+  %h6.red-text.center.tooltipped{"data-delay" => "100", "data-position" => "bottom", "data-tooltip" => "Sorry the mentor is booked out"}
+    %i.fa.fa-lock{"aria-hidden" => "true"}
+    Booked out
+  
   - if @user == current_user and !@user.mentee?
-    %li
-      %a.dropdown-button{"data-activates" => "dropdown1"}
-        Choose your current status
-        %i.material-icons.right arrow_drop_down
-    %ul#dropdown1.dropdown-content
-      %li
-        %a{:class => "status-a"} Available
-      %li
-        %a{:class => "red-text status-a"} Booked Out
+    .input-field.col.s12
+      %select.select-setting
+        %option{:value => "1", :selected => "selected"} Available
+        %option.red-text{:value => "2"} Booked Out
+      %label Current Availability
   
   %hr/
   - if @user != current_user
