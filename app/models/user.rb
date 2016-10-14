@@ -159,6 +159,7 @@ class User < ActiveRecord::Base
     a.each do |v| 
       com_count += 1 if a2.include?(v)
     end
+    
     unless a.length == 0
       (com_count.to_f / a.length ) * 100
     else

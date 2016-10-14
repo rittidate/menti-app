@@ -49,7 +49,7 @@
                         = user.booked_number
                     %td.center.l-border 
                       %h5 
-                        = user.compatibility(current_user).to_i
+                        = number_with_precision(user.compatibility(current_user).to_f, precision: 2)
                         \%
                     %td.center.l-border
                       %h5 
