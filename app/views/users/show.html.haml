@@ -9,6 +9,16 @@
   = hidden_field_tag :courses_user_relations, @course_user_relation.first.id if @course_user_relation.present?
   = render 'rating' if !@user.mentee?
   
+  %li
+    %a.dropdown-button{"data-activates" => "dropdown1", :href => "#!"}
+      Choose your current status
+      %i.material-icons.right arrow_drop_down
+  %ul#dropdown1.dropdown-content
+    %li
+      %a{:href => "#!", :class => "status-a"} Available
+    %li
+      %a{:href => "#!", :class => "red-text status-a"} Booked Out
+  
   %hr/
   - if @user != current_user
     .col.s12

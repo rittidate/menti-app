@@ -1,4 +1,5 @@
 $(document).on 'turbolinks:load', -> 
+  $('select.select-setting').material_select();
   $.rating_star = (num) ->
     switch num
       when '1' 

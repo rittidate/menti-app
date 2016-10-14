@@ -10,6 +10,10 @@
         text-transform: uppercase;
         font-size: 2rem;
         font-weight: 600;
+        clear: both;
+    }
+    .res-heading:first-of-type{
+        margin-top: 5.4rem;
     }
     .res-off-list{
         color: #A5A8AB;
@@ -23,6 +27,7 @@
     .res-user-ul{
         padding-right: 5rem;
         text-align: right;
+        
     }
     .res-user-list{
         color: #A5A8AB;
@@ -45,4 +50,8 @@
         top: 0.8rem;
         padding-left: 0.5rem;
     }
+}
+.upload-res{
+    font-family: 'Lato', sans-serif;
+    font-size: 1.2rem;
 }
