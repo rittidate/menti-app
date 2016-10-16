@@ -20,7 +20,7 @@
     = hidden_field_tag 'js-newest-message', @feed_message.first.id if @feed_message.present?
     
   .feeds
-    - if !@user.feed_messages.present?
+    - if !@feed_message.present?
       %h5.js-no-content.center
         No content
       %ol.chat
