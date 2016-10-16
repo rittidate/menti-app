@@ -40,6 +40,12 @@ $(document).on 'turbolinks:load', ->
 
   $('.feed_message_upload').on "change", ->
     $('.feed-attach-form').submit()
+
+  $('#feed-message-area').on "keydown", (e) ->
+    text = $('#feed-message-area').val()
+    if e.ctrlKey && e.keyCode == 13 && text != ''
+      $("#js-feed-message-button").trigger('click')
+
       
 
   $.create_feed_message = (message) ->
