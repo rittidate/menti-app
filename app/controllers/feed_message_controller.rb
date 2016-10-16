@@ -29,9 +29,20 @@ class FeedMessageController < ApplicationController
     end
   end
 
+  def upload
+    msg = FeedMessage.create(image_params) do |f|
+      f.sender = current_user
+    end
+    redirect_to request.referer
+  end
+
   protected
   def message_params
     params.require(:feed_message).permit(:reciever_id, :message)
+  end
+
+  def image_params
+    params.require(:feed_message).permit(:image)
   end
 
   def feed_message_user

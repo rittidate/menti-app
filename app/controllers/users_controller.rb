@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     @category = Category.where(parent_id: nil)
     user_ids = feed_message_user
     @feed_message = FeedMessage.where(sender_id: user_ids).order("created_at DESC")
+    @feed = FeedMessage.new
   end
 
   # GET /users/:id/edit

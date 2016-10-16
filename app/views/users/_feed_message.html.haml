@@ -7,7 +7,9 @@
           %label{:for => "feed-message-area"}
         %div{:style => "text-align: right;"}
           %a.btn-floating.btn-large.waves-effect.waves-light.btn-flat
-            %i.material-icons.black-text attach_file
+            = form_for(@feed, url: feed_message_upload_path, html: { method: :put , class: 'feed-attach-form' }) do |f|
+              = f.file_field :image, class: 'hide feed_message_upload'
+              %i.material-icons.black-text.feed-attach attach_file
           %button.btn.waves-effect.waves-light.feed-message-button{:name => "action", :type => "submit", id: "js-feed-message-button"}
             Share
 
@@ -31,7 +33,11 @@
                 = image_tag msg.sender.avatar.url(:thumb)
               .msg
                 %h5.msg-name #{msg.sender.first_name}
-                %p #{msg.message}
+                - if msg.message.present?
+                  %p #{msg.message}
+                - else
+                  %p 
+                    = image_tag msg.image.url(:thumb)
                 %time 
                   - if msg.created_at.today?
                     = msg.created_at.strftime("%I:%M %p") 
@@ -43,7 +49,11 @@
                 = image_tag msg.sender.avatar.url(:thumb)
               .msg
                 %h5.msg-name #{msg.sender.first_name}
-                %p #{msg.message}
+                - if msg.message.present?
+                  %p #{msg.message}
+                - else
+                  %p 
+                    = image_tag msg.image.url(:thumb)
                 %time
                   - if msg.created_at.today?
                     = msg.created_at.strftime("%I:%M %p") 

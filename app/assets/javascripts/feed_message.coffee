@@ -34,6 +34,12 @@ $(document).on 'turbolinks:load', ->
     if text != ''
       $.create_feed_message(text)
       $('#feed-message-area').val('')
+
+  $('.feed-attach').on "click", ->
+    $("input[type='file']").trigger('click')
+
+  $('.feed_message_upload').on "change", ->
+    $('.feed-attach-form').submit()
       
 
   $.create_feed_message = (message) ->
