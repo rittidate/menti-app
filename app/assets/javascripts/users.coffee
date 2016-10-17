@@ -89,9 +89,9 @@ $(document).on 'turbolinks:load', ->
             }
     ).always( (d) ->
       if status == 'true'
-        $('#text-mentor-status').removeClass('hide')
-      else
         $('#text-mentor-status').addClass('hide')
+      else
+        $('#text-mentor-status').removeClass('hide')
     )
 
 

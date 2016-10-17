@@ -14,3 +14,17 @@
       .modal-footer
         = f.submit "Send", { class: 'modal-action modal-close waves-effect waves-green btn-flat' }
         %a{ href: "#!", class: 'modal-action modal-close close waves-effect waves-green btn-flat'} Cancel
+
+#refund-modal.modal
+  .modal-content
+    %h4 Not satisfied with the mentor? Request a refund!
+    .input-field.col.s12
+      %select.course-refund
+        %option{:disabled => "disabled", :selected => "selected", :value => ""} Choose your course
+        - for course in @course_user_relation
+          %option{:value => "#{course.id}"} #{course.course.categories.name}
+    .input-field.col.s12
+      %textarea#reason-refund.materialize-textarea{:length => "150"}
+      %label{:for => "reason-refund"} Reason for refund?
+  .modal-footer
+    %a.modal-action.modal-close.waves-effect.waves-green.btn-flat{:onclick => "Materialize.toast('An email is sent for the refund. Our team will get back to you. Thanks!', 4000, 'rounded')"} Request
