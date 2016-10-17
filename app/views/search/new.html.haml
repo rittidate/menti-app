@@ -1,10 +1,8 @@
 .search-container
-  #wrap
+  #wrap.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Click to start search' }}
     = form_tag search_path, method: 'get' do
       = text_field_tag :search, params[:search], placeholder: 'What are you looking for ?', class: 'col s12'
       = submit_tag "Submit",  id: 'search_submit'
-
-  %h4{ class: 'center js-no-content' } Click search icon to start
 
   - if @search.present?
     - for user in @search

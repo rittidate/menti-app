@@ -27,3 +27,18 @@
           .col.s6
             .progress-range
               = range_field_tag("desired_level", 0, { class: 'desired_level_range', style: 'border: none;', min: 0, max: 100 })
+              
+#refund-modal.modal
+  .modal-content
+    %h4 Not satisfied with the mentor? Request a refund!
+    .input-field.col.s12
+      %select.course-refund
+        %option{:disabled => "disabled", :selected => "selected", :value => ""} Choose your course
+        %option{:value => "1"} Course 1
+        %option{:value => "2"} Course 2
+        %option{:value => "3"} Course 3
+    .input-field.col.s12
+      %textarea#reason-refund.materialize-textarea{:length => "150"}
+      %label{:for => "reason-refund"} Reason for refund?
+  .modal-footer
+    %a.modal-action.modal-close.waves-effect.waves-green.btn-flat{:onclick => "Materialize.toast('An email is sent for the refund. Our team will get back to you. Thanks!', 4000, 'rounded')"} Request
