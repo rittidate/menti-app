@@ -1,5 +1,5 @@
 $(document).on 'turbolinks:load', -> 
-  $('select.select-setting').material_select()
+  $('select.select-avail').material_select()
   $('select.course-refund').material_select()
   $('input#input_text, textarea#reason-refund').characterCounter();
 

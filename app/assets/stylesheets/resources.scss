@@ -51,6 +51,17 @@
         padding-left: 0.5rem;
     }
 }
+#search-res{
+    color: #89D2D5;
+    font-weight: bolder;
+    font-family: 'Roboto', sans-serif;
+}
+.search-res{
+    .material-icons{
+        line-height: inherit;
+        color: #89D2D5;
+    }
+}
 .upload-res{
     font-family: 'Lato', sans-serif;
     font-size: 1.2rem;

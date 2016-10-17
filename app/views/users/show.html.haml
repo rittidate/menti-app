@@ -15,7 +15,7 @@
   
   - if @user == current_user and !@user.mentee?
     .input-field.col.s12
-      %select.select-setting
+      %select.select-avail
         %option{:value => "1", :selected => "selected"} Available
         %option.red-text{:value => "2"} Booked Out
       %label Current Availability

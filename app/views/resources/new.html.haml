@@ -1,5 +1,8 @@
 .row.resources-container
   %ul.col.s6.res-off-ul
+    .input-field.col.s8.search-res
+      %i.material-icons.prefix search
+      %input#search-res.validate{:type => "text"}/
     %li.res-heading
       Official Resources
     - for res in @res_default
