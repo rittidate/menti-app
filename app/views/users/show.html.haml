@@ -5,7 +5,7 @@
   %li
     %h6.center.navFont How are you tracking so far...
   - courses = Course.where(user: @user)
-  - @course_user_relation = current_user.courses_user_relations.where(user: current_user, course: courses).where('created_at >= ?', 2.week.ago)
+  - @course_user_relation = @user.courses_user_relations.where(user: @user, course: courses).where('created_at >= ?', 2.week.ago)
   = hidden_field_tag :courses_user_relations, @course_user_relation.first.id if @course_user_relation.present?
   = render 'rating' if !@user.mentee?
   
@@ -23,12 +23,12 @@
   %hr/
   - if @user != current_user
     .col.s12
-      - if current_user.follows.where(follower: @user).first.present?
+      - if @user.follows.where(follower: @user).first.present?
         %button.waves-effect.waves-light.btn.unfollow.profBtns{ id: 'js-follow-button' } Unfollow
       - else
         %button.waves-effect.waves-light.btn.follow.profBtns{ id: 'js-follow-button' } Follow
 
-      - if current_user.transactions.where(course_owner: @user, status: 'holded').where('created_at >= ?', 1.week.ago).present?
+      - if @user.transactions.where(course_owner: @user, status: 'holded').where('created_at >= ?', 1.week.ago).present?
         = link_to 'Contact', users_wait_path(@user) , class: 'waves-effect waves-light btn profBtns contact modal-contact-trigger' 
       - elsif @course_user_relation.present?
         = link_to 'Contact',  message_path(@user) , class: 'waves-effect waves-light btn profBtns contact modal-contact-trigger' 

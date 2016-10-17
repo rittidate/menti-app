@@ -1,5 +1,6 @@
 class PaymentController < ApplicationController
   before_action :authenticate_user!
+  before_action :incomplete_info_user!
   
   def new
     @client_token = generate_client_token

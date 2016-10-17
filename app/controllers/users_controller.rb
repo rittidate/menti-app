@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :incomplete_info_user!, except: :show
   before_action :set_user, only: [:show, :edit, :update, :destroy, :payment, :transaction, :wait]
 
   def index

@@ -16,7 +16,7 @@
   .hide
     = image_tag "images/thumb/avatar.png", class: 'hide', id: 'default-img'
     = hidden_field_tag 'js-feed-reciever', @user.id
-    = hidden_field_tag 'js-feed-sender', current_user.id
+    = hidden_field_tag 'js-feed-sender', @user.id
     = hidden_field_tag 'js-newest-message', @feed_message.first.id if @feed_message.present?
     
   .feeds
