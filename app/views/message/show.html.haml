@@ -36,6 +36,7 @@
       .name.center
         = @user.first_name
         .right.icons
+          %i.fa.fa-trash.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Delete chat' }, style: 'padding-right:3rem;', 'aria-hidden': true}
           %i.fa.fa-phone.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Call. Coming soon!' }, style: 'padding-right:3rem;', 'aria-hidden': true}
           %i.fa.fa-video-camera.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Video call. Coming soon!' }, style: 'padding-right:3rem;', 'aria-hidden': true}
           = hidden_field_tag :coversation, @conversation.id

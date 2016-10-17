@@ -14,6 +14,7 @@
               %h5.msg-name #{msg.sender.first_name}
               - if msg.message.present?
                 %p #{msg.message}
+<<<<<<< HEAD
               - else
                 %p 
                   = image_tag msg.image.url(:thumb)
@@ -22,6 +23,13 @@
                   = msg.created_at.strftime("%I:%M %p") 
                 - else
                   = msg.created_at.strftime("%a/%m - %I:%M %p")
+=======
+                %time 
+                  - if msg.created_at.today?
+                    = msg.created_at.strftime("%I:%M %p") 
+                  - else
+                    = msg.created_at.strftime("%a/%m - %I:%M %p")
+>>>>>>> sprint_9
         - else
           %li.other.animated.slideInDown
             .avatar
