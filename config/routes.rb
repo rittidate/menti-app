@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   put '/settings/mentor',   to: 'settings#mentor_create'
   put '/settings/mentor/detail',   to: 'settings#mentor_detail'
   put '/settings/mentor/update',   to: 'settings#mentor_update'
+  put '/settings/mentor/status',   to: 'settings#mentor_status'
 
 
   get  '/payment',        to: 'payment#new', as: :new_payment

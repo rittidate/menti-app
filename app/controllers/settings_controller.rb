@@ -54,6 +54,12 @@ class SettingsController < ApplicationController
     end
   end
 
+  def mentor_status
+    current_user.mentor_status = params[:mentor_status]
+    current_user.save!
+    render json: { success: true, status: 200 }
+  end
+
   def mentor_detail
     category_arr = Array.new
     params[:user][:category].each do |val|

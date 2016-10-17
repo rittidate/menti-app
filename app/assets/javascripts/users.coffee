@@ -79,6 +79,22 @@ $(document).on 'turbolinks:load', ->
     num = $(this).attr('num')
     $.give_rating(num)
 
+  $('#select-availible').on 'change', () ->
+    status = $(this).val()
+    $.ajax(
+      method: "PUT"
+      url: "/settings/mentor/status"
+      data: {
+              mentor_status: status 
+            }
+    ).always( (d) ->
+      if status == 'true'
+        $('#text-mentor-status').removeClass('hide')
+      else
+        $('#text-mentor-status').addClass('hide')
+    )
+
+
   $.give_rating = (num) ->
     $.ajax(
       method: "POST"

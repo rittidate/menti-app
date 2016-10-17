@@ -9,15 +9,15 @@
   = hidden_field_tag :courses_user_relations, @course_user_relation.first.id if @course_user_relation.present?
   = render 'rating' if !@user.mentee?
   
-  %h6.red-text.center.tooltipped{"data-delay" => "100", "data-position" => "bottom", "data-tooltip" => "Sorry the mentor is booked out"}
+  %h6.red-text.center.tooltipped#text-mentor-status{ data: {"delay": "100", "position": "bottom", "tooltip": "Sorry the mentor is booked out"}, class: "#{'hide' if !@user.mentor_status}" }
     %i.fa.fa-lock{"aria-hidden" => "true"}
     Booked out
   
   - if @user == current_user and !@user.mentee?
     .input-field.col.s12
-      %select.select-avail
-        %option{:value => "1", :selected => "selected"} Available
-        %option.red-text{:value => "2"} Booked Out
+      %select.select-avail#select-availible
+        %option{ value: 'true', selected: @user.mentor_status} Available
+        %option.red-text{ value: 'false', selected: !@user.mentor_status} Booked Out
       %label Current Availability
   
   %hr/
