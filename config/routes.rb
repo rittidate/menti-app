@@ -63,6 +63,7 @@ Rails.application.routes.draw do
   resources :message
 
   put '/message/update', to: 'message#update'
+  put '/reply/upload', to: 'conversation_reply#upload'
   
   get  '/search',        to: 'search#new', as: :search
   get  '/resources',        to: 'resources#new', as: :resources

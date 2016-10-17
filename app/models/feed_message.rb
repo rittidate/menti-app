@@ -18,6 +18,6 @@ class FeedMessage < ActiveRecord::Base
   belongs_to :reciever, :class_name => "User"
   belongs_to :sender, :class_name => "User"
 
-  has_attached_file :image, styles: { thumb: "400x400>" }
+  has_attached_file :image, styles: { thumb: "300x300>" }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 end

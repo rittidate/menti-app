@@ -11,8 +11,9 @@ class MessageController < ApplicationController
     @conversation = Conversation.where('(user_one_id = ? and user_two_id = ?) OR (user_one_id = ? and user_two_id = ?)', @user.id, current_user.id, current_user.id, @user.id).first
     
     @conversation.conversation_replies.where.not(user: current_user).update_all seen: true
-
     @notification = Notification.where(conversation_id: @conversation.id, user: current_user, seen: false).update_all seen: true
+
+    @reply = ConversationReply.new
   end
 
   def create
@@ -33,7 +34,7 @@ class MessageController < ApplicationController
       array = Array.new
       i = 0
       for reply in replies
-        hash = { id: reply.id, message: reply.reply, time: reply.created_at.strftime("%I:%M %p"), user: 'other', avatar: reply.user.avatar.url(:thumb) } 
+        hash = { id: reply.id, message: reply.reply, image: reply.image.url(:thumb) , time: reply.created_at.strftime("%I:%M %p"), user: 'other', avatar: reply.user.avatar.url(:thumb) } 
         array[i] = hash
         i += 1
       end
