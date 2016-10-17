@@ -20,7 +20,7 @@ class FeedMessageController < ApplicationController
     if feed_messages.count > 0
       array = Array.new
       for msg in feed_messages
-        hash = { id: msg.id, message: msg.message, time: msg.created_at.strftime("%I:%M %p"), user: 'other', avatar: msg.sender.avatar.url(:thumb) } 
+        hash = { id: msg.id, message: msg.message, image: msg.image.url(:thumb), time: msg.created_at.strftime("%I:%M %p"), user: 'other', avatar: msg.sender.avatar.url(:thumb) } 
         array << hash
       end
       render json: { success: true, status: 200, msg: array }

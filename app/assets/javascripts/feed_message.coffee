@@ -7,7 +7,13 @@ $(document).on 'turbolinks:load', ->
       avatar =  $('<div />', {'class': 'avatar'}).append($('<img/>', {'src': default_url}))
     else
       avatar =  $('<div />', {'class': 'avatar'}).append($('<img/>', {'src': msg.avatar}))
-    text = $('<div />', {'class': 'msg'}).append($('<p/>', {text: msg.message})).append($('<time/>', {text: msg.time}))
+
+    if msg.message != null
+      text = $('<div />', {'class': 'msg'}).append($('<p/>', {text: msg.message})).append($('<time/>', {text: msg.time}))
+    else
+      image = $('<p/>').append($('<img/>', {'src': msg.image, 'draggable': 'false'}))
+      text = $('<div />', {'class': 'msg'}).append(image).append($('<time/>', {text: msg.time}))
+
     $('<li />', { 'class': msg.user}).append(avatar).append(text)
 
   $.update_feed_message = () ->

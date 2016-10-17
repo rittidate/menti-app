@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
+  before_action :incomplete_info_user!
   
   def index
     user_ids = feed_message_user
