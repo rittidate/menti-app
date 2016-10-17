@@ -66,5 +66,10 @@ Rails.application.routes.draw do
   put '/reply/upload', to: 'conversation_reply#upload'
   
   get  '/search',        to: 'search#new', as: :search
+
   get  '/resources',        to: 'resources#new', as: :resources
+  put  '/resources/upload',        to: 'resources#upload'
+  get  '/resources/admin',        to: 'resources#admin'
+  put  '/resources/admin',        to: 'resources#upload_default'
+
 end

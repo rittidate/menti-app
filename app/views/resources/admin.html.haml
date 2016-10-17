@@ -1,0 +1,18 @@
+.row.resources-container
+  %ul.col.s6.res-off-ul
+    %li.res-heading
+      Official Resources
+    - for res in @res_default
+      %li.res-off-list.res-padd
+        Resource: 
+        = link_to res.resource_name, res.document.url(:original)
+
+  %ul.col.s6.res-user-ul
+    = form_for(@resource, url: resources_admin_path, html: { method: :put , class: 'right row resource-attach-form' }) do |f|
+      .file-field.input-field.upload-res
+        .btn#resource-upload-button
+          %span
+            Upload Resources
+      = f.file_field :document, class: 'hide resource_upload'
+      = f.hidden_field :resource_name
+      = f.hidden_field :resource_type, value: 0

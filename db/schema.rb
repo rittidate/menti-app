@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161016221335) do
+ActiveRecord::Schema.define(version: 20161017033252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,6 +164,18 @@ ActiveRecord::Schema.define(version: 20161016221335) do
   end
 
   add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
+
+  create_table "resources", force: :cascade do |t|
+    t.string   "resource_name"
+    t.integer  "resource_type"
+    t.integer  "user_id"
+    t.string   "document_file_name"
+    t.string   "document_content_type"
+    t.integer  "document_file_size"
+    t.datetime "document_updated_at"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
 
   create_table "security_questions", force: :cascade do |t|
     t.string "locale", null: false
