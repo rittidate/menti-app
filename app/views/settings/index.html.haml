@@ -10,7 +10,7 @@
         = form_for(current_user, url: settings_path, html: { method: :put , class: 'col s12' }) do |f|
           .row
             .input-field.col.s12
-              = f.text_field :first_name, autofocus: true
+              = f.text_field :first_name, data: { validation: "required" }, autofocus: true
               = f.label :first_name
 
             .input-field.col.s12
@@ -18,7 +18,7 @@
               = f.label :middle_name
 
             .input-field.col.s12
-              = f.text_field :last_name
+              = f.text_field :last_name, data: { validation: "required" }
               = f.label :last_name
 
             .input-field.col.s12{:style => "margin-bottom: 40px"}
@@ -32,7 +32,7 @@
 
             .input-field.col.s12
               = f.label :birthdate
-              = f.text_field :birthdate, class: 'datepicker', value: (f.object.birthdate.strftime('%m/%d/%Y') if f.object.birthdate), autofocus: true
+              = f.text_field :birthdate, class: 'datepicker', value: (f.object.birthdate.strftime('%m/%d/%Y') if f.object.birthdate), data: { validation: "date", "validation-format": "mm/dd/yyyy" }
 
             .input-field.col.s12
               = f.select :education, options_for_select(educations, f.object.education), {prompt: "Select Education"}, { class: 'select-setting' }
@@ -52,7 +52,7 @@
 
             .input-field.col.s12
               %label{ for: 'postcode'} Postcode
-              = f.text_field :zipcode
+              = f.text_field :zipcode,  data: { validation: "required" }
 
             .input-field.col.s12
               = f.select :country, options_for_select(countries, f.object.country), {prompt: "Select Country"}, { class: 'select-setting' }
