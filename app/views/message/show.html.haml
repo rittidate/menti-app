@@ -36,14 +36,19 @@
       .name.center
         = @user.first_name
         .right.icons
-          %i.fa.fa-trash.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Delete chat' }, style: 'padding-right:3rem;', 'aria-hidden': true}
+          %i.fa.fa-trash.tooltipped#js-delete-chat{data: { position: 'bottom', delay: 50, tooltip: 'Delete chat' }, style: 'padding-right:3rem;', 'aria-hidden': true}
           %i.fa.fa-phone.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Call. Coming soon!' }, style: 'padding-right:3rem;', 'aria-hidden': true}
           %i.fa.fa-video-camera.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Video call. Coming soon!' }, style: 'padding-right:3rem;', 'aria-hidden': true}
           = hidden_field_tag :coversation, @conversation.id
           = hidden_field_tag :lasted_reply, @conversation.conversation_replies.last.id if @conversation.conversation_replies.present?
           = image_tag "images/thumb/avatar.png", class: 'hide', id: 'default-img'
     %ol.chat-msg
-      - for msg in @conversation.conversation_replies.order("created_at DESC")
+      - if @history.present?
+        - messaging = @conversation.conversation_replies.where('id > ?', @history.conversation_replies_id).order("created_at DESC")
+      - else
+        - messaging = @conversation.conversation_replies.order("created_at DESC")
+
+      - for msg in messaging
         - if msg.user == current_user
           %li.self-msg
             .avatar-msg

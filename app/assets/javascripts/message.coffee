@@ -76,6 +76,20 @@ $(document).on 'turbolinks:load', ->
   $('.reply_message_upload').on "change", ->
     $('.message-attach-form').submit()
 
+  $('#js-delete-chat').on "click", ->
+    $.ajax(
+      method: "POST"
+      url: "/reply/delete"
+      data: { 
+              conversation_id: $('#coversation').val()
+              lasted_reply: $('#lasted_reply').val()
+            }
+    ).always( (data) ->
+      if data.status == 200
+        $('.self-msg').remove()
+        $('.other-msg').remove()
+    )
+
 
 
 

@@ -23,9 +23,6 @@ $(document).on 'turbolinks:load', ->
         image = $('<p/>').append($('<img/>', {'src': msg.image, 'draggable': 'false'}))
         text = $('<div />', {'class': 'msg'}).append($('<h5/>', {class: 'msg-name', text: msg.first_name})).append(image).append($('<time/>', {text: msg.time}))
 
-    
-
-
     $('<li />', { 'class': msg.user}).append(avatar).append(text)
 
   $.update_feed_message = () ->

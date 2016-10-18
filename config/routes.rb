@@ -66,6 +66,7 @@ Rails.application.routes.draw do
 
   put '/message/update', to: 'message#update'
   put '/reply/upload', to: 'conversation_reply#upload'
+  post '/reply/delete', to: 'conversation_reply#delete'
   
   get  '/search',        to: 'search#new', as: :search
 
