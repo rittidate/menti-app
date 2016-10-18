@@ -70,10 +70,10 @@
 div.self{
     padding-bottom: 2.3rem;
 }
-.self a{
+/*.self a{
     position: absolute;
     right: 260px;
-}
+}*/
 .js-no-content{
     color: #E3E4E5;
 }
@@ -322,4 +322,9 @@ font-family: 'Sunshiney', cursive !important;
 	box-shadow: inset 0 -1px 0 0 #ccc, inset 0 1px 0 0 #ccc, 0 1px 0 0 #ccc, 0 -1px 0 0 #ccc;    
 	margin-top: 0;
     margin-bottom: 1rem;
+}
+.credit-msg{
+    color: #566D7C;
+    font-family: 'Nova Flat', cursive;
+    font-size: 1rem;
 }

@@ -20,14 +20,16 @@
               - if msg.ref_feed_message.message.present?
                 %p 
                   #{msg.ref_feed_message.message}
-                %p
-                  Cr.
+                .credit-msg
+                  %i.fa.fa-retweet{"aria-hidden" => "true"}
+                  Shared from
                   = link_to msg.ref_feed_message.sender.first_name, user_path(msg.ref_feed_message.sender)
               - elsif msg.ref_feed_message.image.present?
                 %p 
                   = image_tag msg.ref_feed_message.image.url(:thumb)
-                %p
-                  Cr.
+                .credit-msg
+                  %i.fa.fa-retweet{"aria-hidden" => "true"}
+                  Shared from
                   = link_to msg.ref_feed_message.sender.first_name, user_path(msg.ref_feed_message.sender)
             %time 
               - if msg.created_at.today?
@@ -53,14 +55,16 @@
               - if msg.ref_feed_message.message.present?
                 %p 
                   #{msg.ref_feed_message.message}
-                %p
-                  Cr.
+                .credit-msg
+                  %i.fa.fa-retweet{"aria-hidden" => "true"}
+                  Shared from
                   = link_to msg.ref_feed_message.sender.first_name, user_path(msg.ref_feed_message.sender)
               - elsif msg.ref_feed_message.image.present?
                 %p 
                   = image_tag msg.ref_feed_message.image.url(:thumb)
-                %p
-                  Cr.
+                .credit-msg
+                  %i.fa.fa-retweet{"aria-hidden" => "true"}
+                  Shared from
                   = link_to msg.ref_feed_message.sender.first_name, user_path(msg.ref_feed_message.sender)
             %time
               - if msg.created_at.today?
