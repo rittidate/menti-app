@@ -9,10 +9,10 @@ $(document).on 'turbolinks:load', ->
       avatar =  $('<div />', {'class': 'avatar'}).append($('<img/>', {'src': msg.avatar}))
 
     if msg.message != null
-      text = $('<div />', {'class': 'msg'}).append($('<p/>', {text: msg.message})).append($('<time/>', {text: msg.time}))
+      text = $('<div />', {'class': 'msg'}).append($('<h5/>', {class: 'msg-name', text: msg.first_name})).append($('<p/>', {text: msg.message})).append($('<time/>', {text: msg.time}))
     else
       image = $('<p/>').append($('<img/>', {'src': msg.image, 'draggable': 'false'}))
-      text = $('<div />', {'class': 'msg'}).append(image).append($('<time/>', {text: msg.time}))
+      text = $('<div />', {'class': 'msg'}).append($('<h5/>', {class: 'msg-name', text: msg.first_name})).append(image).append($('<time/>', {text: msg.time}))
 
     $('<li />', { 'class': msg.user}).append(avatar).append(text)
 
@@ -22,7 +22,7 @@ $(document).on 'turbolinks:load', ->
       url: "/feed_message/update"
       async: false
       data: { 
-              user_id: $('#js-feed-reciever').val()
+              user_id: $('#js-feed-sender').val()
               lasted_feed: $('#js-newest-message').val()
             }
     ).success( (data) ->
@@ -30,7 +30,8 @@ $(document).on 'turbolinks:load', ->
         messages = data.msg
         for itemIndex in [0...messages.length]
           $('ol.chat').prepend($.chat_element(messages[itemIndex]))
-      window.setTimeout($.update_feed_message, 36000);
+      window.setTimeout($.update_feed_message, 6000);
+      #36000
     )
   
   return if $('#js-feed-container').length != 1
@@ -60,7 +61,6 @@ $(document).on 'turbolinks:load', ->
       url: "/feed_message"
       data: { 
               feed_message:
-                reciever_id: $('#js-feed-reciever').val()
                 message: message
             }
     ).always( (data) ->
