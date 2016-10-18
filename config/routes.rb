@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   put '/feed_message',    to: 'feed_message#create'
   put '/feed_message/update',    to: 'feed_message#update'
   put '/feed_message/upload',    to: 'feed_message#upload'
+  put '/feed_message/share',    to: 'feed_message#share'
 
   put '/follow',    to: 'follow#create'
   put '/follow/delete',    to: 'follow#delete'

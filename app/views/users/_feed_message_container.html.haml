@@ -1,0 +1,23 @@
+#js-feed-container.feed-container.animated.fadeInRight
+  - if @user == current_user
+    .row
+      .row
+        .input-field.col.s12
+          %textarea#feed-message-area.materialize-textarea.feed-message-area{:placeholder => "Share your ideas, concepts, motivations... anything..."}
+          %label{:for => "feed-message-area"}
+        %div{:style => "text-align: right;"}
+          %a.btn-floating.btn-large.waves-effect.waves-light.btn-flat
+            = form_for(@feed, url: feed_message_upload_path, html: { method: :put , class: 'feed-attach-form' }) do |f|
+              = f.file_field :image, class: 'hide feed_message_upload'
+              %i.material-icons.black-text.feed-attach attach_file
+          %button.btn.waves-effect.waves-light.feed-message-button{:name => "action", :type => "submit", id: "js-feed-message-button"}
+            Share
+
+  .hide
+    = image_tag "images/thumb/avatar.png", class: 'hide', id: 'default-img'
+    = hidden_field_tag 'js-feed-reciever', @user.id
+    = hidden_field_tag 'js-feed-sender', @user.id
+    = hidden_field_tag 'js-newest-message', @feed_message.first.id if @feed_message.present?
+    
+  .feeds
+    = render 'feed_message'

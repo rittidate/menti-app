@@ -69,7 +69,7 @@
 %a.button-collapse-other.left.hide-on-large-only{"data-activates" => "slide-out", :href => "#", :style => "font-size: 4rem; color: #36524E !important;"}
   %div{:style => "display: block;"}= image_tag @user.avatar.url(:thumb), :class => "circle mypicslide"
 
-= render 'feed_message'
+= render 'feed_message_container'
 
 = render 'modal' if @user == current_user
 

@@ -9,10 +9,22 @@ $(document).on 'turbolinks:load', ->
       avatar =  $('<div />', {'class': 'avatar'}).append($('<img/>', {'src': msg.avatar}))
 
     if msg.message != null
-      text = $('<div />', {'class': 'msg'}).append($('<h5/>', {class: 'msg-name', text: msg.first_name})).append($('<p/>', {text: msg.message})).append($('<time/>', {text: msg.time}))
+      if msg.cr != null
+        cr = $('<p/>', {text: 'Cr.'}).append($('<a/>', { href: msg.cr_url, text: msg.cr }))
+        text = $('<div />', {'class': 'msg'}).append($('<h5/>', {class: 'msg-name', text: msg.first_name})).append($('<p/>', {text: msg.message})).append(cr).append($('<time/>', {text: msg.time}))
+      else
+        text = $('<div />', {'class': 'msg'}).append($('<h5/>', {class: 'msg-name', text: msg.first_name})).append($('<p/>', {text: msg.message})).append($('<time/>', {text: msg.time}))
     else
-      image = $('<p/>').append($('<img/>', {'src': msg.image, 'draggable': 'false'}))
-      text = $('<div />', {'class': 'msg'}).append($('<h5/>', {class: 'msg-name', text: msg.first_name})).append(image).append($('<time/>', {text: msg.time}))
+      if msg.cr != null
+        cr = $('<p/>', {text: 'Cr.'}).append($('<a/>', { href: msg.cr_url, text: msg.cr }))
+        image = $('<p/>').append($('<img/>', {'src': msg.image, 'draggable': 'false'}))
+        text = $('<div />', {'class': 'msg'}).append($('<h5/>', {class: 'msg-name', text: msg.first_name})).append(image).append(cr).append($('<time/>', {text: msg.time}))
+      else
+        image = $('<p/>').append($('<img/>', {'src': msg.image, 'draggable': 'false'}))
+        text = $('<div />', {'class': 'msg'}).append($('<h5/>', {class: 'msg-name', text: msg.first_name})).append(image).append($('<time/>', {text: msg.time}))
+
+    
+
 
     $('<li />', { 'class': msg.user}).append(avatar).append(text)
 
@@ -30,12 +42,26 @@ $(document).on 'turbolinks:load', ->
         messages = data.msg
         for itemIndex in [0...messages.length]
           $('ol.chat').prepend($.chat_element(messages[itemIndex]))
-      window.setTimeout($.update_feed_message, 6000);
-      #36000
+      window.setTimeout($.update_feed_message, 36000)
     )
   
+  $('.js-share-feed').on "click", ->
+    id = $(this).attr('ref')
+    $.ajax(
+      method: "PUT"
+      url: "/feed_message/share"
+      async: false
+      data: { 
+              feed_id: id
+            }
+    ).success( (data) ->
+      if data.status == 200
+        $('#js-newest-message').val(data.msg.id)
+        $('ol.chat').prepend($.chat_element(data.msg))
+    )
+
   return if $('#js-feed-container').length != 1
-  $.update_feed_message()
+  window.setTimeout($.update_feed_message, 36000)
   $('#js-feed-message-button').on "click", ->
     text = $('#feed-message-area').val()
     if text != ''
@@ -52,8 +78,6 @@ $(document).on 'turbolinks:load', ->
     text = $('#feed-message-area').val()
     if e.ctrlKey && e.keyCode == 13 && text != ''
       $("#js-feed-message-button").trigger('click')
-
-      
 
   $.create_feed_message = (message) ->
     $.ajax(

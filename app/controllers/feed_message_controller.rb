@@ -6,7 +6,7 @@ class FeedMessageController < ApplicationController
       f.sender = current_user
     end
     
-    render json: { status: 200, msg: { id: msg.id, message: msg.message, time: msg.created_at.strftime("%I:%M %p"), user: 'self', first_name: msg.sender.first_name, avatar: msg.sender.avatar.url(:thumb) } }
+    render json: { status: 200, msg: { id: msg.id, message: msg.message, image: msg.image.url(:thumb), time: msg.created_at.strftime("%I:%M %p"), user: 'self', first_name: msg.sender.first_name, avatar: msg.sender.avatar.url(:thumb) } }
   end
 
   def update
@@ -30,6 +30,17 @@ class FeedMessageController < ApplicationController
       f.sender = current_user
     end
     redirect_to request.referer
+  end
+
+  def share
+    old_msg = FeedMessage.find(params[:feed_id])
+    reciever_id = old_msg.sender_id
+    msg = FeedMessage.new
+    msg.sender_id = current_user.id
+    msg.reciever_id = reciever_id
+    msg.ref_feed_message_id = params[:feed_id]
+    msg.save!
+    render json: { status: 200, msg: { id: msg.id, message: msg.ref_feed_message.message, image: msg.ref_feed_message.image.url(:thumb), time: msg.created_at.strftime("%I:%M %p"), user: 'self', first_name: msg.sender.first_name, avatar: msg.sender.avatar.url(:thumb), cr: msg.ref_feed_message.sender.first_name, cr_url: user_path(msg.ref_feed_message.sender) } }
   end
 
   protected

@@ -4,8 +4,10 @@ class DashboardController < ApplicationController
   
   def index
     user_ids = feed_message_user
+    @user = current_user
     @feed_message = FeedMessage.where(sender_id: user_ids).order("created_at DESC")
   end
+  
 private
   def feed_message_user
     user_array = Array.new
