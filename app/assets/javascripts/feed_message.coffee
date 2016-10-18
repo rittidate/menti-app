@@ -58,6 +58,7 @@ $(document).on 'turbolinks:load', ->
       current_user = $('#js-feed-current-user').val()
       reciever_id = $('#js-feed-reciever').val()
       if data.status == 200
+        Materialize.toast("Shared!!!", 5000)
         if current_user == reciever_id
           $('#js-newest-message').val(data.msg.id)
           $('ol.chat').prepend($.chat_element(data.msg))
