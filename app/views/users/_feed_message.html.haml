@@ -72,6 +72,6 @@
               - else
                 = msg.created_at.strftime("%a/%m - %I:%M %p")
         - if msg.sender != current_user and current_user.present?
-          %a.waves-effect.waves-teal.btn-flat.js-share-feed{style: "margin-left: 4%;", ref: msg.id}
+          %a.waves-effect.waves-teal.btn-flat.js-share-feed{ style: "margin-left: 4%;", ref: msg.id }
             Share
             %i.fa.fa-heart{"aria-hidden" => "true"}

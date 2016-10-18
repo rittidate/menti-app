@@ -9,19 +9,19 @@ $(document).on 'turbolinks:load', ->
       avatar =  $('<div />', {'class': 'avatar'}).append($('<img/>', {'src': msg.avatar}))
 
     if msg.message != null
-      if msg.cr != null
-        cr = $('<p/>', {text: 'Cr.'}).append($('<a/>', { href: msg.cr_url, text: msg.cr }))
-        text = $('<div />', {'class': 'msg'}).append($('<h5/>', {class: 'msg-name', text: msg.first_name})).append($('<p/>', {text: msg.message})).append(cr).append($('<time/>', {text: msg.time}))
-      else
+      if typeof msg.cr == 'undefined'
         text = $('<div />', {'class': 'msg'}).append($('<h5/>', {class: 'msg-name', text: msg.first_name})).append($('<p/>', {text: msg.message})).append($('<time/>', {text: msg.time}))
-    else
-      if msg.cr != null
-        cr = $('<p/>', {text: 'Cr.'}).append($('<a/>', { href: msg.cr_url, text: msg.cr }))
-        image = $('<p/>').append($('<img/>', {'src': msg.image, 'draggable': 'false'}))
-        text = $('<div />', {'class': 'msg'}).append($('<h5/>', {class: 'msg-name', text: msg.first_name})).append(image).append(cr).append($('<time/>', {text: msg.time}))
       else
+        cr = $('<div/>', { class: 'credit-msg'}).append($('<i/>', { class: 'fa fa-retweet' })).append('Shared from').append($('<a/>', { href: msg.cr_url, text: msg.cr }))
+        text = $('<div />', {'class': 'msg'}).append($('<h5/>', {class: 'msg-name', text: msg.first_name})).append($('<p/>', {text: msg.message})).append(cr).append($('<time/>', {text: msg.time}))
+    else
+      if typeof msg.cr == 'undefined'
         image = $('<p/>').append($('<img/>', {'src': msg.image, 'draggable': 'false'}))
         text = $('<div />', {'class': 'msg'}).append($('<h5/>', {class: 'msg-name', text: msg.first_name})).append(image).append($('<time/>', {text: msg.time}))
+      else
+        cr = $('<div/>', { class: 'credit-msg'}).append($('<i/>', { class: 'fa fa-retweet' })).append('Shared from').append($('<a/>', { href: msg.cr_url, text: msg.cr }))
+        image = $('<p/>').append($('<img/>', {'src': msg.image, 'draggable': 'false'}))
+        text = $('<div />', {'class': 'msg'}).append($('<h5/>', {class: 'msg-name', text: msg.first_name})).append(image).append(cr).append($('<time/>', {text: msg.time}))
 
     $('<li />', { 'class': msg.user}).append(avatar).append(text)
 
