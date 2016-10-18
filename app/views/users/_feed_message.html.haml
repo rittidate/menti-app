@@ -10,7 +10,7 @@
           .avatar
             = image_tag msg.sender.avatar.url(:thumb)
           .msg
-            %h5.msg-name #{msg.sender.first_name}
+            %h5.msg-name.center #{msg.sender.first_name}
             - if msg.message.present?
               %p #{msg.message}
             - elsif msg.image.present?
@@ -45,7 +45,7 @@
           .avatar
             = image_tag msg.sender.avatar.url(:thumb)
           .msg
-            %h5.msg-name #{msg.sender.first_name}
+            %h5.msg-name.center #{msg.sender.first_name}
             - if msg.message.present?
               %p #{msg.message}
             - elsif msg.image.present?
