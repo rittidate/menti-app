@@ -14,6 +14,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def incomplete_info_user!
+    unless current_user.birthdate.present?
+      session[:from] = request.original_fullpath
+      respond_to do |format|
+        format.html { redirect_to settings_path }
+      end
+    end
+  end
+
   def generate_client_token
     Braintree::ClientToken.generate
   end

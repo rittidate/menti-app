@@ -1,5 +1,6 @@
 class SettingsController < ApplicationController
   before_action :authenticate_user!
+  before_action :incomplete_info_user!, except: [:index, :update]
   before_action :set_categories, only: [:mentor]
 
   def index
@@ -51,6 +52,12 @@ class SettingsController < ApplicationController
     else
       @course = Course.new
     end
+  end
+
+  def mentor_status
+    current_user.mentor_status = params[:mentor_status]
+    current_user.save!
+    render json: { success: true, status: 200 }
   end
 
   def mentor_detail

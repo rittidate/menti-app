@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   put '/settings/mentor',   to: 'settings#mentor_create'
   put '/settings/mentor/detail',   to: 'settings#mentor_detail'
   put '/settings/mentor/update',   to: 'settings#mentor_update'
+  put '/settings/mentor/status',   to: 'settings#mentor_status'
 
 
   get  '/payment',        to: 'payment#new', as: :new_payment
@@ -50,6 +51,8 @@ Rails.application.routes.draw do
 
   put '/feed_message',    to: 'feed_message#create'
   put '/feed_message/update',    to: 'feed_message#update'
+  put '/feed_message/upload',    to: 'feed_message#upload'
+  put '/feed_message/share',    to: 'feed_message#share'
 
   put '/follow',    to: 'follow#create'
   put '/follow/delete',    to: 'follow#delete'
@@ -62,7 +65,14 @@ Rails.application.routes.draw do
   resources :message
 
   put '/message/update', to: 'message#update'
+  put '/reply/upload', to: 'conversation_reply#upload'
+  post '/reply/delete', to: 'conversation_reply#delete'
   
   get  '/search',        to: 'search#new', as: :search
+
   get  '/resources',        to: 'resources#new', as: :resources
+  put  '/resources/upload',        to: 'resources#upload'
+  get  '/resources/admin',        to: 'resources#admin'
+  put  '/resources/admin',        to: 'resources#upload_default'
+
 end

@@ -1,5 +1,7 @@
 $(document).on 'turbolinks:load', -> 
-  $('select.select-setting').material_select()
+  $('select.select-avail').material_select()
+  $('select.course-refund').material_select()
+  $('input#input_text, textarea#reason-refund').characterCounter();
 
   $.rating_star = (num) ->
     switch num
@@ -76,6 +78,22 @@ $(document).on 'turbolinks:load', ->
   $('.rating-give').on 'click', () ->
     num = $(this).attr('num')
     $.give_rating(num)
+
+  $('#select-availible').on 'change', () ->
+    status = $(this).val()
+    $.ajax(
+      method: "PUT"
+      url: "/settings/mentor/status"
+      data: {
+              mentor_status: status 
+            }
+    ).always( (d) ->
+      if status == 'true'
+        $('#text-mentor-status').addClass('hide')
+      else
+        $('#text-mentor-status').removeClass('hide')
+    )
+
 
   $.give_rating = (num) ->
     $.ajax(

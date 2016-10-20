@@ -1,5 +1,6 @@
 class PaymentController < ApplicationController
   before_action :authenticate_user!
+  before_action :incomplete_info_user!
   
   def new
     @client_token = generate_client_token
@@ -25,7 +26,7 @@ class PaymentController < ApplicationController
     rescue BraintreeApi::CreditCardVerifyException => e
       respond_to do |format|
         format.json do
-          render json: { errors: { message: e.message } }, status: 422
+          render json: "Sorry, Card Declined. Please check your card or use another card to process.", status: 422
         end
       end
     end
@@ -53,9 +54,11 @@ class PaymentController < ApplicationController
       transaction.user.collect_transaction(transaction, noticification)
       render json: { success: true, data: transaction, status: 200 }
     rescue BraintreeApi::NilNonceException
-      render json: { error: { type: 'payment', message: "Sorry, Card Declined. Please check your card or use another card to process this transaction." } }
+      #render json: { error: { type: 'payment', message: "Sorry, Card Declined. Please check your card or use another card to process this transaction." } }
+      render json: "Sorry, Card Declined. Please check your card or use another card to process this transaction.", status: 422
     rescue BraintreeApi::CreditCardVerifyException
-      render json: { error: { type: 'payment', message: "Sorry, Card Declined. Please check your card or use another card to process this transaction." } }
+      #render json: { error: { type: 'payment', message: "Sorry, Card Declined. Please check your card or use another card to process this transaction." } }
+      render json: "Sorry, Card Declined. Please check your card or use another card to process this transaction.", status: 422
     end
   end
 
@@ -66,9 +69,11 @@ class PaymentController < ApplicationController
       transaction.user.release_transaction(transaction, noticification)
       render json: { success: true, data: transaction, status: 200 }
     rescue BraintreeApi::NilNonceException
-      render json: { error: { type: 'payment', message: "Sorry, Card Declined. Please check your card or use another card to process this transaction." } }
+      #render json: { error: { type: 'payment', message: "Sorry, Card Declined. Please check your card or use another card to process this transaction." } }
+      render json: "Sorry, Card Declined. Please check your card or use another card to process this transaction.", status: 422
     rescue BraintreeApi::CreditCardVerifyException
-      render json: { error: { type: 'payment', message: "Sorry, Card Declined. Please check your card or use another card to process this transaction." } }
+      #render json: { error: { type: 'payment', message: "Sorry, Card Declined. Please check your card or use another card to process this transaction." } }
+      render json: "Sorry, Card Declined. Please check your card or use another card to process this transaction.", status: 422
     end
   end
 

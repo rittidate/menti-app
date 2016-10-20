@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :incomplete_info_user!, except: :show
   before_action :set_user, only: [:show, :edit, :update, :destroy, :payment, :transaction, :wait]
 
   def index
@@ -14,6 +15,7 @@ class UsersController < ApplicationController
     @category = Category.where(parent_id: nil)
     user_ids = feed_message_user
     @feed_message = FeedMessage.where(sender_id: user_ids).order("created_at DESC")
+    @feed = FeedMessage.new
   end
 
   # GET /users/:id/edit

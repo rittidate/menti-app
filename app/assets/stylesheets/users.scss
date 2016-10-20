@@ -15,6 +15,32 @@
     width: 2.5rem;
     margin-top: 0.8rem;
 }
-.status-a{
-    padding-top: 1rem !important;
+.select-avail{
+    width: 70%;
+    margin: 1rem auto;
+    input{
+        color: #36524E;
+    }
+}
+.course-refund{
+    input{
+        color: #36524E;
+    }
+}
+#refund-modal{
+    .modal-content{
+        padding: 2rem !important;
+    }
+    textarea{
+        color: #36524E;
+    }
+    textarea:focus{
+        color: #36524E;
+    }
+    label{
+        color: #36524E;
+    }
+    .input-field{
+        color: #36524E;
+    }
 }

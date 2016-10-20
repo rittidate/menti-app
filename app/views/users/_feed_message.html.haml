@@ -1,51 +1,77 @@
-#js-feed-container.feed-container.animated.fadeInRight
-  - if @user == current_user
-    .row
-      .row
-        .input-field.col.s12
-          %textarea#feed-message-area.materialize-textarea.feed-message-area{:placeholder => "Share your ideas, concepts, motivations... anything..."}
-          %label{:for => "feed-message-area"}
-        %div{:style => "text-align: right;"}
-          %a.btn-floating.btn-large.waves-effect.waves-light.btn-flat
-            %i.material-icons.black-text attach_file
-          %button.btn.waves-effect.waves-light.feed-message-button{:name => "action", :type => "submit", id: "js-feed-message-button"}
+- if !@feed_message.present?
+  %h5.js-no-content.center
+    = "-- No content --"
+  %ol.chat
+- else
+  %ol.chat
+    - for msg in @feed_message
+      - if msg.sender == @user
+        %li.self.animated.slideInDown
+          .avatar
+            = image_tag msg.sender.avatar.url(:thumb)
+          .msg
+            %h5.msg-name.center #{msg.sender.first_name}
+            - if msg.message.present?
+              %p #{msg.message}
+            - elsif msg.image.present?
+              %p 
+                = image_tag msg.image.url(:thumb)
+            - elsif msg.ref_feed_message.present?
+              - if msg.ref_feed_message.message.present?
+                %p 
+                  #{msg.ref_feed_message.message}
+                .credit-msg
+                  %i.fa.fa-retweet{"aria-hidden" => "true"}
+                  Shared from
+                  = link_to msg.ref_feed_message.sender.first_name, user_path(msg.ref_feed_message.sender)
+              - elsif msg.ref_feed_message.image.present?
+                %p 
+                  = image_tag msg.ref_feed_message.image.url(:thumb)
+                .credit-msg
+                  %i.fa.fa-retweet{"aria-hidden" => "true"}
+                  Shared from
+                  = link_to msg.ref_feed_message.sender.first_name, user_path(msg.ref_feed_message.sender)
+            %time 
+              - if msg.created_at.today?
+                = msg.created_at.strftime("%I:%M %p") 
+              - else
+                = msg.created_at.strftime("%a/%m - %I:%M %p")
+        - if msg.sender != current_user and current_user.present?
+          %a.waves-effect.waves-teal.btn-flat.right.js-share-feed{style: "margin-right: 6%;", ref: msg.id}
             Share
-
-  .hide
-    = image_tag "images/thumb/avatar.png", class: 'hide', id: 'default-img'
-    = hidden_field_tag 'js-feed-reciever', @user.id
-    = hidden_field_tag 'js-feed-sender', current_user.id
-    = hidden_field_tag 'js-newest-message', @feed_message.first.id if @feed_message.present?
-    
-  .feeds
-    - if !@user.feed_messages.present?
-      %h5.js-no-content.center
-        No content
-      %ol.chat
-    - else
-      %ol.chat
-        - for msg in @feed_message
-          - if msg.sender == @user
-            %li.self.animated.slideInDown
-              .avatar
-                = image_tag msg.sender.avatar.url(:thumb)
-              .msg
-                %h5.msg-name #{msg.sender.first_name}
-                %p #{msg.message}
-                %time 
-                  - if msg.created_at.today?
-                    = msg.created_at.strftime("%I:%M %p") 
-                  - else
-                    = msg.created_at.strftime("%a/%m - %I:%M %p")
-          - else
-            %li.other.animated.slideInDown
-              .avatar
-                = image_tag msg.sender.avatar.url(:thumb)
-              .msg
-                %h5.msg-name #{msg.sender.first_name}
-                %p #{msg.message}
-                %time
-                  - if msg.created_at.today?
-                    = msg.created_at.strftime("%I:%M %p") 
-                  - else
-                    = msg.created_at.strftime("%a/%m - %I:%M %p")
+            %i.fa.fa-heart{"aria-hidden" => "true"}
+      - else
+        %li.other.animated.slideInDown
+          .avatar
+            = image_tag msg.sender.avatar.url(:thumb)
+          .msg
+            %h5.msg-name.center #{msg.sender.first_name}
+            - if msg.message.present?
+              %p #{msg.message}
+            - elsif msg.image.present?
+              %p 
+                = image_tag msg.image.url(:thumb)
+            - elsif msg.ref_feed_message.present?
+              - if msg.ref_feed_message.message.present?
+                %p 
+                  #{msg.ref_feed_message.message}
+                .credit-msg
+                  %i.fa.fa-retweet{"aria-hidden" => "true"}
+                  Shared from
+                  = link_to msg.ref_feed_message.sender.first_name, user_path(msg.ref_feed_message.sender)
+              - elsif msg.ref_feed_message.image.present?
+                %p 
+                  = image_tag msg.ref_feed_message.image.url(:thumb)
+                .credit-msg
+                  %i.fa.fa-retweet{"aria-hidden" => "true"}
+                  Shared from
+                  = link_to msg.ref_feed_message.sender.first_name, user_path(msg.ref_feed_message.sender)
+            %time
+              - if msg.created_at.today?
+                = msg.created_at.strftime("%I:%M %p") 
+              - else
+                = msg.created_at.strftime("%a/%m - %I:%M %p")
+        - if msg.sender != current_user and current_user.present?
+          %a.waves-effect.waves-teal.btn-flat.js-share-feed{ style: "margin-left: 4%;", ref: msg.id }
+            Share
+            %i.fa.fa-heart{"aria-hidden" => "true"}

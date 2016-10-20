@@ -36,19 +36,29 @@
       .name.center
         = @user.first_name
         .right.icons
+          %i.fa.fa-trash.tooltipped#js-delete-chat{data: { position: 'bottom', delay: 50, tooltip: 'Delete chat' }, style: 'padding-right:3rem;', 'aria-hidden': true}
           %i.fa.fa-phone.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Call. Coming soon!' }, style: 'padding-right:3rem;', 'aria-hidden': true}
           %i.fa.fa-video-camera.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Video call. Coming soon!' }, style: 'padding-right:3rem;', 'aria-hidden': true}
           = hidden_field_tag :coversation, @conversation.id
           = hidden_field_tag :lasted_reply, @conversation.conversation_replies.last.id if @conversation.conversation_replies.present?
           = image_tag "images/thumb/avatar.png", class: 'hide', id: 'default-img'
     %ol.chat-msg
-      - for msg in @conversation.conversation_replies.order("created_at DESC")
+      - if @history.present?
+        - messaging = @conversation.conversation_replies.where('id > ?', @history.conversation_replies_id).order("created_at DESC")
+      - else
+        - messaging = @conversation.conversation_replies.order("created_at DESC")
+
+      - for msg in messaging
         - if msg.user == current_user
           %li.self-msg
             .avatar-msg
               = image_tag msg.user.avatar.url(:thumb), draggable: "false"
             .msg-msg
-              %p #{msg.reply}
+              - if msg.reply.present?
+                %p #{msg.reply}
+              - else
+                %p 
+                  = image_tag msg.image.url(:thumb)
               %time
                 - if msg.created_at.today?
                   = msg.created_at.strftime("%I:%M %p") 
@@ -59,7 +69,11 @@
             .avatar-msg
               = image_tag msg.user.avatar.url(:thumb), draggable: "false"
             .msg-msg
-              %p #{msg.reply}
+              - if msg.reply.present?
+                %p #{msg.reply}
+              - else
+                %p 
+                  = image_tag msg.image.url(:thumb)
               %time
                 - if msg.created_at.today?
                   = msg.created_at.strftime("%I:%M %p") 
@@ -72,4 +86,7 @@
         .send
           %i.material-icons#js-conversation-send-message send
       .emojis
-        %i.fa.fa-paperclip.fa-rotate-90{ style: 'font-size: xx-large;padding-top: 1.5rem; color: #6A6A6A;', 'aria-hidden': true}
+        %i.fa.fa-paperclip.fa-rotate-90#message-attach-button{ style: 'font-size: xx-large;padding-top: 1.5rem; color: #6A6A6A;', 'aria-hidden': true}
+        = form_for(@reply, url: reply_upload_path, html: { method: :put , class: 'message-attach-form' }) do |f|
+          = f.file_field :image, class: 'hide reply_message_upload'
+          = f.hidden_field :conversation_id, value: @conversation.id

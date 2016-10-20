@@ -1,4 +1,7 @@
 class NotificationsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :incomplete_info_user!
+
   def index
     @notices = Notification.where(user: current_user)
     @notices.update_all(seen: true)

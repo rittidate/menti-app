@@ -1,5 +1,4 @@
 class CategoryController < ApplicationController
-  before_action :authenticate_user!, except: [:new, :create]
   
   def update_current
     current_user.categorys_users_relations.where(category_id: params[:catergory_id]).update_all(value: params[:value])

@@ -43,6 +43,7 @@
 #  terms                    :string
 #  provider                 :string
 #  uid                      :string
+#  mentor_status            :boolean          default(TRUE)
 #
 # Indexes
 #
