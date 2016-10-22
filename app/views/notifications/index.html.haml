@@ -3,7 +3,7 @@
     .row
       -if @notices.present?
         - for notice in @notices.order("created_at DESC")
-          - if notice.notification_type == 'payment'
+          - if notice.notification_type == 'payment' and notice.course.present?
             .col.s12.animated.zoomIn
               .card.horizontal.card-confirm
                 .card-image.notification-img
@@ -27,7 +27,7 @@
                     %h5= notice.sender.first_name
                     %p 
                       %b Terms: 
-                      = notice.user.terms
+                      = notice.user.terms 
 
                     %p
                       %b Course: 
@@ -41,6 +41,8 @@
                     - if notice.notification_type == 'payment' and notice.status == 'holded'
                       %button{ class: 'btn-flat payment_accept', ref: notice.transaction_id, noticification: notice.id } Accept
                       %button{ class: 'btn-flat payment_decline', ref: notice.transaction_id, noticification: notice.id } Decline
+                    - elsif notice.notification_type == 'payment' and notice.status == 'voided'
+                      %button{ class: 'btn-flat payment_accept', disabled: 'disabled', ref: notice.transaction_id, noticification: notice.id } Decline
                     - else
                       %button{ class: 'btn-flat payment_accept', disabled: 'disabled', ref: notice.transaction_id, noticification: notice.id } Accepted
           
@@ -103,6 +105,25 @@
                           = notice.created_at.strftime("%a/%m - %I:%M %p")
                       %h5= notice.sender.first_name
                       %p #{notice.sender.first_name} sent new messages!!!!
+
+          - elsif notice.notification_type == 'resource'          
+            .col.s12.animated.zoomIn
+              .card.horizontal.card-message
+                .card-image.notification-img-2
+                  = image_tag notice.sender.avatar.url(:thumb), :class => "circle"
+                .card-stacked
+                  .card-content
+                    %i.fa.fa-trash-o.right.trash
+                    %i.fa.fa-share-square.tooltip.icons
+                      %span.tooltiptext
+                        Access your files #{notice.resource.resource_name}
+                    %time{ style: 'position: absolute;right: 8rem;color: #CAB7B7;'}
+                      - if notice.created_at.today?
+                        = notice.created_at.strftime("%I:%M %p") 
+                      - else
+                        = notice.created_at.strftime("%a/%m - %I:%M %p")
+                    %h5= notice.sender.first_name
+                    %p #{notice.sender.first_name} Access your #{notice.resource.resource_name} file!!!!
 
       - else
         %h4.js-no-content.center

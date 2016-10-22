@@ -1,7 +1,12 @@
 class ResourcesController < ApplicationController
   def new
     @resource = Resource.new
-    @res_default = Resource.where(resource_type: 0)
+    if params['search-res'].present?
+      @res_default = Resource.search(params['search-res'].downcase)
+    else
+      @res_default = Resource.where(resource_type: 0)
+    end
+    
     @resources = Resource.where(resource_type: 1)
   end
 

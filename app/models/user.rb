@@ -134,8 +134,10 @@ class User < ActiveRecord::Base
 
   def self.search(search)
     time = 6.month.ago
-    where("lower(first_name) LIKE ? OR lower(last_name) LIKE ?", "%#{search}%", "%#{search}%")
-    .joins("LEFT JOIN ratings ON users.id = ratings.user_id AND ratings.updated_at >= '#{time}'", )
+    User.joins("LEFT JOIN courses ON courses.user_id = users.id
+            LEFT JOIN categories ON courses.categories_id = categories.id 
+            LEFT JOIN ratings ON users.id = ratings.user_id AND ratings.updated_at >= '#{time}'")
+    .where("lower(first_name) LIKE ? OR lower(last_name) LIKE ? OR lower(categories.name) LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
     .group("users.id")
     .order("avg(ratings.value) ASC")
   end

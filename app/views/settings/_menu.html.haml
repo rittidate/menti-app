@@ -11,10 +11,12 @@
     = link_to settings_payment_path, class: 'collection-item active' do
       Default Payment
       %i{ class: "right fa fa-credit-card-alt" }
-  = link_to_unless_current 'Category<i class="right fa fa-bar-chart" aria-hidden="true"></i>'.html_safe,  settings_category_path, class: 'collection-item' do
-    = link_to  settings_category_path, class: 'collection-item active' do
-      Category
-      %i{ class: "right fa fa-bar-chart" }
+      
+  - if !current_user.mentor?
+    = link_to_unless_current 'Category<i class="right fa fa-bar-chart" aria-hidden="true"></i>'.html_safe,  settings_category_path, class: 'collection-item' do
+      = link_to  settings_category_path, class: 'collection-item active' do
+        Category
+        %i{ class: "right fa fa-bar-chart" }
 
   - if !current_user.mentee?
     = link_to_unless_current 'Mentor Setting<i class="right fa fa-newspaper-o" aria-hidden="true"></i>'.html_safe,  settings_mentor_path, class: 'collection-item' do

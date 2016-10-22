@@ -12,6 +12,7 @@
 #  sender_id         :integer
 #  seen              :boolean          default(FALSE)
 #  conversation_id   :integer
+#  resource_id       :integer
 #
 # Indexes
 #
@@ -23,11 +24,12 @@
 #
 
 class Notification < ActiveRecord::Base
-  enum notification_type: { payment: 'payment', course: 'course', message: 'message' }
+  enum notification_type: { payment: 'payment', course: 'course', message: 'message', resource: 'resource' }
 
   belongs_to :user
   belongs_to :sender, :class_name => "User"
   belongs_to :conversation
+  belongs_to :resource
 
   def course
     Transaction.find(self.transaction_id).course

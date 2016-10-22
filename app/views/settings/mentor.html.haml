@@ -9,13 +9,13 @@
         = form_for(current_user, url: settings_mentor_detail_path , html: { method: :put }) do |f|
           .row
             .input-field.col.s12
-              = f.text_area :about, length: 120, class: 'materialize-textarea'
+              = f.text_area :about, length: 120, class: 'materialize-textarea', placeholder: 'Something that describes you well...'
               = f.label :about
             .input-field.col.s12
-              = f.text_area :program, length: 120, class: 'materialize-textarea'
+              = f.text_area :program, length: 120, class: 'materialize-textarea', placeholder: 'Something that describes your program well...'
               = f.label :program
             .input-field.col.s12
-              = f.text_area :terms, length: 100, class: 'materialize-textarea'
+              = f.text_area :terms, length: 100, class: 'materialize-textarea', placeholder: 'List all your terms here, Eg: Available only from 10am - 3pm Weekdays...'
               = f.label :terms
             .input-field.col.s12
               %select.select-areas{:multiple => "multiple", id: 'mentor-category-area'}
@@ -41,7 +41,7 @@
                         %label{ for: "category_#{sub_category.id}" }
                           %span.category_label #{sub_category.name}
                       .col.s4.mentor_category_price_div{ ref: "#{sub_category.id}"}
-                        %input{ type: 'number', id: "category_price_#{sub_category.id}",min: '0', name: 'user[category][][price]', ref: "#{sub_category.id}", class: 'mentor_category_price', value: "#{category.category_course(current_user, sub_category.id).first.price if category.category_course(current_user, sub_category.id).present?}" }
+                        %input{ type: 'number', id: "category_price_#{sub_category.id}",min: '0', name: 'user[category][][price]', ref: "#{sub_category.id}", class: 'mentor_category_price', data: { validation: "number", 'validation-error-msg': "Fill price"  }, value: "#{category.category_course(current_user, sub_category.id).first.price if category.category_course(current_user, sub_category.id).present?}" }
                         %span{ class: 'prefix aud right'} 
                           AUD/Fortnight
                         %label{ for: "category_price_#{sub_category.id}" }
