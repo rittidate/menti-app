@@ -3,6 +3,7 @@ class SessionsController < Devise::SessionsController
   
   def new
     super
+    
   end
 
   def create
@@ -15,6 +16,11 @@ class SessionsController < Devise::SessionsController
     else
       "application"
     end
+  end
+
+private
+  def user_params
+    params.require(:user).permit(:email, :password)
   end
 
 end

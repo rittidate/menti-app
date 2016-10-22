@@ -41,6 +41,8 @@
                     - if notice.notification_type == 'payment' and notice.status == 'holded'
                       %button{ class: 'btn-flat payment_accept', ref: notice.transaction_id, noticification: notice.id } Accept
                       %button{ class: 'btn-flat payment_decline', ref: notice.transaction_id, noticification: notice.id } Decline
+                    - elsif notice.notification_type == 'payment' and notice.status == 'voided'
+                      %button{ class: 'btn-flat payment_accept', disabled: 'disabled', ref: notice.transaction_id, noticification: notice.id } Decline
                     - else
                       %button{ class: 'btn-flat payment_accept', disabled: 'disabled', ref: notice.transaction_id, noticification: notice.id } Accepted
           

@@ -9,12 +9,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="login-page">
-<% if flash.any? %>
+<%- flash.each do |name, msg| -%>
   <script type="text/javascript">
-    $(function(){Materialize.toast("<%= notice %>", 5000);});
+    $(function(){Materialize.toast("<%= msg %>", 5000);});
   </script>
-<% end %>
-
+<%- end -%>  
 <%= yield  %>
 </body>
 
