@@ -59,6 +59,8 @@ Rails.application.routes.draw do
 
   resources :notifications
 
+  post '/notifications/resources', to: 'notifications#resources'
+
   put '/payment/accept', to: 'payment#accept'
   put '/payment/decline', to: 'payment#decline'
 

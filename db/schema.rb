@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018040825) do
+ActiveRecord::Schema.define(version: 20161022035333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 20161018040825) do
     t.integer  "sender_id"
     t.boolean  "seen",              default: false
     t.integer  "conversation_id"
+    t.integer  "resource_id"
   end
 
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree

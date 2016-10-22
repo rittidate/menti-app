@@ -27,7 +27,7 @@
     - for res in @resources
       %li.res-user-list
         Resource: 
-        = link_to res.resource_name, res.document.url(:original)
+        = link_to res.resource_name, res.document.url(:original), class: 'resource-access', resource: res.id,  user: res.user.id
         .img-cont
           = image_tag res.user.avatar.url(:thumb), class: 'circle res-img'
           %span.res-name #{res.user.first_name}
