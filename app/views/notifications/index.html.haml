@@ -3,7 +3,7 @@
     .row
       -if @notices.present?
         - for notice in @notices.order("created_at DESC")
-          - if notice.notification_type == 'payment'
+          - if notice.notification_type == 'payment' and notice.course.present?
             .col.s12.animated.zoomIn
               .card.horizontal.card-confirm
                 .card-image.notification-img
@@ -27,7 +27,7 @@
                     %h5= notice.sender.first_name
                     %p 
                       %b Terms: 
-                      = notice.user.terms
+                      = notice.user.terms 
 
                     %p
                       %b Course: 
