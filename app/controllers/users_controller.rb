@@ -73,8 +73,15 @@ class UsersController < ApplicationController
   end
 
   def transaction
-    current_user.hold_transaction(params[:course], params[:payment])
-    redirect_to users_wait_path
+    if params[:payment].present?
+      current_user.hold_transaction(params[:course], params[:payment])
+      redirect_to users_wait_path
+    else
+      respond_to do |format|
+        format.html { redirect_to request.referer, notice: 'Your transaction has problem!!!.' }
+        format.json { head :no_content }
+      end
+    end
   end
 
   def wait

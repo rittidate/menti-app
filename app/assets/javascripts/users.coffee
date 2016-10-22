@@ -61,8 +61,9 @@ $(document).on 'turbolinks:load', ->
                       $("form").submit()
                         
   $('#option').on 'click', () ->
-    $('#submit-course').removeClass('disabled')
-    $.payment_acceptance()
+    if $('.payment-course').length > 0
+      $('#submit-course').removeClass('disabled')
+      $.payment_acceptance()
 
   $('#option2').on 'click', () ->
     $('#submit-course').addClass('disabled')

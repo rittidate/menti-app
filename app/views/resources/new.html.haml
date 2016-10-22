@@ -1,8 +1,9 @@
 .row.resources-container
   %ul.col.s6.res-off-ul
-    .input-field.col.s8.search-res
+    = form_tag resources_path, method: 'get', class: 'input-field col s8 search-res' do
       %i.material-icons.prefix search
-      %input#search-res.validate{:type => "text"}/
+      = text_field_tag 'search-res', params[:search], class: 'validate'
+
     %li.res-heading
       Official Resources
     - for res in @res_default
