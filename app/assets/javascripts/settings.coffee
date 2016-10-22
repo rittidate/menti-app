@@ -21,3 +21,6 @@ $(document).on 'turbolinks:load', ->
         console.log $.inArray( $(this).attr('ref'), $(this).val())
     
     $.hide_and_show_category()
+
+  $('#refresh-submit').on 'click', () ->
+    location.reload()
