@@ -7,7 +7,7 @@ class ResourcesController < ApplicationController
       @res_default = Resource.where(resource_type: 0)
     end
     
-    @resources = Resource.where(resource_type: 1)
+    @resources = Resource.where(resource_type: 1, user_id: member_users)
   end
 
   def admin
@@ -32,5 +32,15 @@ class ResourcesController < ApplicationController
 private
   def document_params
     params.require(:resource).permit(:document, :resource_name, :user_id)
+  end
+
+  def member_users
+    course_user_relation = CoursesUserRelation.joins("LEFT JOIN courses ON courses.id = courses_user_relations.course_id").where("courses.user_id = ?", current_user)
+    user_array = Array.new
+    for cur in course_user_relation
+      user_array << cur.user_id
+    end
+
+    user_array << current_user.id
   end
 end

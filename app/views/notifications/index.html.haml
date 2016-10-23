@@ -46,7 +46,7 @@
                     - else
                       %button{ class: 'btn-flat payment_accept', disabled: 'disabled', ref: notice.transaction_id, noticification: notice.id } Accepted
           
-          - elsif notice.notification_type == 'course'  
+          - elsif notice.notification_type == 'course' and notice.course.present?
             .col.s12.animated.zoomIn
               .card.horizontal.card-confirm
                 .card-image.notification-img
