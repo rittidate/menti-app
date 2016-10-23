@@ -3,6 +3,7 @@ $(document).on 'turbolinks:load', ->
     selectMonths: true, 
     selectYears: 80
     format: 'mm/dd/yyyy'
+    max: 10
 
   $('input.autocomplete').autocomplete({
     data: {
