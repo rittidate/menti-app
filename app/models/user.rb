@@ -111,11 +111,15 @@ class User < ActiveRecord::Base
       email = auth.info.email
       user = User.where(:email => email).first if email
 
+      user_info = auth.extra.raw_info.name.split(' ')
+
+
       # Create the user if it's a new registration
       if user.nil?
         user = User.new(
           username: auth.uid,
-          first_name: auth.extra.raw_info.name,
+          first_name: user_info[0],
+          last_name: user_info[1],
           terms_of_service: true,
           email: email,
           password: Devise.friendly_token[0,20]
