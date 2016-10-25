@@ -20,7 +20,7 @@ input#search[type="text"] {
   color: #555;
   padding: 3px;
   padding-right: 60px;
-  width: 0px;
+  width: 45rem;
   position: absolute;
   top: 0;
   right: 0;
@@ -148,4 +148,34 @@ input#search_submit[type="submit"]:hover {
 .search-rating > span.active:before {
    content: "\2605";
    position: absolute;
+}
+.search-img-div{
+  width: 69.8vw;
+  height: 37.5vh;
+  border-radius: 10px;
+}
+.img-div-search{
+  border: 5px solid #FFDAB9;
+  width: 70.3vw;
+  height: 38.4vh;
+  margin-top: 2rem;
+  border-radius: 16px;
+}
+.txt-div-search{
+  position: absolute;
+    margin: 0 auto;
+    color: #FFDAB9;
+    top: 28%;
+    left: 24%;
+    text-shadow: 1px 2px 4px black;
+    font-family: 'Righteous', cursive;
+    letter-spacing: 2px;
+}
+.down-icon{
+  position: absolute;
+  font-size: 5rem !important;
+  color: #FFDAB9;
+  top: 36%;
+  left: 50%;
+  text-shadow: 1px 2px 4px black;
 }

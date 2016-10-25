@@ -1,4 +1,8 @@
 .search-container
+  .img-div-search.hide-on-med-and-down
+    %h3.txt-div-search Looking for mentors? You can find them here!
+    %i.fa.fa-chevron-down.down-icon.animated.swing
+    = image_tag 'search.jpg', :class => "search-img-div"
   #wrap.tooltipped{data: { position: 'bottom', delay: 50, tooltip: 'Click to start search' }}
     = form_tag search_path, method: 'get' do
       = text_field_tag :search, params[:search], placeholder: 'What are you looking for ?', class: 'col s12'
