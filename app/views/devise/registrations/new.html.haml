@@ -20,11 +20,11 @@
 
       .field.input-field
         = f.label :password
-        = f.password_field :password, autocomplete: "off", data: { validation: "required" }
+        = f.password_field :password, autocomplete: "off", data: { validation: "required length", "validation-length": "6-15" }
 
       .field.input-field
         = f.label :password_confirmation
-        = f.password_field :password_confirmation, autocomplete: "off", data: { validation: "required" }
+        = f.password_field :password_confirmation, autocomplete: "off", data: { validation: "required length", "validation-length": "6-15" }
 
       .field.input-field
         = f.label :birthdate
@@ -59,8 +59,8 @@
         = f.label :security_question_answer
         = f.text_field :security_question_answer, autocomplete: "off", length: "20", data: { validation: "required" }
 
-      .field.input-field
-        = f.check_box :terms_of_service
+      .field.input-field.terms_validation
+        = f.check_box :terms_of_service, data: { validation: "required", "validation-error-msg": "You have to agree our terms of service" }
         = f.label :terms_of_service do
           I agree to
           = link_to 'Terms of Service', terms_path, target: '_blank'
@@ -68,7 +68,7 @@
 
       .actions.col.s10.offset-s1.center
         %h5
-          = f.submit "Next", class: 'btn-large margin-btn green lighten-1'
+          = f.submit "Next", class: 'btn-large margin-btn green lighten-1', id: 'registration-submit'
           //Here next button should navigate to next page(new2.html.haml) after validation and not submit!
 
         = render "devise/shared/links"
