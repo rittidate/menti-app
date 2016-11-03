@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   root 'home#index'
   get   '/terms',          to:  'home#terms'
+  get   '/registration',          to:  'home#registration'
+  put   '/registration',          to:  'home#registration_update'
 
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
 

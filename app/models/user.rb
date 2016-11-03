@@ -84,7 +84,6 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "images/:style/avatar.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
-  validates_acceptance_of :terms_of_service, allow_nil: false, accept: true, on: :create
   validates :email, uniqueness: true
   validates :username, presence: true
   validates :username, uniqueness: true
@@ -120,7 +119,7 @@ class User < ActiveRecord::Base
           username: auth.uid,
           first_name: user_info[0],
           last_name: user_info[1],
-          terms_of_service: true,
+          terms_of_service: false,
           email: email,
           password: Devise.friendly_token[0,20]
         )
