@@ -15,10 +15,10 @@ class ApplicationController < ActionController::Base
   end
 
   def incomplete_info_user!
-    unless current_user.birthdate.present?
+    unless current_user.terms_of_service
       session[:from] = request.original_fullpath
       respond_to do |format|
-        format.html { redirect_to settings_path }
+        format.html { redirect_to registration_path }
       end
     end
   end
