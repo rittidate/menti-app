@@ -10,6 +10,10 @@ $(document).on 'turbolinks:load', ->
     notice = $(this).attr('noticification')
     $.decline_session(id, notice)
 
+  $('.trash').on 'click', () ->
+    id = $(this).attr('ref')
+    $.delete_notification(id)
+
   $.accept_session = (transaction_id, notice) ->
     $.ajax(
       method: "PUT"
@@ -32,4 +36,16 @@ $(document).on 'turbolinks:load', ->
             }
     ).always((d) ->
       location.reload()
+    )
+
+  $.delete_notification = (notification_id) ->
+    $.ajax(
+      method: "PUT"
+      url: "/notifications/delete"
+      data: { 
+        notification_id: notification_id
+      }
+    ).always((d) ->
+      if d.status == 200
+        $(".notification-box[ref= " + notification_id + "]").remove()
     )

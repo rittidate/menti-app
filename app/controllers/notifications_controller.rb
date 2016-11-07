@@ -19,4 +19,9 @@ class NotificationsController < ApplicationController
 
     render json: { success: true, status: 200 }
   end
+
+  def delete
+    Notification.where(id: params[:notification_id]).destroy_all
+    render json: { success: true, status: 200 }
+  end
 end

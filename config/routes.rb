@@ -8,8 +8,8 @@ Rails.application.routes.draw do
 
   root 'home#index'
   get   '/terms',          to:  'home#terms'
-  get   '/registration',          to:  'home#registration'
-  put   '/registration',          to:  'home#registration_update'
+  get   '/facebook_registration',          to:  'home#registration'
+  put   '/facebook_registration',          to:  'home#registration_update'
 
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
 
@@ -59,9 +59,9 @@ Rails.application.routes.draw do
   put '/follow',    to: 'follow#create'
   put '/follow/delete',    to: 'follow#delete'
 
-  resources :notifications
-
+  get '/notifications', to: 'notifications#index'
   post '/notifications/resources', to: 'notifications#resources'
+  put '/notifications/delete', to: 'notifications#delete'
 
   put '/payment/accept', to: 'payment#accept'
   put '/payment/decline', to: 'payment#decline'

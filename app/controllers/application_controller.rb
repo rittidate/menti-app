@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     unless current_user.terms_of_service
       session[:from] = request.original_fullpath
       respond_to do |format|
-        format.html { redirect_to registration_path }
+        format.html { redirect_to facebook_registration_path }
       end
     end
   end

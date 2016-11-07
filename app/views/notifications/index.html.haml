@@ -4,13 +4,13 @@
       -if @notices.present?
         - for notice in @notices.order("created_at DESC")
           - if notice.notification_type == 'payment' and notice.course.present?
-            .col.s12.animated.zoomIn
+            .col.s12.animated.zoomIn{ class: 'notification-box', ref: "#{notice.id}" }
               .card.horizontal.card-confirm
                 .card-image.notification-img
                   = image_tag notice.sender.avatar.url(:thumb), :class => "circle"
                 .card-stacked
                   .card-content
-                    %i.fa.fa-trash-o.right.trash
+                    %i.fa.fa-trash-o.right.trash{ ref: "#{notice.id}" }
                     - if notice.status == 'holded'
                       %i.fa.fa-pencil-square-o.tooltip.icons.right
                         %span.tooltiptext
@@ -47,13 +47,13 @@
                       %button{ class: 'btn-flat payment_accept', disabled: 'disabled', ref: notice.transaction_id, noticification: notice.id } Accepted
           
           - elsif notice.notification_type == 'course' and notice.course.present?
-            .col.s12.animated.zoomIn
+            .col.s12.animated.zoomIn{ class: 'notification-box', ref: "#{notice.id}" }
               .card.horizontal.card-confirm
                 .card-image.notification-img
                   = image_tag notice.sender.avatar.url(:thumb), :class => "circle"
                 .card-stacked
                   .card-content
-                    %i.fa.fa-trash-o.right.trash
+                    %i.fa.fa-trash-o.right.trash{ ref: "#{notice.id}" }
                     - if notice.status == 'holded'
                       %i.fa.fa-pencil-square-o.tooltip.icons.right
                         %span.tooltiptext
@@ -87,14 +87,14 @@
                       %button{ class: 'btn-flat payment_accept', disabled: 'disabled', ref: notice.transaction_id, noticification: notice.id } Declined
 
           - elsif notice.notification_type == 'message'          
-            .col.s12.animated.zoomIn
+            .col.s12.animated.zoomIn{ class: 'notification-box', ref: "#{notice.id}" }
               = link_to message_path(notice.sender), style: 'color: black;' do
                 .card.horizontal.card-message
                   .card-image.notification-img-2
                     = image_tag notice.sender.avatar.url(:thumb), :class => "circle"
                   .card-stacked
                     .card-content
-                      %i.fa.fa-trash-o.right.trash
+                      %i.fa.fa-trash-o.right.trash{ ref: "#{notice.id}" }
                       %i.fa.fa-share-square.tooltip.icons
                         %span.tooltiptext
                           Received message
@@ -107,13 +107,13 @@
                       %p #{notice.sender.first_name} sent new messages!!!!
 
           - elsif notice.notification_type == 'resource'          
-            .col.s12.animated.zoomIn
+            .col.s12.animated.zoomIn{ class: 'notification-box', ref: "#{notice.id}" }
               .card.horizontal.card-message
                 .card-image.notification-img-2
                   = image_tag notice.sender.avatar.url(:thumb), :class => "circle"
                 .card-stacked
                   .card-content
-                    %i.fa.fa-trash-o.right.trash
+                    %i.fa.fa-trash-o.right.trash{ ref: "#{notice.id}" }
                     %i.fa.fa-share-square.tooltip.icons
                       %span.tooltiptext
                         Access your files #{notice.resource.resource_name}
